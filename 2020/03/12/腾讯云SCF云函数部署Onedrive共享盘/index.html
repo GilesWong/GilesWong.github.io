@@ -1,236 +1,402 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
 
 
 
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="Giles Wong">
-  <meta name="keywords" content="Giles">
-  
-  <title>腾讯云SCF云函数部署OneDrive共享盘 - Giles&#39; Blog</title>
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>腾讯云SCF云函数部署OneDrive共享盘 | Giles&#39; Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+    
+        <!-- Import DisqusJS Default Theme -->
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2.5/dist/disqusjs.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2.5/dist/disqusjs.css"></noscript>
+
+    
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Giles' Blog"><meta name="msapplication-starturl" content="https://wwg.xyz"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Giles' Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="腾讯云SCF云函数部署OneDrive共享盘 | Giles&#39; Blog"><meta property="og:site_name" content="Giles&#39; Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://wwg.xyz/2020/03/12/%E8%85%BE%E8%AE%AF%E4%BA%91SCF%E4%BA%91%E5%87%BD%E6%95%B0%E9%83%A8%E7%BD%B2Onedrive%E5%85%B1%E4%BA%AB%E7%9B%98/"><meta property="og:locale" content="zh-CN"><meta name="description" content="前情提要申请了Office365技术社区成员，通过后获得了一个Office 365 E3的账号，其中包含1T容量的OneDrive for business世纪互联版。物要尽其用，用这个搭一个网盘。  OneDrive for business下的文件，组织的管理员可以查看，私人文件请放OneDrive个人版   教育邮箱白嫖的1T空间需要有管理员才可以继续搭建  准备工作 自己腾讯云账户Secr - Giles Wong - Giles&#39; Blog"><meta name="keywords" content="Serverless, Onedrive, Giles"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840003353411.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840014767585.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840015000546.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059076677.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840010146922.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840010980146.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840012366668.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059287716.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059495290.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840061723614.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840063286973.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840020982768.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840021388736.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840032103556.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840032536675.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840035563819.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840038279126.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840038768398.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039343976.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039663480.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039941934.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840040234491.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840040765357.jpg"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840043148579.jpg"><meta property="article:published_time" content="2020-03-12T07:56:13.000Z"><meta property="article:modified_time" content="2021-06-05T07:57:16.214Z"><meta property="og:updated_time" content="2021-06-05T07:57:16.214Z"><meta property="article:author" content="Giles Wong"><meta property="article:tag" content="Serverless, Onedrive, Giles"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://wwg.xyz/2020/03/12/%E8%85%BE%E8%AE%AF%E4%BA%91SCF%E4%BA%91%E5%87%BD%E6%95%B0%E9%83%A8%E7%BD%B2Onedrive%E5%85%B1%E4%BA%AB%E7%9B%98/">
+
+    <meta name="generator" content="Hexo 5.3.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://wwg.xyz/2020/03/12/%E8%85%BE%E8%AE%AF%E4%BA%91SCF%E4%BA%91%E5%87%BD%E6%95%B0%E9%83%A8%E7%BD%B2Onedrive%E5%85%B1%E4%BA%AB%E7%9B%98/",
+    "@type": "BlogPosting",
+    "logo": "https://wwg.xyz/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://wwg.xyz/2020/03/12/%E8%85%BE%E8%AE%AF%E4%BA%91SCF%E4%BA%91%E5%87%BD%E6%95%B0%E9%83%A8%E7%BD%B2Onedrive%E5%85%B1%E4%BA%AB%E7%9B%98/"
+    },
+    "headline": "腾讯云SCF云函数部署OneDrive共享盘 | Giles&#39; Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://wwg.xyz/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2020-03-12T07:56:13.000Z",
+    "dateModified": "2021-06-05T07:57:16.214Z",
+    "author": {
+        "@type": "Person",
+        "name": "Giles Wong",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://wwg.xyz/img/default_avatar.png"
+        },
+        "description": "Hi, nice to meet you."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Giles&#39; Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://wwg.xyz/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://wwg.xyz/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Serverless, Onedrive, Giles",
+    "description": "前情提要申请了Office365技术社区成员，通过后获得了一个Office 365 E3的账号，其中包含1T容量的OneDrive for business世纪互联版。物要尽其用，用这个搭一个网盘。  OneDrive for business下的文件，组织的管理员可以查看，私人文件请放OneDrive个人版   教育邮箱白嫖的1T空间需要有管理员才可以继续搭建  准备工作 自己腾讯云账户Secr - Giles Wong - Giles&#39; Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Giles&#39; Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                Hi, nice to meet you.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
     
     
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+        <a href="/archives/" class="navbar-link">归档</a>
     
-  
+    
+        <a href="/search" class="navbar-link">搜索</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <ul class="menu share-menu">
 
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"wwg.xyz","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"gUtMfQ09QSFgfXRGbx8vTPqx-MdYXbMMI","app_key":"dWjMcACC3NMLm3L50P5YFUhx","server_url":null}},"search_path":"/local-search.xml"};
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.3.0"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Giles' Blog</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
+        <!-- Share Weibo -->
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
+
+        <!-- Share Twitter -->
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
+
+        <!-- Share Facebook -->
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
+
+        <!-- Share Google+ -->
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
+
+        <!-- Share LinkedIn -->
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
+
+        <!-- Share QQ -->
         
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=Giles' Blog&title=腾讯云SCF云函数部署OneDrive共享盘&summary=&pics=https://wwg.xyz/img/suka-favicon.ico&url=https://wwg.xyz" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+        </li>
         
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
+
+        <!-- Share Telegram -->
         
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://wwg.xyz&text=腾讯云SCF云函数部署OneDrive共享盘" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        </li>
         
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
+
+        <!-- QRCode -->
         
-      </ul>
-    </div>
-  </div>
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANQAAADUCAAAAADBtVLEAAADqklEQVR42u3a0W4iMQxGYd7/pdtbioj/4xSIGR1utrtiM/kqjePYvv1c8HMTJUqUKFGXQ92Kz/13Hn9+9p30f/9s4O57j2tWzyv3KUrUENTqoauNPFvw2SZW/7azabJPUaImoVaL0Jd4FVQe11xtcrVW2ocoUd+IWi4CXuYqoKTDOwUUUaKugiIJcDpEaUIrStS3osgiqwemC2TCkKDz0ixdlKg3o+iLffrPl1WTRIl6IyoW3UPhY/Uip0BBfoFv63qIEvVGFDlkSeGks3l8mIYkWZSoiahUwK8udFXyShoJ1XNW6+HoJ0rUIdQqCFQN63TBq158EixSc6HddBMl6oOoarCDXNpIcWQVcOgzU2NBlKipKNLAXm0sDZLQyx/9PkpoRYk6gEpF+W6ySy6RnaZDSoBFifoWVDokyYAwLfinxLcqkJZdD1GiDqA6i3QeQi6RnaQ4Df+LEjUNVb2sqVhZbT4FjM6asQgjStQQVCp4pIIJLeyn5Dcd8DihFSXqIKoziFs9JB2u3aS5c7CLEjURtVNYIYP65FAmw1okWIgSNQnVKbZUP3cCRDrcOwevKFETUaQ4SZpkt/DpNuX+FShEiTqAShshAxodUBVsyC8IdT1EiTqISgdjdZlcbTCtQ0DVfkSJmoqiL+zOhW71S+k2xtM6okRNQtFNkgILxafGNi3KlA0CUaIOoTqXO9I0W13saHEmrVEOaokSNQBVHmbFIruDj6QAQ4YccZYuStSHUdWlLxUaaSElNqBBcwAVYkSJGoSiDerqAkcLk/jFD0XVOMQoStQhFGm8kUZZdYEjTbXOnlA1SZSoQyhanE9NAVKA3MGTICFK1BTUzoWtc4lLF0s6bIIGVUSJGoLaeUBVtKEDJqTpnQ5tUaImomjxn2wwwckQShoEWX5HlKgBqO6hSAYKO802Mlj8r4ErUaIOoFJA6DQJyBBJp7FA4KJETUJ1Gtm0qZYS3XSYpmHkrZuvKFEfQq1eXLr47ktOktcuUJSoSShaAOkWL2ny2m1CiBI1FUUuc6Q4UgUbMuCRLookeIgSNQEVm8ONgXdSrCTJLF2njH6iRB1CpQ3vNOLogMhO4wAVM0WJOoxKh2E18J42TC+QnYCDMgpRog6jyIGaGgE0+KRCDimoxgaBKFGDUWR4JDWg0wFOEt+U8IoS9W2obnKLB6VCg4IMPooSNQ1FCvPpIkkGpF4Bx4FClKhDqFYRvvn3VwaImPyKEjUAdaWPKFGiRIm6zOcXmsaQ7SRa68QAAAAASUVORK5CYII=" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
 </nav>
-
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="腾讯云SCF云函数部署OneDrive共享盘">
-              
-            </span>
+</header>
 
             
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-03-12 15:56" pubdate>
-        2020年3月12日 下午
-      </time>
-    </span>
-  
-</div>
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">腾讯云SCF云函数部署OneDrive共享盘</h1>
 
-<div class="mt-1">
-  
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Giles Wong's Avatar">
+        <span>2020-03-12</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
     
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      963 字
-    </span>
-  
 
-  
+    <!-- Share Twitter -->
     
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      10
-       分钟
-    </span>
-  
 
-  
-  
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Giles' Blog&title=Giles' Blog&summary=&pics=https://wwg.xyz/img/suka-favicon.ico&url=https://wwg.xyz/2020/03/12/%E8%85%BE%E8%AE%AF%E4%BA%91SCF%E4%BA%91%E5%87%BD%E6%95%B0%E9%83%A8%E7%BD%B2Onedrive%E5%85%B1%E4%BA%AB%E7%9B%98/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://wwg.xyz/2020/03/12/%E8%85%BE%E8%AE%AF%E4%BA%91SCF%E4%BA%91%E5%87%BD%E6%95%B0%E9%83%A8%E7%BD%B2Onedrive%E5%85%B1%E4%BA%AB%E7%9B%98/&text=Giles' Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANQAAADUCAAAAADBtVLEAAADqklEQVR42u3a0W4iMQxGYd7/pdtbioj/4xSIGR1utrtiM/kqjePYvv1c8HMTJUqUKFGXQ92Kz/13Hn9+9p30f/9s4O57j2tWzyv3KUrUENTqoauNPFvw2SZW/7azabJPUaImoVaL0Jd4FVQe11xtcrVW2ocoUd+IWi4CXuYqoKTDOwUUUaKugiIJcDpEaUIrStS3osgiqwemC2TCkKDz0ixdlKg3o+iLffrPl1WTRIl6IyoW3UPhY/Uip0BBfoFv63qIEvVGFDlkSeGks3l8mIYkWZSoiahUwK8udFXyShoJ1XNW6+HoJ0rUIdQqCFQN63TBq158EixSc6HddBMl6oOoarCDXNpIcWQVcOgzU2NBlKipKNLAXm0sDZLQyx/9PkpoRYk6gEpF+W6ySy6RnaZDSoBFifoWVDokyYAwLfinxLcqkJZdD1GiDqA6i3QeQi6RnaQ4Df+LEjUNVb2sqVhZbT4FjM6asQgjStQQVCp4pIIJLeyn5Dcd8DihFSXqIKoziFs9JB2u3aS5c7CLEjURtVNYIYP65FAmw1okWIgSNQnVKbZUP3cCRDrcOwevKFETUaQ4SZpkt/DpNuX+FShEiTqAShshAxodUBVsyC8IdT1EiTqISgdjdZlcbTCtQ0DVfkSJmoqiL+zOhW71S+k2xtM6okRNQtFNkgILxafGNi3KlA0CUaIOoTqXO9I0W13saHEmrVEOaokSNQBVHmbFIruDj6QAQ4YccZYuStSHUdWlLxUaaSElNqBBcwAVYkSJGoSiDerqAkcLk/jFD0XVOMQoStQhFGm8kUZZdYEjTbXOnlA1SZSoQyhanE9NAVKA3MGTICFK1BTUzoWtc4lLF0s6bIIGVUSJGoLaeUBVtKEDJqTpnQ5tUaImomjxn2wwwckQShoEWX5HlKgBqO6hSAYKO802Mlj8r4ErUaIOoFJA6DQJyBBJp7FA4KJETUJ1Gtm0qZYS3XSYpmHkrZuvKFEfQq1eXLr47ktOktcuUJSoSShaAOkWL2ny2m1CiBI1FUUuc6Q4UgUbMuCRLookeIgSNQEVm8ONgXdSrCTJLF2njH6iRB1CpQ3vNOLogMhO4wAVM0WJOoxKh2E18J42TC+QnYCDMgpRog6jyIGaGgE0+KRCDimoxgaBKFGDUWR4JDWg0wFOEt+U8IoS9W2obnKLB6VCg4IMPooSNQ1FCvPpIkkGpF4Bx4FClKhDqFYRvvn3VwaImPyKEjUAdaWPKFGiRIm6zOcXmsaQ7SRa68QAAAAASUVORK5CYII=" alt="QRCode">
+    </li>
+    
+
+</ul>
 </div>
-
-            
-          </div>
-
-          
-        </div>
-      </div>
+        
     </div>
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">腾讯云SCF云函数部署OneDrive共享盘</h1>
-            
-            <div class="markdown-body">
-              <html><head></head><body><h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>申请了Office365技术社区成员，通过后获得了一个Office 365 E3的账号，其中包含1T容量的OneDrive for business世纪互联版。物要尽其用，用这个搭一个网盘。</p>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="post-toc-number">1.</span> <span class="post-toc-text">前情提要</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="post-toc-number">2.</span> <span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%96%B0%E5%BB%BA%E4%BA%91%E5%87%BD%E6%95%B0"><span class="post-toc-number">3.</span> <span class="post-toc-text">新建云函数</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%8A%E4%BC%A0%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6"><span class="post-toc-number">4.</span> <span class="post-toc-text">上传代码文件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F"><span class="post-toc-number">5.</span> <span class="post-toc-text">添加触发方式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E7%9B%98%E5%8F%82%E6%95%B0"><span class="post-toc-number">6.</span> <span class="post-toc-text">配置网盘参数</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%AE%8C%E5%96%84%E4%BD%93%E9%AA%8C"><span class="post-toc-number">7.</span> <span class="post-toc-text">完善体验</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BD%91%E7%9B%98%E9%85%8D%E7%BD%AE"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">网盘配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">自定义域名</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%88%90"><span class="post-toc-number">8.</span> <span class="post-toc-text">部署完成</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <html><head></head><body><h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>申请了Office365技术社区成员，通过后获得了一个Office 365 E3的账号，其中包含1T容量的OneDrive for business世纪互联版。物要尽其用，用这个搭一个网盘。</p>
 <blockquote>
 <p>OneDrive for business下的文件，组织的管理员可以查看，私人文件请放OneDrive个人版</p>
 </blockquote>
@@ -238,20 +404,20 @@
 <p>教育邮箱白嫖的1T空间需要有管理员才可以继续搭建</p>
 </blockquote>
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
-<li>自己腾讯云账户SecretID和SecretKey<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840003353411.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840003353411.jpg"></li>
+<li>自己腾讯云账户SecretID和SecretKey<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840003353411.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840003353411.jpg"></li>
 <li>SCF函数文件<br><a target="_blank" rel="noopener" href="https://github.com/qkqpttgf/OneManager-php">点击去Github</a></li>
 </ul>
-<h1 id="新建云函数"><a href="#新建云函数" class="headerlink" title="新建云函数"></a>新建云函数</h1><p><a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/scf/">点击去云函数控制台</a><br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840014767585.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840014767585.jpg"></p>
-<p>新建一个云函数，选择自己想要的区域，新建函数，运行环境选择<strong>Php 7.2</strong>，选择空白模板，下一步<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840015000546.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840015000546.jpg"></p>
+<h1 id="新建云函数"><a href="#新建云函数" class="headerlink" title="新建云函数"></a>新建云函数</h1><p><a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/scf/">点击去云函数控制台</a><br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840014767585.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840014767585.jpg"></p>
+<p>新建一个云函数，选择自己想要的区域，新建函数，运行环境选择<strong>Php 7.2</strong>，选择空白模板，下一步<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840015000546.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840015000546.jpg"></p>
 <blockquote>
-<p>OneDrive个人版选择内地区域可能会有问题，建议选择中国香港<br>拉到下方高级配置，你刚才选择的区域Region<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">官方对应列表</a><br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059076677.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059076677.jpg"></p>
+<p>OneDrive个人版选择内地区域可能会有问题，建议选择中国香港<br>拉到下方高级配置，你刚才选择的区域Region<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">官方对应列表</a><br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059076677.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059076677.jpg"></p>
 </blockquote>
 <p>点击完成</p>
-<h1 id="上传代码文件"><a href="#上传代码文件" class="headerlink" title="上传代码文件"></a>上传代码文件</h1><p>返回到函数列表，点击函数，选择<strong>函数代码</strong>，更改提交方法，把解压缩的代码传上去，保存<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840010146922.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840010146922.jpg"></p>
-<h1 id="添加触发方式"><a href="#添加触发方式" class="headerlink" title="添加触发方式"></a>添加触发方式</h1><p>在<strong>触发方式</strong>内添加触发方式，选择API网关触发方式，将<strong>启用集成响应</strong>打钩，其余默认即可<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840010980146.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840010980146.jpg"></p>
-<p>获得访问路径<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840012366668.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840012366668.jpg"></p>
-<h1 id="配置网盘参数"><a href="#配置网盘参数" class="headerlink" title="配置网盘参数"></a>配置网盘参数</h1><p>访问上一步内获得的链接<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059287716.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059287716.jpg"><br>填写之前获得的SecretKey和SecretID，设置密码，确认<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059495290.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059495290.jpg"><br>稍等会跳转到首页，点击左上角的管理，添加Onedrive盘<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840061723614.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840061723614.jpg"></p>
-<p>选择自己对应的版本：<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840063286973.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840063286973.jpg"></p>
+<h1 id="上传代码文件"><a href="#上传代码文件" class="headerlink" title="上传代码文件"></a>上传代码文件</h1><p>返回到函数列表，点击函数，选择<strong>函数代码</strong>，更改提交方法，把解压缩的代码传上去，保存<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840010146922.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840010146922.jpg"></p>
+<h1 id="添加触发方式"><a href="#添加触发方式" class="headerlink" title="添加触发方式"></a>添加触发方式</h1><p>在<strong>触发方式</strong>内添加触发方式，选择API网关触发方式，将<strong>启用集成响应</strong>打钩，其余默认即可<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840010980146.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840010980146.jpg"></p>
+<p>获得访问路径<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840012366668.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840012366668.jpg"></p>
+<h1 id="配置网盘参数"><a href="#配置网盘参数" class="headerlink" title="配置网盘参数"></a>配置网盘参数</h1><p>访问上一步内获得的链接<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059287716.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059287716.jpg"><br>填写之前获得的SecretKey和SecretID，设置密码，确认<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059495290.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840059495290.jpg"><br>稍等会跳转到首页，点击左上角的管理，添加Onedrive盘<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840061723614.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840061723614.jpg"></p>
+<p>选择自己对应的版本：<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840063286973.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840063286973.jpg"></p>
 <p>怎么样选择自己的版本：</p>
 <p>在浏览器里打开OneDrive的文件目录的首页，看地址栏的域名</p>
 <table>
@@ -277,8 +443,8 @@
 </tbody>
 </table>
 <p>这里我用的是世纪互联版，选第二个</p>
-<p>确认后会调到授权界面，授权即可<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840020982768.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840020982768.jpg"></p>
-<p>稍等即可跳转到首页<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840021388736.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840021388736.jpg"></p>
+<p>确认后会调到授权界面，授权即可<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840020982768.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840020982768.jpg"></p>
+<p>稍等即可跳转到首页<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840021388736.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840021388736.jpg"></p>
 <h1 id="完善体验"><a href="#完善体验" class="headerlink" title="完善体验"></a>完善体验</h1><h2 id="网盘配置"><a href="#网盘配置" class="headerlink" title="网盘配置"></a>网盘配置</h2><p>在云函数环境变量处可以添加以下值（说明来自开发者）：</p>
 <table>
 <thead>
@@ -322,251 +488,188 @@
 </tr>
 </tbody>
 </table>
-<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><p>触发方式下选择<strong>API服务名</strong><br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840032103556.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840032103556.jpg"></p>
-<p>在<strong>自定义域名</strong>下选择新建<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840032536675.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840032536675.jpg"><br>填写域名，路径映射选择自定义，填<strong>/</strong>，环境选择<strong>发布</strong><br>如果没有证书的话，可以去控制台免费申请证书<br>点击提交前，请先将自定义的域名用CNAME方式指向图中的公网二级域名<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840035563819.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840035563819.jpg"><br>在<strong>管理API</strong>下，点击编辑<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840038279126.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840038279126.jpg"><br>路径改为<strong>/</strong><br>下一步<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840038768398.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840038768398.jpg"><br>勾选<strong>是否启用响应集成</strong><br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039343976.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039343976.jpg"><br>下一步<br>返回类型选择HTML<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039663480.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039663480.jpg"><br>完成，点击前往发布服务<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039941934.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039941934.jpg"><br>点击发布<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840040234491.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840040234491.jpg"><br>写点备注，提交<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840040765357.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840040765357.jpg"></p>
-<h1 id="部署完成"><a href="#部署完成" class="headerlink" title="部署完成"></a>部署完成</h1><p>已经可以用来访问了<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840043148579.jpg" srcset="/img/loading.gif" lazyload alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840043148579.jpg"></p>
+<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><p>触发方式下选择<strong>API服务名</strong><br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840032103556.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840032103556.jpg"></p>
+<p>在<strong>自定义域名</strong>下选择新建<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840032536675.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840032536675.jpg"><br>填写域名，路径映射选择自定义，填<strong>/</strong>，环境选择<strong>发布</strong><br>如果没有证书的话，可以去控制台免费申请证书<br>点击提交前，请先将自定义的域名用CNAME方式指向图中的公网二级域名<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840035563819.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840035563819.jpg"><br>在<strong>管理API</strong>下，点击编辑<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840038279126.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840038279126.jpg"><br>路径改为<strong>/</strong><br>下一步<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840038768398.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840038768398.jpg"><br>勾选<strong>是否启用响应集成</strong><br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039343976.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039343976.jpg"><br>下一步<br>返回类型选择HTML<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039663480.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039663480.jpg"><br>完成，点击前往发布服务<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039941934.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840039941934.jpg"><br>点击发布<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840040234491.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840040234491.jpg"><br>写点备注，提交<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840040765357.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840040765357.jpg"></p>
+<h1 id="部署完成"><a href="#部署完成" class="headerlink" title="部署完成"></a>部署完成</h1><p>已经可以用来访问了<br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840043148579.jpg" alt="" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/15840043148579.jpg"></p>
 </body></html>
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
+                    </article>
                     
-                      <a class="hover-with-bg" href="/tags/Serverless/">Serverless</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Onedrive/">Onedrive</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2020/08/24/%E5%9F%BA%E4%BA%8EWechaty%E7%9A%84%E7%BE%A4%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E6%8E%A8%E9%80%81%E5%B7%A5%E5%85%B7/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">基于Wechaty的群学习内容推送工具</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2020/03/12/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91%E6%95%B0%E6%8D%AE%E5%BA%93%E8%81%94%E8%A1%A8%E6%9F%A5%E6%89%BE/">
-                        <span class="hidden-mobile">微信小程序云开发数据库联表查找</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2021-06-05");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-03-12T07:56:13.000Z" itemprop="datePublished">2020-03-12</time>
+
+    , 最后修改于&nbsp;<time datetime="2021-06-05T07:57:16.214Z" itemprop="dateModified">2021-06-05</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/Serverless/" rel="tag">#&nbsp;Serverless</a>
+
+<a class="post-tags-list-item" href="/tags/Onedrive/" rel="tag">#&nbsp;Onedrive</a>
+
+</span>
+
+
+</p>
+
                 </div>
-              
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2020/08/24/%E5%9F%BA%E4%BA%8EWechaty%E7%9A%84%E7%BE%A4%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E6%8E%A8%E9%80%81%E5%B7%A5%E5%85%B7/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">基于Wechaty的群学习内容推送工具</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2020/03/12/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91%E6%95%B0%E6%8D%AE%E5%BA%93%E8%81%94%E8%A1%A8%E6%9F%A5%E6%89%BE/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">微信小程序云开发数据库联表查找</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+
+<script id="js-disqusjs" src="https://cdn.jsdelivr.net/npm/disqusjs@1.2.5/dist/disqus.js" async></script>
+<script>
+document.getElementById('js-disqusjs').addEventListener('load', function () {
+    function loadDisqusJS() {
+        new DisqusJS({
+            shortname: 'giles-blog',
+            
+            siteName: 'Giles&#39; Blog',
+            
+            identifier: 'https://wwg.xyz/2020/03/12/%E8%85%BE%E8%AE%AF%E4%BA%91SCF%E4%BA%91%E5%87%BD%E6%95%B0%E9%83%A8%E7%BD%B2Onedrive%E5%85%B1%E4%BA%AB%E7%9B%98/',
+            url: 'https://wwg.xyz/2020/03/12/%E8%85%BE%E8%AE%AF%E4%BA%91SCF%E4%BA%91%E5%87%BD%E6%95%B0%E9%83%A8%E7%BD%B2Onedrive%E5%85%B1%E4%BA%AB%E7%9B%98/',
+            api: 'https://disqus.wwg.xyz/api',
+            apikey: 'hncX8dVAHc4EgWZa1RpTAqqxxf3709jaCN4qFDQ42wfsqJzs6k1QoN0W4mJbNape',
+            
+            admin: 'GilesWW',
+            
+            
+            adminLabel: 'Moderator'
+            
+        })
+    }
+    if (document.readyState === 'complete') {
+        loadDisqusJS();
+    } else {
+        window.addEventListener('load', loadDisqusJS);
+    }
+});
+</script>
+
+                        </div>
+                    
+                
             </div>
-
-            
-              <!-- Comments -->
-              <article class="comments" id="comments" lazyload>
-                
-                  
-                
-                
-  <div class="disqus" style="width:100%">
-    <div id="disqus_thread"></div>
-    
-      <script>
-        Fluid.utils.loadComments('#disqus_thread', function() {
-          Fluid.utils.createCssLink('https://cdn.jsdelivr.net/npm/disqusjs@1.0/dist/disqusjs.css');
-          Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/disqusjs@1.0/dist/disqus.js', function() {
-            new DisqusJS({
-              shortname: 'giles-blog',
-              apikey: 'hncX8dVAHc4EgWZa1RpTAqqxxf3709jaCN4qFDQ42wfsqJzs6k1QoN0W4mJbNape'
-            });
-          });
-        });
-      </script>
-    
-    <noscript>Please enable JavaScript to view the comments</noscript>
-  </div>
-
-
-              </article>
-            
-          </article>
         </div>
-      </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
     
-  </div>
-</div>
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://wwg.xyz">Giles' Blog</a>
+        </p>
 
-<!-- Custom -->
-
-
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
     
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
 
-    
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
 
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-    
 
-    
-  </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  
-
-  
-
-  
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
 </footer>
 
 
-  <!-- SCRIPTS -->
-  
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
 
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
+<script>
 
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
 
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+</script>
 
-<!-- Plugins -->
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
 
 
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-  
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
+<!-- Offset -->
 
 
 
 
-  <script defer src="/js/leancloud.js" ></script>
+<!-- Comment -->
+
+    
+        <!-- No need for DisqusJS -->
+    
 
 
+<!-- ### Custom Footer ### -->
 
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
+    </body>
 
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
-
-
-</body>
 </html>
