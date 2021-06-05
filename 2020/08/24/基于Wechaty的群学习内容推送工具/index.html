@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -19,6 +19,7 @@
   <meta name="description" content="">
   <meta name="author" content="Giles Wong">
   <meta name="keywords" content="Giles">
+  
   <title>基于Wechaty的群学习内容推送工具 - Giles&#39; Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -57,7 +58,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"wwg.xyz","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"gUtMfQ09QSFgfXRGbx8vTPqx-MdYXbMMI","app_key":"dWjMcACC3NMLm3L50P5YFUhx","server_url":null}}};
+    var CONFIG = {"hostname":"wwg.xyz","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"gUtMfQ09QSFgfXRGbx8vTPqx-MdYXbMMI","app_key":"dWjMcACC3NMLm3L50P5YFUhx","server_url":null}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -143,13 +144,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -246,7 +247,7 @@
 <li>使用 Node.js Express 对 Wechaty 进行了封装，后续功能可以本地写好 python 或 nodejs 云函数后，直接部署在腾讯云上，不用调整服务器</li>
 <li>使用 pm2 进行 wechaty 运行状态的维持（后续可以考虑改为使用无服务器的环境，比如 Leancloud、Heroku 容器等，减少服务器的开支）</li>
 </ul>
-<h2 id="功能示例"><a href="#功能示例" class="headerlink" title="功能示例"></a>功能示例</h2><p><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/img-4425.jpg" srcset="/img/loading.gif" alt="img-4425.jpg" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/img-4425.jpg"><br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/img-4418.jpg" srcset="/img/loading.gif" alt="img-4418.jpg" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/img-4418.jpg"></p>
+<h2 id="功能示例"><a href="#功能示例" class="headerlink" title="功能示例"></a>功能示例</h2><p><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/img-4425.jpg" srcset="/img/loading.gif" lazyload alt="img-4425.jpg" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/img-4425.jpg"><br><img src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/img-4418.jpg" srcset="/img/loading.gif" lazyload alt="img-4418.jpg" data-src="https://cdn.jsdelivr.net/gh/GilesWong/GilesWong.github.io@latest/images/img-4418.jpg"></p>
 <h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">|-- wechaty-xiaowang<br>    |-- index.js  //主程序<br>    |-- package-lock.json<br>    |-- package.json<br>    |-- puppet-config.js  //pupet参数<br>    |-- serverchan.js  //通过方糖报告错误<br>    |-- tulingbot.js   //图灵机器人<br>    |-- cloudFunctions // 运行在腾讯云上的云函数爬虫<br>        |-- dailyEnglishTest  //英语每日一题<br>        |-- dailySentence   //英语每日一句<br>        |-- moringNews  //每日早报<br>        |-- rainDetection   //降雨提醒<br>        |-- weatherTip  //早晨问好，及天气预报<br></code></pre></td></tr></tbody></table></figure>
 <h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><ul>
 <li>服务器端<br>Express + Wechaty 开放一个 HTTP 接口用于访问，传入 HTTP 接口的内容会被发送到预先指定的群内</li>
@@ -296,7 +297,11 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
                 <div class="post-prevnext">
@@ -326,25 +331,27 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <div class="disqus" style="width:100%">
     <div id="disqus_thread"></div>
-    <script>
-      Fluid.utils.waitElementVisible('disqus_thread', function() {
-        Fluid.utils.createCssLink('https://cdn.jsdelivr.net/npm/disqusjs@1.3/dist/disqusjs.css');
-        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3/dist/disqus.js', function () {
-          new DisqusJS({
-            shortname: 'giles-blog',
-            apikey: 'hncX8dVAHc4EgWZa1RpTAqqxxf3709jaCN4qFDQ42wfsqJzs6k1QoN0W4mJbNape'
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://cdn.jsdelivr.net/npm/disqusjs@1.0/dist/disqusjs.css');
+          Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/disqusjs@1.0/dist/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'giles-blog',
+              apikey: 'hncX8dVAHc4EgWZa1RpTAqqxxf3709jaCN4qFDQ42wfsqJzs6k1QoN0W4mJbNape'
+            });
           });
         });
-      });
-    </script>
-    <noscript>Please enable JavaScript to view the
-      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
-    </noscript>
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
   </div>
 
 
@@ -409,39 +416,15 @@
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
   
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- LeanCloud 统计PV -->
-        <span id="leancloud-site-pv-container" style="display: none">
-            总访问量 
-            <span id="leancloud-site-pv"></span>
-             次
-          </span>
-      
-      
-        <!-- LeanCloud 统计UV -->
-        <span id="leancloud-site-uv-container" style="display: none">
-            总访客数 
-            <span id="leancloud-site-uv"></span>
-             人
-          </span>
-      
-
-    
-  </div>
-
 
   
 
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -456,7 +439,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -464,7 +446,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -489,6 +471,10 @@
 
 
 
+  <script  src="/js/local-search.js" ></script>
+
+
+
 
   <script defer src="/js/leancloud.js" ></script>
 
@@ -503,20 +489,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
-    })()
   </script>
 
 
@@ -548,7 +520,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>
