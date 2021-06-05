@@ -280,31 +280,23 @@
               <article class="comments" id="comments">
                 
                 
-  <div id="waline"></div>
-  <script type="text/javascript">
-    Fluid.utils.waitElementVisible('waline', function() {
-      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@waline/client@0.4.2/dist/Waline.min.js', function () {
-        new Waline({
-          el: "#waline",
-          placeholder: "说点什么",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          serverURL: "https://comment.wwg.xyz",
-          avatarForce: false,
-          requiredFields: [],
-          emojiCDN: "",
-          emojiMaps: {},
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script>
+      Fluid.utils.waitElementVisible('disqus_thread', function() {
+        Fluid.utils.createCssLink('https://cdn.jsdelivr.net/npm/disqusjs@1.3/dist/disqusjs.css');
+        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3/dist/disqus.js', function () {
+          new DisqusJS({
+            shortname: 'giles-blog',
+            apikey: 'hncX8dVAHc4EgWZa1RpTAqqxxf3709jaCN4qFDQ42wfsqJzs6k1QoN0W4mJbNape'
+          });
         });
       });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the
-    <a target="_blank" href="https://waline.js.org" rel="nofollow noopener noopener">comments powered by Waline.</a>
-  </noscript>
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </article>
