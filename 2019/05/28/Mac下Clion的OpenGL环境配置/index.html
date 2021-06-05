@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>Mac下Clion的OpenGL环境配置 | Giles&#39; Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+    
+        <!-- Import DisqusJS Default Theme -->
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2.5/dist/disqusjs.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2.5/dist/disqusjs.css"></noscript>
+
+    
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Giles' Blog"><meta name="msapplication-starturl" content="https://wwg.xyz"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Giles' Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="Mac下Clion的OpenGL环境配置 | Giles&#39; Blog"><meta property="og:site_name" content="Giles&#39; Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://wwg.xyz/2019/05/28/Mac%E4%B8%8BClion%E7%9A%84OpenGL%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><meta property="og:locale" content="zh-CN"><meta name="description" content="Mac下Clion的OpenGL环境配置安装glfw&#x2F;glew12$ brew install glew$ brew install glfw 对工程内CMakeLists.txt进行更改：1234567891011121314151617181920212223cmake_minimum_required(VERSION 3.14)project(XXX)set(CMAKE_CXX_STANDA - Giles Wong - Giles&#39; Blog"><meta name="keywords" content="OpenGL, Clion, Giles"><meta property="article:published_time" content="2019-05-28T11:51:45.000Z"><meta property="article:modified_time" content="2021-06-05T07:57:16.209Z"><meta property="og:updated_time" content="2021-06-05T07:57:16.209Z"><meta property="article:author" content="Giles Wong"><meta property="article:tag" content="OpenGL, Clion, Giles"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://wwg.xyz/2019/05/28/Mac%E4%B8%8BClion%E7%9A%84OpenGL%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+
+    <meta name="generator" content="Hexo 5.3.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://wwg.xyz/2019/05/28/Mac%E4%B8%8BClion%E7%9A%84OpenGL%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/",
+    "@type": "BlogPosting",
+    "logo": "https://wwg.xyz/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://wwg.xyz/2019/05/28/Mac%E4%B8%8BClion%E7%9A%84OpenGL%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
+    },
+    "headline": "Mac下Clion的OpenGL环境配置 | Giles&#39; Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://wwg.xyz/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2019-05-28T11:51:45.000Z",
+    "dateModified": "2021-06-05T07:57:16.209Z",
+    "author": {
+        "@type": "Person",
+        "name": "Giles Wong",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://wwg.xyz/img/default_avatar.png"
+        },
+        "description": "Hi, nice to meet you."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Giles&#39; Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://wwg.xyz/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://wwg.xyz/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "OpenGL, Clion, Giles",
+    "description": "Mac下Clion的OpenGL环境配置安装glfw/glew12$ brew install glew$ brew install glfw 对工程内CMakeLists.txt进行更改：1234567891011121314151617181920212223cmake_minimum_required(VERSION 3.14)project(XXX)set(CMAKE_CXX_STANDA - Giles Wong - Giles&#39; Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Giles&#39; Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                Hi, nice to meet you.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
+    
+    
+        <a href="/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/about/" class="navbar-link">About</a>
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+
+        <!-- Share Twitter -->
+        
+
+        <!-- Share Facebook -->
+        
+
+        <!-- Share Google+ -->
+        
+
+        <!-- Share LinkedIn -->
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=Giles' Blog&title=Mac下Clion的OpenGL环境配置&summary=&pics=https://wwg.xyz/img/suka-favicon.ico&url=https://wwg.xyz" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://wwg.xyz&text=Mac下Clion的OpenGL环境配置" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAAAAAAYplnuAAACtklEQVR42u3c207DMBBF0f7/T8NrFdlz9nEKAmX3pVyaeFHJzMUDr69/+HiJFi1a9APRr+Hx/pr3116/dv3edtHL9dc1okO0aIjeLZAAq8+vzyv07g1J64gW3aCvN0wbbLXY9IOu7jOtt7y/aNEfQqNkZhEopsCUgpRo0T+J3gUSGlhS8iVa9E+gSfBIkFQMrBKmJnETLZqip4LyN58/Vo2LfjSaJEK7pkoqYNNGo8mYaNFtf3q3EUigmQLGtNmb9UWLvoPeJUBp85FAsStwScErWnSLpo3vtGFogby751hAixZdoKdNM22eFGxSAVzdW7RogJ6aiKm5kl5DCgnyi0C06AZNBkfuNBmn+5E3auwwiRa96eWRIjYVC+natPHq4CJaNGhAnhSuCZc2cApmsakuWnR5+EmHqE6Gq1IAEy36BD0tTG5GC+KpYZOaRKJFN2jyRwsnQYYeKJFrRYtu0ScFQLPhWnSVMIkWPRS2KRA0CX1q+JDrRIs+QdPmeduoIYf56RlPQIoWvTn8bBouZNCkLSrigZNo0UURQJIfPCAFAPSgSrToE3R7MNQ0Z9pCeDxUEi26QE9NQFp8oqQnDMqOG1O0aIhuLm4O8XfJUXMghQevRIsGg1LpRqRQaBKr2NQRLbpAkwBDA0Vqpqc3arueaNEQTRKfpng92cwkGIkWfQdNhv7SgTxpxKSGp2jRp+jmDwvSAm1yhAsO0aJLNGmw0MOgNCAwNfW3b4Zo0QDdHuTQRIgmVWlIHA19ixZ9+I/gycekeZOGVVBwES0a/lMSElBOitqUeJGNL1r0SRHQbqim8G0TJjRMKFr0AToVn+3QbBrewlMIokXfRDeHm80h57TBj4OL6MejSeJDAgcZtE3FcHVQJFp0Wdg2w3+p2J2GCEhjSLToT/Sn/9JDtGjRoh+E/gaQBDnXcQpjqAAAAABJRU5ErkJggg==" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">Mac下Clion的OpenGL环境配置</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Giles Wong's Avatar">
+        <span>2019-05-28</span>
+        
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Giles' Blog&title=Giles' Blog&summary=&pics=https://wwg.xyz/img/suka-favicon.ico&url=https://wwg.xyz/2019/05/28/Mac%E4%B8%8BClion%E7%9A%84OpenGL%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://wwg.xyz/2019/05/28/Mac%E4%B8%8BClion%E7%9A%84OpenGL%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/&text=Giles' Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAAAAAAYplnuAAACtklEQVR42u3c207DMBBF0f7/T8NrFdlz9nEKAmX3pVyaeFHJzMUDr69/+HiJFi1a9APRr+Hx/pr3116/dv3edtHL9dc1okO0aIjeLZAAq8+vzyv07g1J64gW3aCvN0wbbLXY9IOu7jOtt7y/aNEfQqNkZhEopsCUgpRo0T+J3gUSGlhS8iVa9E+gSfBIkFQMrBKmJnETLZqip4LyN58/Vo2LfjSaJEK7pkoqYNNGo8mYaNFtf3q3EUigmQLGtNmb9UWLvoPeJUBp85FAsStwScErWnSLpo3vtGFogby751hAixZdoKdNM22eFGxSAVzdW7RogJ6aiKm5kl5DCgnyi0C06AZNBkfuNBmn+5E3auwwiRa96eWRIjYVC+natPHq4CJaNGhAnhSuCZc2cApmsakuWnR5+EmHqE6Gq1IAEy36BD0tTG5GC+KpYZOaRKJFN2jyRwsnQYYeKJFrRYtu0ScFQLPhWnSVMIkWPRS2KRA0CX1q+JDrRIs+QdPmeduoIYf56RlPQIoWvTn8bBouZNCkLSrigZNo0UURQJIfPCAFAPSgSrToE3R7MNQ0Z9pCeDxUEi26QE9NQFp8oqQnDMqOG1O0aIhuLm4O8XfJUXMghQevRIsGg1LpRqRQaBKr2NQRLbpAkwBDA0Vqpqc3arueaNEQTRKfpng92cwkGIkWfQdNhv7SgTxpxKSGp2jRp+jmDwvSAm1yhAsO0aJLNGmw0MOgNCAwNfW3b4Zo0QDdHuTQRIgmVWlIHA19ixZ9+I/gycekeZOGVVBwES0a/lMSElBOitqUeJGNL1r0SRHQbqim8G0TJjRMKFr0AToVn+3QbBrewlMIokXfRDeHm80h57TBj4OL6MejSeJDAgcZtE3FcHVQJFp0Wdg2w3+p2J2GCEhjSLToT/Sn/9JDtGjRoh+E/gaQBDnXcQpjqAAAAABJRU5ErkJggg==" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Mac%E4%B8%8BClion%E7%9A%84OpenGL%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="post-toc-number">1.</span> <span class="post-toc-text">Mac下Clion的OpenGL环境配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85glfw-glew"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">安装glfw&#x2F;glew</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AF%B9%E5%B7%A5%E7%A8%8B%E5%86%85CMakeLists-txt%E8%BF%9B%E8%A1%8C%E6%9B%B4%E6%94%B9%EF%BC%9A"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">对工程内CMakeLists.txt进行更改：</span></a></li></ol></li></ol></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <html><head></head><body><h1 id="Mac下Clion的OpenGL环境配置"><a href="#Mac下Clion的OpenGL环境配置" class="headerlink" title="Mac下Clion的OpenGL环境配置"></a>Mac下Clion的OpenGL环境配置</h1><h3 id="安装glfw-glew"><a href="#安装glfw-glew" class="headerlink" title="安装glfw/glew"></a>安装glfw/glew</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew install glew</span><br><span class="line">$ brew install glfw</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="对工程内CMakeLists-txt进行更改："><a href="#对工程内CMakeLists-txt进行更改：" class="headerlink" title="对工程内CMakeLists.txt进行更改："></a>对工程内CMakeLists.txt进行更改：</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.14)</span><br><span class="line">project(XXX)</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>(CMAKE_CXX_STANDARD 11)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加头文件</span></span><br><span class="line"><span class="built_in">set</span>(GLEW_H /usr/<span class="built_in">local</span>/Cellar/glew/2.1.0/include/GL)</span><br><span class="line"><span class="built_in">set</span>(GLFW_H /usr/<span class="built_in">local</span>/Cellar/glfw/3.2.1/include/GLFW)</span><br><span class="line">include_directories(<span class="variable">${GLEW_H}</span> <span class="variable">${GLFW_H}</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加目标链接</span></span><br><span class="line"><span class="built_in">set</span>(GLEW_LINK /usr/<span class="built_in">local</span>/Cellar/glew/2.1.0/lib/libGLEW.2.1.dylib)</span><br><span class="line"><span class="built_in">set</span>(GLFW_LINK /usr/<span class="built_in">local</span>/Cellar/glfw/3.2.1/lib/libglfw.3.dylib)</span><br><span class="line">link_libraries(<span class="variable">${OPENGL}</span> <span class="variable">${GLEW_LINK}</span> <span class="variable">${GLFW_LINK}</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行编译命令</span></span><br><span class="line"><span class="built_in">set</span>(SOURCE_FILES main.cpp)</span><br><span class="line">add_executable(XXX <span class="variable">${SOURCE_FILES}</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (APPLE)</span><br><span class="line">    target_link_libraries(XXX <span class="string">"-framework OpenGL"</span>)</span><br><span class="line">    target_link_libraries(XXX <span class="string">"-framework GLUT"</span>)</span><br><span class="line">endif()</span><br></pre></td></tr></tbody></table></figure>
+<p>将上方的<strong>XXX</strong>改为自己的工程名称即可</p>
+</body></html>
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2021-06-05");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2019-05-28T11:51:45.000Z" itemprop="datePublished">2019-05-28</time>
+
+    , 最后修改于&nbsp;<time datetime="2021-06-05T07:57:16.209Z" itemprop="dateModified">2021-06-05</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/OpenGL/" rel="tag">#&nbsp;OpenGL</a>
+
+<a class="post-tags-list-item" href="/tags/Clion/" rel="tag">#&nbsp;Clion</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2019/09/15/Traceroute%E4%B8%8EVMNAT/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Traceroute与VMNAT</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2019/05/27/Mac%E6%89%8B%E5%8A%A8%E5%88%87%E6%8D%A2%E6%98%BE%E5%8D%A1/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Mac手动切换显卡</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+
+<script id="js-disqusjs" src="https://cdn.jsdelivr.net/npm/disqusjs@1.2.5/dist/disqus.js" async></script>
+<script>
+document.getElementById('js-disqusjs').addEventListener('load', function () {
+    function loadDisqusJS() {
+        new DisqusJS({
+            shortname: 'giles-blog',
+            
+            siteName: 'Giles&#39; Blog',
+            
+            identifier: 'https://wwg.xyz/2019/05/28/Mac%E4%B8%8BClion%E7%9A%84OpenGL%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/',
+            url: 'https://wwg.xyz/2019/05/28/Mac%E4%B8%8BClion%E7%9A%84OpenGL%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/',
+            api: 'https://disqus.wwg.xyz/api',
+            apikey: 'hncX8dVAHc4EgWZa1RpTAqqxxf3709jaCN4qFDQ42wfsqJzs6k1QoN0W4mJbNape',
+            
+            admin: 'GilesWW',
+            
+            
+            adminLabel: 'Moderator'
+            
+        })
+    }
+    if (document.readyState === 'complete') {
+        loadDisqusJS();
+    } else {
+        window.addEventListener('load', loadDisqusJS);
+    }
+});
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://wwg.xyz">Giles' Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        <!-- No need for DisqusJS -->
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>
