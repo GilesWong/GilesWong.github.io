@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>腾讯云SCF云函数部署OneDrive共享盘 - Giles&#039; Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Giles"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Giles"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="更新更新于2022年7月腾讯云SCF大幅削减了免费额度，请事先查阅收费标准再决定是否使用。 前情提要申请了Office365技术社区成员，通过后获得了一个Office 365 E3的账号，其中包含1T容量的OneDrive for business世纪互联版。物要尽其用，用这个搭一个网盘。  OneDrive for business下的文件，组织的管理员可以查看，私人文件请放OneDrive个人"><meta property="og:type" content="blog"><meta property="og:title" content="腾讯云SCF云函数部署OneDrive共享盘"><meta property="og:url" content="http://wwg.xyz/2020/03/12/scf-onedrive/"><meta property="og:site_name" content="Giles&#039; Blog"><meta property="og:description" content="更新更新于2022年7月腾讯云SCF大幅削减了免费额度，请事先查阅收费标准再决定是否使用。 前情提要申请了Office365技术社区成员，通过后获得了一个Office 365 E3的账号，其中包含1T容量的OneDrive for business世纪互联版。物要尽其用，用这个搭一个网盘。  OneDrive for business下的文件，组织的管理员可以查看，私人文件请放OneDrive个人"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://wwg.xyz/15840003353411.jpg"><meta property="og:image" content="http://wwg.xyz/15840014767585.jpg"><meta property="og:image" content="http://wwg.xyz/15840015000546.jpg"><meta property="og:image" content="http://wwg.xyz/15840059076677.jpg"><meta property="og:image" content="http://wwg.xyz/15840010146922.jpg"><meta property="og:image" content="http://wwg.xyz/15840010980146.jpg"><meta property="og:image" content="http://wwg.xyz/15840012366668.jpg"><meta property="og:image" content="http://wwg.xyz/15840059287716.jpg"><meta property="og:image" content="http://wwg.xyz/15840059495290.jpg"><meta property="og:image" content="http://wwg.xyz/15840061723614.jpg"><meta property="og:image" content="http://wwg.xyz/15840063286973.jpg"><meta property="og:image" content="http://wwg.xyz/15840020982768.jpg"><meta property="og:image" content="http://wwg.xyz/15840021388736.jpg"><meta property="og:image" content="http://wwg.xyz/15840032103556.jpg"><meta property="og:image" content="http://wwg.xyz/15840032536675.jpg"><meta property="og:image" content="http://wwg.xyz/15840035563819.jpg"><meta property="og:image" content="http://wwg.xyz/15840038279126.jpg"><meta property="og:image" content="http://wwg.xyz/15840038768398.jpg"><meta property="og:image" content="http://wwg.xyz/15840039343976.jpg"><meta property="og:image" content="http://wwg.xyz/15840039663480.jpg"><meta property="og:image" content="http://wwg.xyz/15840039941934.jpg"><meta property="og:image" content="http://wwg.xyz/15840040234491.jpg"><meta property="og:image" content="http://wwg.xyz/15840040765357.jpg"><meta property="og:image" content="http://wwg.xyz/15840043148579.jpg"><meta property="article:published_time" content="2020-03-12T07:56:13.000Z"><meta property="article:modified_time" content="2022-07-22T08:53:06.869Z"><meta property="article:author" content="Giles"><meta property="article:tag" content="Serverless"><meta property="article:tag" content="Onedrive"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://wwg.xyz/15840003353411.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://wwg.xyz/2020/03/12/scf-onedrive/"},"headline":"腾讯云SCF云函数部署OneDrive共享盘","image":["http://wwg.xyz/15840003353411.jpg","http://wwg.xyz/15840014767585.jpg","http://wwg.xyz/15840015000546.jpg","http://wwg.xyz/15840059076677.jpg","http://wwg.xyz/15840010146922.jpg","http://wwg.xyz/15840010980146.jpg","http://wwg.xyz/15840012366668.jpg","http://wwg.xyz/15840059287716.jpg","http://wwg.xyz/15840059495290.jpg","http://wwg.xyz/15840061723614.jpg","http://wwg.xyz/15840063286973.jpg","http://wwg.xyz/15840020982768.jpg","http://wwg.xyz/15840021388736.jpg","http://wwg.xyz/15840032103556.jpg","http://wwg.xyz/15840032536675.jpg","http://wwg.xyz/15840035563819.jpg","http://wwg.xyz/15840038279126.jpg","http://wwg.xyz/15840038768398.jpg","http://wwg.xyz/15840039343976.jpg","http://wwg.xyz/15840039663480.jpg","http://wwg.xyz/15840039941934.jpg","http://wwg.xyz/15840040234491.jpg","http://wwg.xyz/15840040765357.jpg","http://wwg.xyz/15840043148579.jpg"],"datePublished":"2020-03-12T07:56:13.000Z","dateModified":"2022-07-22T08:53:06.869Z","author":{"@type":"Person","name":"Giles"},"publisher":{"@type":"Organization","name":"Giles' Blog","logo":{"@type":"ImageObject","url":{"text":"Giles' Blog"}}},"description":"更新更新于2022年7月腾讯云SCF大幅削减了免费额度，请事先查阅收费标准再决定是否使用。 前情提要申请了Office365技术社区成员，通过后获得了一个Office 365 E3的账号，其中包含1T容量的OneDrive for business世纪互联版。物要尽其用，用这个搭一个网盘。  OneDrive for business下的文件，组织的管理员可以查看，私人文件请放OneDrive个人"}</script><link rel="canonical" href="http://wwg.xyz/2020/03/12/scf-onedrive/"><link rel="alternate" href="/atom.xml" title="Giles&#039; Blog" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://lib.baomitu.com/font-awesome/5.12.1/css/all.min.css"><link rel="stylesheet" href="https://lib.baomitu.com/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://lib.baomitu.com/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://lib.baomitu.com/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://lib.baomitu.com/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ED55ZDHVH" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-5ED55ZDHVH');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://lib.baomitu.com/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="pub-3509031865667679" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+          Array
+              .from(document.querySelectorAll('.tab-content'))
+              .forEach($tab => {
+                  $tab.classList.add('is-hidden');
+              });
+          Array
+              .from(document.querySelectorAll('.tabs li'))
+              .forEach($tab => {
+                  $tab.classList.remove('is-active');
+              });
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Giles&#039; Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-03-12T07:56:13.000Z" title="2020/3/12 15:56:13">2020-03-12</time>发表</span><span class="level-item"><time dateTime="2022-07-22T08:53:06.869Z" title="2022/7/22 16:53:06">2022-07-22</time>更新</span><span class="level-item">8 分钟读完 (大约1141个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">腾讯云SCF云函数部署OneDrive共享盘</h1><div class="content"><h1 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h1><p>更新于2022年7月<br>腾讯云SCF大幅<strong>削减了</strong>免费额度，请事先查阅收费标准再决定是否使用。</p>
+<h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p>申请了Office365技术社区成员，通过后获得了一个Office 365 E3的账号，其中包含1T容量的OneDrive for business世纪互联版。物要尽其用，用这个搭一个网盘。</p>
+<blockquote>
+<p>OneDrive for business下的文件，组织的管理员可以查看，私人文件请放OneDrive个人版</p>
+</blockquote>
+<blockquote>
+<p>教育邮箱白嫖的1T空间需要有管理员才可以继续搭建</p>
+</blockquote>
+<span id="more"></span>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li>自己腾讯云账户SecretID和SecretKey<br><img src="/15840003353411.jpg"></li>
+<li>SCF函数文件<br><a target="_blank" rel="noopener" href="https://github.com/qkqpttgf/OneManager-php">点击去Github</a></li>
+</ul>
+<h1 id="新建云函数"><a href="#新建云函数" class="headerlink" title="新建云函数"></a>新建云函数</h1><p><a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/scf/">点击去云函数控制台</a><br><img src="/15840014767585.jpg"></p>
+<p>新建一个云函数，选择自己想要的区域，新建函数，运行环境选择<strong>Php 7.2</strong>，选择空白模板，下一步<br><img src="/15840015000546.jpg"></p>
+<blockquote>
+<p>OneDrive个人版选择内地区域可能会有问题，建议选择中国香港<br>拉到下方高级配置，你刚才选择的区域Region<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/api/583/17238#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">官方对应列表</a><br><img src="/15840059076677.jpg"></p>
+</blockquote>
+<p>点击完成</p>
+<h1 id="上传代码文件"><a href="#上传代码文件" class="headerlink" title="上传代码文件"></a>上传代码文件</h1><p>返回到函数列表，点击函数，选择<strong>函数代码</strong>，更改提交方法，把解压缩的代码传上去，保存<br><img src="/15840010146922.jpg"></p>
+<h1 id="添加触发方式"><a href="#添加触发方式" class="headerlink" title="添加触发方式"></a>添加触发方式</h1><p>在<strong>触发方式</strong>内添加触发方式，选择API网关触发方式，将<strong>启用集成响应</strong>打钩，其余默认即可<br><img src="/15840010980146.jpg"></p>
+<p>获得访问路径<br><img src="/15840012366668.jpg"></p>
+<h1 id="配置网盘参数"><a href="#配置网盘参数" class="headerlink" title="配置网盘参数"></a>配置网盘参数</h1><p>访问上一步内获得的链接<br><img src="/15840059287716.jpg"><br>填写之前获得的SecretKey和SecretID，设置密码，确认<br><img src="/15840059495290.jpg"><br>稍等会跳转到首页，点击左上角的管理，添加Onedrive盘<br><img src="/15840061723614.jpg"></p>
+<p>选择自己对应的版本：<br><img src="/15840063286973.jpg"></p>
+<p>怎么样选择自己的版本：</p>
+<p>在浏览器里打开OneDrive的文件目录的首页，看地址栏的域名</p>
+<table>
+<thead>
+<tr>
+<th>域名</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onedrive.live.com</td>
+<td>个人版</td>
+</tr>
+<tr>
+<td>*****.sharepoint.cn</td>
+<td>商业世纪互联版</td>
+</tr>
+<tr>
+<td>*****.sharepoint.com</td>
+<td>商业国际版</td>
+</tr>
+</tbody></table>
+<p>这里我用的是世纪互联版，选第二个</p>
+<p>确认后会调到授权界面，授权即可<br><img src="/15840020982768.jpg"></p>
+<p>稍等即可跳转到首页<br><img src="/15840021388736.jpg"></p>
+<h1 id="完善体验"><a href="#完善体验" class="headerlink" title="完善体验"></a>完善体验</h1><h2 id="网盘配置"><a href="#网盘配置" class="headerlink" title="网盘配置"></a>网盘配置</h2><p>在云函数环境变量处可以添加以下值（说明来自开发者）：</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sitename</td>
+<td>网站的名称，不添加会显示为‘请在环境变量添加sitename’。</td>
+</tr>
+<tr>
+<td>admin</td>
+<td>管理密码，不添加时不显示登录页面且无法登录。</td>
+</tr>
+<tr>
+<td>adminloginpage</td>
+<td>管理登录的页面不再是’?admin’，而是此设置的值。如果设置，登录按钮及页面隐藏。</td>
+</tr>
+<tr>
+<td>public_path</td>
+<td>使用API长链接访问时，显示网盘文件的路径，不设置时默认为根目录；不能是private_path的上级（public看到的不能比private多，要么看到的就不一样）。</td>
+</tr>
+<tr>
+<td>private_path</td>
+<td>使用自定义域名访问时，显示网盘文件的路径，不设置时默认为根目录。</td>
+</tr>
+<tr>
+<td>domain_path</td>
+<td>格式为”a1.com:&#x2F;dir&#x2F;path1&amp;#124;b1.com:&#x2F;path2”，比private_path优先。</td>
+</tr>
+<tr>
+<td>imgup_path</td>
+<td>设置图床路径，不设置这个值时该目录内容会正常列文件出来，设置后只有上传界面，不显示其中文件（登录后显示）。</td>
+</tr>
+<tr>
+<td>passfile</td>
+<td>自定义密码文件的名字，可以是’pppppp’，也可以是’aaaa.txt’等等；密码是这个文件的内容，可以空格、可以中文；列目录时不会显示，只有知道密码才能查看或下载此文件。</td>
+</tr>
+</tbody></table>
+<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><p>触发方式下选择<strong>API服务名</strong><br><img src="/15840032103556.jpg"></p>
+<p>在<strong>自定义域名</strong>下选择新建<br><img src="/15840032536675.jpg"><br>填写域名，路径映射选择自定义，填**&#x2F;<strong>，环境选择</strong>发布**<br>如果没有证书的话，可以去控制台免费申请证书<br>点击提交前，请先将自定义的域名用CNAME方式指向图中的公网二级域名<br><img src="/15840035563819.jpg"><br>在<strong>管理API</strong>下，点击编辑<br><img src="/15840038279126.jpg"><br>路径改为**&#x2F;**<br>下一步<br><img src="/15840038768398.jpg"><br>勾选<strong>是否启用响应集成</strong><br><img src="/15840039343976.jpg"><br>下一步<br>返回类型选择HTML<br><img src="/15840039663480.jpg"><br>完成，点击前往发布服务<br><img src="/15840039941934.jpg"><br>点击发布<br><img src="/15840040234491.jpg"><br>写点备注，提交<br><img src="/15840040765357.jpg"></p>
+<h1 id="部署完成"><a href="#部署完成" class="headerlink" title="部署完成"></a>部署完成</h1><p>已经可以用来访问了<br><img src="/15840043148579.jpg"></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>腾讯云SCF云函数部署OneDrive共享盘</p><p><a href="http://wwg.xyz/2020/03/12/scf-onedrive/">http://wwg.xyz/2020/03/12/scf-onedrive/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-03-12</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-07-22</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Serverless/">Serverless</a><a class="link-muted mr-2" rel="tag" href="/tags/Onedrive/">Onedrive</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/08/24/wechaty/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">基于Wechaty的群学习内容推送工具</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/03/12/miniapp-lookup/"><span class="level-item">微信小程序云开发数据库联表查找</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css"><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script src="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js"></script><script>new DisqusJS({
+            shortname: 'giles-blog',
+            apikey: "hncX8dVAHc4EgWZa1RpTAqqxxf3709jaCN4qFDQ42wfsqJzs6k1QoN0W4mJbNape",
+            siteName: "Giles' Blog",
+            identifier: "2020/03/12/scf-onedrive/",
+            url: "http://wwg.xyz/2020/03/12/scf-onedrive/",
+            title: "腾讯云SCF云函数部署OneDrive共享盘",
+            api: "https://disqus.wwg.xyz/api/",
+            admin: "GilesWW",
+            adminLabel: "Admin",
+            nesting: 4,
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars.githubusercontent.com/u/13916856?v=4" alt="Giles"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Giles</p><p class="is-size-6 is-block">是学生</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Xi&#039;an, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">7</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">9</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/GilesWong" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Telegram" href="https://t.me/WenceslasW"><i class="fab fa-telegram"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://louyu.cc/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Louyu</span></span><span class="level-right"><span class="level-item tag">louyu.cc</span></span></a></li></ul></div></div></div><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-04-09T14:48:28.000Z">2021-04-09</time></p><p class="title"><a href="/2021/04/09/2021-xjtu-postgraduate-admission-experience/">2021届西安交通大学计算机专硕上岸经验</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-08-24T12:29:28.000Z">2020-08-24</time></p><p class="title"><a href="/2020/08/24/wechaty/">基于Wechaty的群学习内容推送工具</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-03-12T07:56:13.000Z">2020-03-12</time></p><p class="title"><a href="/2020/03/12/scf-onedrive/">腾讯云SCF云函数部署OneDrive共享盘</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-03-12T07:09:55.000Z">2020-03-12</time></p><p class="title"><a href="/2020/03/12/miniapp-lookup/">微信小程序云开发数据库联表查找</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2019-12-18T05:13:33.000Z">2019-12-18</time></p><p class="title"><a href="/2019/12/18/mac-catalina-damaged-app/">macOS 10.15 ”app已损坏，无法打开“ 解决方法</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">四月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/12/"><span class="level-start"><span class="level-item">十二月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/05/"><span class="level-start"><span class="level-item">五月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Clion/"><span class="tag">Clion</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mac/"><span class="tag">Mac</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Onedrive/"><span class="tag">Onedrive</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/OpenGL/"><span class="tag">OpenGL</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Serverless/"><span class="tag">Serverless</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BA%91%E5%BC%80%E5%8F%91/"><span class="tag">云开发</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">小程序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1/"><span class="tag">微信</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%8B%AC%E6%98%BE/"><span class="tag">独显</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="pub-3509031865667679" data-ad-slot="2734282774" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Giles&#039; Blog</a><p class="is-size-7"><span>&copy; 2022 Giles</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><script src="https://lib.baomitu.com/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://lib.baomitu.com/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://lib.baomitu.com/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://lib.baomitu.com/lightgallery/1.10.0/js/lightgallery.min.js" defer></script><script src="https://lib.baomitu.com/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
