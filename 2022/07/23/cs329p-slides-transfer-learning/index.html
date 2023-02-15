@@ -3,7 +3,7 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
     
-        gtag('config', 'G-5ED55ZDHVH');</script><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="75cdn"></script><!--!--><!--!--><script data-ad-client="pub-3509031865667679" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+        gtag('config', 'G-5ED55ZDHVH');</script><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="75cdn"></script><!--!--><!--!--><script data-ad-client="pub-3509031865667679" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
   (function () {
       function switchTab() {
           if (!location.hash) {
@@ -33,116 +33,98 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Giles&#039; Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-07-23T08:59:49.000Z" title="2022/7/23 16:59:49">2022-07-23</time>发表</span><span class="level-item"><time dateTime="2022-07-23T09:10:59.819Z" title="2022/7/23 17:10:59">2022-07-23</time>更新</span><span class="level-item">12 分钟读完 (大约1796个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">11.1 迁移学习【斯坦福21秋季：实用机器学习中文版】</h1><div class="content"><p>本节课程课件：<br><a href="cs329p_slides_transfer_learning.pdf">课件</a><br>自己做的思维导图：<br><a href="cs329p_slides_transfer_learning.xmind">导图</a></p>
-<h2 id="迁移学习的出发点"><a href="#迁移学习的出发点" class="headerlink" title="迁移学习的出发点"></a>迁移学习的出发点</h2><p><img src="/2022/07/23/cs329p-slides-transfer-learning/2022-07-23T170422.png" alt="2022-07-23T170422"></p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Giles&#039; Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-07-23T08:59:49.000Z" title="2022/7/23 16:59:49">2022-07-23</time>发表</span><span class="level-item"><time dateTime="2022-07-23T09:10:59.819Z" title="2022/7/23 17:10:59">2022-07-23</time>更新</span><span class="level-item">12 分钟读完 (大约1796个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">11.1 迁移学习【斯坦福21秋季：实用机器学习中文版】</h1><div class="content"><p>本节课程课件： <a href="cs329p_slides_transfer_learning.pdf">课件</a>
+自己做的思维导图： <a
+href="cs329p_slides_transfer_learning.xmind">导图</a></p>
+<h2 id="迁移学习的出发点">迁移学习的出发点</h2>
+<p><img src="2022-07-23T170422.png" alt="2022-07-23T170422" /> -
+在一个任务上学习到的知识，可以在另外一个地方用到</p>
 <ul>
-<li><p>在一个任务上学习到的知识，可以在另外一个地方用到</p>
-</li>
-<li><p>因为训练要花钱，还要搞数据集</p>
-</li>
+<li>因为训练要花钱，还要搞数据集</li>
 </ul>
-<h2 id="途径"><a href="#途径" class="headerlink" title="途径"></a>途径</h2><ul>
-<li><p>训练好的模型做成特征抽取的模块，得到特征干别的事情，比如作为另外一个模型的输入</p>
-</li>
-<li><p>在相关的任务上训练一个模型，在另外一个任务上直接用，例如GPT系列</p>
-</li>
-<li><p>在训练好的模型上，针对新的任务进行微调（本节内容）</p>
-</li>
-</ul>
-<h2 id="相关领域"><a href="#相关领域" class="headerlink" title="相关领域"></a>相关领域</h2><ul>
-<li><p>半监督学习</p>
-</li>
-<li><p>极端情况下，新的任务，不给标记；或者只给几张有标记</p>
-</li>
-<li><p>多任务学习，每一个任务都有自己的数据但不是很够，但任务之间又有相关性</p>
-</li>
-</ul>
-<h2 id="转移知识"><a href="#转移知识" class="headerlink" title="转移知识"></a>转移知识</h2><p><img src="/2022/07/23/cs329p-slides-transfer-learning/2022-07-23T170442.png" alt="2022-07-23T170442"></p>
+<h2 id="途径">途径</h2>
 <ul>
-<li><p>有很多大规模的标好的数据集，尤其是图片分类任务上（因为标记很容易）</p>
-</li>
+<li><p>训练好的模型做成特征抽取的模块，得到特征干别的事情，比如作为另外一个模型的输入</p></li>
+<li><p>在相关的任务上训练一个模型，在另外一个任务上直接用，例如GPT系列</p></li>
+<li><p>在训练好的模型上，针对新的任务进行微调（本节内容）</p></li>
+</ul>
+<h2 id="相关领域">相关领域</h2>
+<ul>
+<li><p>半监督学习</p></li>
+<li><p>极端情况下，新的任务，不给标记；或者只给几张有标记</p></li>
+<li><p>多任务学习，每一个任务都有自己的数据但不是很够，但任务之间又有相关性</p></li>
+</ul>
+<h2 id="转移知识">转移知识</h2>
+<p><img src="2022-07-23T170442.png" alt="2022-07-23T170442" /> -
+有很多大规模的标好的数据集，尤其是图片分类任务上（因为标记很容易）</p>
+<ul>
 <li><p>计算机视觉的迁移学习里面，存在很多效果比较好的模型，希望把这些模型的知识拓展到自己的任务上去</p>
 <ul>
 <li>刚开始进行任务的时候可能不会投入太多，看能不能利用别人在标记好的、比自己的数据集大10倍，100倍的数据集上面学到的一些东西迁移过来，试试效果</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="预训练模型"><a href="#预训练模型" class="headerlink" title="预训练模型"></a>预训练模型</h2><p><img src="/2022/07/23/cs329p-slides-transfer-learning/2022-07-23T170457.png" alt="2022-07-23T170457"></p>
+<h2 id="预训练模型">预训练模型</h2>
+<p><img src="2022-07-23T170457.png" alt="2022-07-23T170457" /> -
+用的最多的迁移学习的方法</p>
 <ul>
-<li><p>用的最多的迁移学习的方法</p>
-</li>
 <li><p>一般来说，一个神经网络大概分为两块</p>
 <ul>
 <li><p>编码器</p>
 <ul>
 <li>可以认为是特征提取器</li>
 <li>将像素转化为在语义空间里面线性可分的一些特征（浅表示）</li>
-</ul>
-</li>
+</ul></li>
 <li><p>解码器</p>
 <ul>
 <li>可能就是个线性层</li>
 <li>把编码器的输出映射为最终结果，做决策</li>
-</ul>
-</li>
+</ul></li>
 <li><p>例如</p>
 <ul>
 <li>给个猫的图片</li>
 <li>可以认为除了最后一层之外的，都是编码器</li>
 <li>最后一层把语义特征（如1024的特征向量），转化为语义空间内的表示</li>
 <li>也可以认为最后几层都是解码器，剩下的是编码器</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 <li><p>预训练模型</p>
 <ul>
-<li><p>在比较大的数据集上训练好的一个模型</p>
-</li>
+<li><p>在比较大的数据集上训练好的一个模型</p></li>
 <li><p>训练的数据集大，可以认为其有一定的泛化能力</p>
 <ul>
 <li>泛化能力指，放到别的任务或者数据集上，多多少少也是能帮点忙</li>
 <li>虽然目标任务可能不会对猫感兴趣，但是编码器部分多多少少学会了点怎么样去处理像素的信息</li>
 <li>在ImageNet上训练的模型，能对其他任务的图片做特征提取，总比从随机开始好</li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Fine-Tune技巧"><a href="#Fine-Tune技巧" class="headerlink" title="Fine-Tune技巧"></a>Fine-Tune技巧</h2><p><img src="/2022/07/23/cs329p-slides-transfer-learning/2022-07-23T170538.png" alt="2022-07-23T170538"></p>
+<h2 id="fine-tune技巧">Fine-Tune技巧</h2>
+<p><img src="2022-07-23T170538.png" alt="2022-07-23T170538" /> -
+通常认为，在深度学习中微调能够带来最好的效果</p>
 <ul>
-<li><p>通常认为，在深度学习中微调能够带来最好的效果</p>
-</li>
 <li><p>在新的任务上面，构建一个新的模型，其架构要与预训练模型一样</p>
 <ul>
 <li>如一个在ImageNet上训练好的ResNet 50模型</li>
-<li>在新的任务上面，也要用一个ResNet 50模型（可以先找找在当前任务的特定架构上是不是有比较好的预训练模型）</li>
-</ul>
-</li>
+<li>在新的任务上面，也要用一个ResNet
+50模型（可以先找找在当前任务的特定架构上是不是有比较好的预训练模型）</li>
+</ul></li>
 <li><p>初始化模型</p>
 <ul>
-<li><p>新模型的特征提取器（编码器）的权重直接从预训练模型得到</p>
-</li>
+<li><p>新模型的特征提取器（编码器）的权重直接从预训练模型得到</p></li>
 <li><p>解码器的权重随机初始化</p>
 <ul>
 <li>不同任务的语义空间不同</li>
-</ul>
-</li>
-<li><p>例如图中右侧的例子</p>
-</li>
-</ul>
-</li>
+</ul></li>
+<li><p>例如图中右侧的例子</p></li>
+</ul></li>
 <li><p>在限制搜索空间，进行训练</p>
 <ul>
-<li><p>因为之前效果已经比较好了，已经在最优解附近了</p>
-</li>
+<li><p>因为之前效果已经比较好了，已经在最优解附近了</p></li>
 <li><p>要把学习率调的小</p>
 <ul>
 <li>例如正常是0.1，现在要用1e-3</li>
-</ul>
-</li>
-<li><p>epoch数要小</p>
-</li>
+</ul></li>
+<li><p>epoch数要小</p></li>
 <li><p>例如</p>
 <ul>
 <li>不做特别的限制的话，不管是fine-tune还是随机初始化整个网络，在足够长的时间下，网络都会达到一个特定的程度，但这个程度并非是最佳状态</li>
@@ -150,87 +132,70 @@
 <li>在数据集不大且网络足够复杂的情况下，网络是可以记住整个数据集的</li>
 <li>训练误差最低的时候，泛化误差不一定更好</li>
 <li>在完全拟合自己的数据和保留在大数据集上的泛化能力之间，做一个权衡</li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="冻结底层网络"><a href="#冻结底层网络" class="headerlink" title="冻结底层网络"></a>冻结底层网络</h2><p><img src="/2022/07/23/cs329p-slides-transfer-learning/2022-07-23T170546.png" alt="2022-07-23T170546"></p>
+<h2 id="冻结底层网络">冻结底层网络</h2>
+<p><img src="2022-07-23T170546.png" alt="2022-07-23T170546" /> -
+限制搜索空间的另一种方法</p>
 <ul>
-<li><p>限制搜索空间的另一种方法</p>
-</li>
 <li><p>因为神经网络有个比较层次化的学习过程</p>
 <ul>
 <li><p>在最底层学到一些底层的特征的表示，像素底层特征，学习到的纹理是什么形状、颜色的知识</p>
 <ul>
 <li>如一个圆圈，图形的边</li>
-</ul>
-</li>
-<li><p>层数越来越高的时候，多多少少会学到一些更大，更全局的东西，更加跟语义相关</p>
-</li>
-</ul>
-</li>
+</ul></li>
+<li><p>层数越来越高的时候，多多少少会学到一些更大，更全局的东西，更加跟语义相关</p></li>
+</ul></li>
 <li><p>最下面的层在微调的时候不动</p>
 <ul>
 <li>例如第0层学习率为0，第1层为1e-8，第二层为1e-7</li>
 <li>通常做法，固定住最下面一些层，往上面一些层学习率为1e-3，再往上是1e-1</li>
-</ul>
-</li>
+</ul></li>
 <li><p>需要固定多少层是需要调的</p>
 <ul>
 <li>若目标任务和预训练模型之间差比较大的话，需要多训练一些层</li>
 <li>差异小的话，可以固定更多层，极端情况下甚至可以只允许最后一层进行训练</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="在哪儿找与训练模型"><a href="#在哪儿找与训练模型" class="headerlink" title="在哪儿找与训练模型"></a>在哪儿找与训练模型</h2><p><img src="/2022/07/23/cs329p-slides-transfer-learning/2022-07-23T170558.png" alt="2022-07-23T170558"></p>
+<h2 id="在哪儿找与训练模型">在哪儿找与训练模型</h2>
+<p><img src="2022-07-23T170558.png" alt="2022-07-23T170558" /> -
+在微调的时候怎么样找到一个与训练模型，很重要</p>
 <ul>
-<li><p>在微调的时候怎么样找到一个与训练模型，很重要</p>
-</li>
 <li><p>首先有没有</p>
 <ul>
 <li>例如要注重latency的话，找个训练好的MobileNet</li>
-</ul>
-</li>
+</ul></li>
 <li><p>其次是考虑在什么样的大数据集上</p>
 <ul>
 <li>例如是在ImageNet上训练好的</li>
+</ul></li>
+<li><p>各种各样的Hub</p></li>
+<li><p>Timm的Hub</p></li>
 </ul>
-</li>
-<li><p>各种各样的Hub</p>
-</li>
-<li><p>Timm的Hub</p>
-</li>
-</ul>
-<h2 id="Fine-Tune应用"><a href="#Fine-Tune应用" class="headerlink" title="Fine-Tune应用"></a>Fine-Tune应用</h2><p><img src="/2022/07/23/cs329p-slides-transfer-learning/2022-07-23T170622.png" alt="2022-07-23T170622"></p>
+<h2 id="fine-tune应用">Fine-Tune应用</h2>
+<p><img src="2022-07-23T170622.png" alt="2022-07-23T170622" /> -
+使用在大数据集预训练好的模型，Fine-Tune到自己的任务上，是过去七八年至现在，在CV方面都是一个主流方法</p>
+<pre><code>- 目标检测/分割----图片相似但目标不同
+- 医学/卫星图像识别----任务相同但图像不同</code></pre>
 <ul>
-<li><p>使用在大数据集预训练好的模型，Fine-Tune到自己的任务上，是过去七八年至现在，在CV方面都是一个主流方法</p>
-<ul>
-<li>目标检测&#x2F;分割—-图片相似但目标不同</li>
-<li>医学&#x2F;卫星图像识别—-任务相同但图像不同</li>
-</ul>
-</li>
 <li><p>微调加速了收敛</p>
 <ul>
 <li>开始的点不是随机初始化的点，而是比较靠近目标的点</li>
-</ul>
-</li>
+</ul></li>
 <li><p>不一定提升精度</p>
 <ul>
 <li>预训练的数据集和目标数据集比较像的时候，一般结果会比只在目标数据集上训练好</li>
 <li>有时候直接在目标数据集上训练时也会得到一个相似的结果，特别是在目标数据集比较大的情况下</li>
 <li>通常不会让精度变得更低，So why not?</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="/2022/07/23/cs329p-slides-transfer-learning/2022-07-23T170700.png" alt="2022-07-23T170700"></p>
+<h2 id="总结">总结</h2>
+<p><img src="2022-07-23T170700.png" alt="2022-07-23T170700" /> -
+通常会在比较大的数据集上训练预训练好的模型</p>
 <ul>
-<li><p>通常会在比较大的数据集上训练预训练好的模型</p>
-</li>
-<li><p>在新的任务上，初始化一个编码器部分的权重和预训练模型权重一样的模型，解码器权重随机初始化</p>
-</li>
-<li><p>微调通常来说加速收敛，有时会提升精度，但不会使得精度变差</p>
-</li>
+<li><p>在新的任务上，初始化一个编码器部分的权重和预训练模型权重一样的模型，解码器权重随机初始化</p></li>
+<li><p>微调通常来说加速收敛，有时会提升精度，但不会使得精度变差</p></li>
 </ul>
 </div><div class="article-licensing box"><div class="licensing-title"><p>11.1 迁移学习【斯坦福21秋季：实用机器学习中文版】</p><p><a href="http://wwg.xyz/2022/07/23/cs329p-slides-transfer-learning/">http://wwg.xyz/2022/07/23/cs329p-slides-transfer-learning/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-07-23</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-07-23</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="link-muted mr-2" rel="tag" href="/tags/Transfer-Learning/">Transfer Learning</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/02/15/algorithm-train-day1/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">代码随想录算法训练营第一天 | 704. 二分查找、27. 移除元素</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2021/04/09/2021-xjtu-postgraduate-admission-experience/"><span class="level-item">2021级西安交通大学计算机专硕上岸经验</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><link rel="stylesheet" href="75cdn"><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script src="75cdn"></script><script>new DisqusJS({
             shortname: 'giles-blog',
@@ -285,11 +250,7 @@
                 }
                 $('.justified-gallery').justifiedGallery();
             }
-        });</script><!--!--><!--!--><link rel="stylesheet" href="75cdn"><script src="75cdn" defer></script><script src="75cdn" defer></script><script src="75cdn" defer></script><script>window.addEventListener("load", function() {
-            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
-                renderMathInElement(element);
-            });
-        });</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
             'HTML-CSS': {
                 matchFontHeight: false
             },
