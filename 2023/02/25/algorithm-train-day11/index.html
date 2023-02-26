@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>代码随想录算法训练营第11天 | 20. 有效的括号，1047. 删除字符串中的所有相邻重复项，150. 逆波兰表达式求值 - Giles&#039; Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Giles"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Giles"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="LeetCode - 20. 有效的括号，1047. 删除字符串中的所有相邻重复项，150. 逆波兰表达式求值"><meta property="og:type" content="blog"><meta property="og:title" content="代码随想录算法训练营第11天 | 20. 有效的括号，1047. 删除字符串中的所有相邻重复项，150. 逆波兰表达式求值"><meta property="og:url" content="http://wwg.xyz/2023/02/25/algorithm-train-day11/"><meta property="og:site_name" content="Giles&#039; Blog"><meta property="og:description" content="LeetCode - 20. 有效的括号，1047. 删除字符串中的所有相邻重复项，150. 逆波兰表达式求值"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://wwg.xyz/2023/02/25/algorithm-train-day11/2023-02-26T152534.png"><meta property="og:image" content="http://wwg.xyz/2023/02/25/algorithm-train-day11/2023-02-26T153149.png"><meta property="og:image" content="http://wwg.xyz/2023/02/25/algorithm-train-day11/2023-02-26T153649.png"><meta property="article:published_time" content="2023-02-25T07:22:22.000Z"><meta property="article:modified_time" content="2023-02-26T07:46:18.314Z"><meta property="article:author" content="Giles"><meta property="article:tag" content="学习"><meta property="article:tag" content="算法"><meta property="article:tag" content="代码随想录"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://wwg.xyz/2023/02/25/algorithm-train-day11/2023-02-26T152534.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://wwg.xyz/2023/02/25/algorithm-train-day11/"},"headline":"代码随想录算法训练营第11天 | 20. 有效的括号，1047. 删除字符串中的所有相邻重复项，150. 逆波兰表达式求值","image":["http://wwg.xyz/2023/02/25/algorithm-train-day11/2023-02-26T152534.png","http://wwg.xyz/2023/02/25/algorithm-train-day11/2023-02-26T153149.png","http://wwg.xyz/2023/02/25/algorithm-train-day11/2023-02-26T153649.png"],"datePublished":"2023-02-25T07:22:22.000Z","dateModified":"2023-02-26T07:46:18.314Z","author":{"@type":"Person","name":"Giles"},"publisher":{"@type":"Organization","name":"Giles' Blog","logo":{"@type":"ImageObject","url":{"text":"Giles' Blog"}}},"description":"LeetCode - 20. 有效的括号，1047. 删除字符串中的所有相邻重复项，150. 逆波兰表达式求值"}</script><link rel="canonical" href="http://wwg.xyz/2023/02/25/algorithm-train-day11/"><link rel="alternate" href="/atom.xml" title="Giles&#039; Blog" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ED55ZDHVH" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-5ED55ZDHVH');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="pub-3509031865667679" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Giles&#039; Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-02-25T07:22:22.000Z" title="2023/2/25 15:22:22">2023-02-25</time>发表</span><span class="level-item"><time dateTime="2023-02-26T07:46:18.314Z" title="2023/2/26 15:46:18">2023-02-26</time>更新</span><span class="level-item">6 分钟读完 (大约948个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">代码随想录算法训练营第11天 | 20. 有效的括号，1047. 删除字符串中的所有相邻重复项，150. 逆波兰表达式求值</h1><div class="content"><h2 id="有效的括号">20. 有效的括号</h2>
+<p>(代码随想录链接)[https://programmercarl.com/0020.%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7.html]</p>
+<h3 id="题目">题目</h3>
+<figure>
+<img src="2023-02-26T152534.png" alt="LeetCode-20" />
+<figcaption aria-hidden="true">LeetCode-20</figcaption>
+</figure>
+<p>给定一个只包含了()<span></span>6种字符的字符串，判断该字符串中的括号是否满足左右匹配。</p>
+<h3 id="自己的想法">自己的想法</h3>
+<p>遇到左侧符号<code>[(&#123;</code>就进栈，遇到右侧符号<code>])&#125;</code>就判断栈顶是否为对应的左侧符号，若是则将左侧符号弹出，若不匹配，则不满足条件。若遍历完成后，栈中仍有元素，则也不满足条件。</p>
+<h3 id="题解">题解</h3>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
+private:
+    stack&lt;char&gt; cs;
+public:
+    bool isPair(char a, char b) &#123;               &#x2F;&#x2F; 判断a是否为b的对应左侧符号
+        if (a &#x3D;&#x3D; &#39;(&#39; &amp;&amp; b &#x3D;&#x3D; &#39;)&#39;) return true;
+        if (a &#x3D;&#x3D; &#39;[&#39; &amp;&amp; b &#x3D;&#x3D; &#39;]&#39;) return true;
+        if (a &#x3D;&#x3D; &#39;&#123;&#39; &amp;&amp; b &#x3D;&#x3D; &#39;&#125;&#39;) return true;
+        return false;
+    &#125;
+
+    bool isValid(string s) &#123;
+        for (char c : s) &#123;                                      &#x2F;&#x2F; 遍历字符串中的字符
+            if (c &#x3D;&#x3D; &#39;(&#39; || c &#x3D;&#x3D; &#39;&#123;&#39; || c &#x3D;&#x3D; &#39;[&#39;)  cs.push(c);  &#x2F;&#x2F; 若为左侧字符，则入栈
+            else &#123;                                              &#x2F;&#x2F; 若为右侧字符
+                if (cs.empty()) return false;                   &#x2F;&#x2F; 栈中没有内容，不匹配
+                char topChar &#x3D; cs.top();                        &#x2F;&#x2F; 判断栈顶符号是否和当前的右侧符号匹配
+                if (isPair(topChar, c)) cs.pop();
+                else return false;
+            &#125;
+        &#125;
+        if (!cs.empty()) return false;                          &#x2F;&#x2F; 遍历完成后，栈若不为空，则仍不满足条件
+        return true;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="删除字符串中的所有相邻重复项">1047.
+删除字符串中的所有相邻重复项</h2>
+<p>(代码随想录链接)[https://programmercarl.com/1047.%E5%88%A0%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%9B%B8%E9%82%BB%E9%87%8D%E5%A4%8D%E9%A1%B9.html]</p>
+<h3 id="题目-1">题目</h3>
+<figure>
+<img src="2023-02-26T153149.png" alt="LeetCode-1047" />
+<figcaption aria-hidden="true">LeetCode-1047</figcaption>
+</figure>
+<p>去除字符串中所有的相同相邻字符。</p>
+<h3 id="自己的想法-1">自己的想法</h3>
+<p>遍历给定的字符串，设遍历获得的字符为c，若c和新的结果字符串末尾的字符相同，则将结果字符串的末尾字符取出；若不同，则将c拼接在新的字符串的结尾。实际上将字符串当做了一个栈。</p>
+<h3 id="题解-1">题解</h3>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
+public:
+    string removeDuplicates(string s) &#123;
+        string result;                                  &#x2F;&#x2F; 初始化一个结果字符串
+        for (char c : s) &#123;                              &#x2F;&#x2F; 遍历给定的字符串
+            if (result.empty() || result.back() !&#x3D; c) &#123; &#x2F;&#x2F; 若字符串为空或者字符串末尾字符不等于当前遍历到的字符
+                result.push_back(c);                    &#x2F;&#x2F; 将该字符加入结果字符串
+            &#125; else &#123;
+                result.pop_back();                      &#x2F;&#x2F; 否则就将结果字符串的末尾字符去除
+            &#125;
+        &#125;
+        return result;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="逆波兰表达式求值">150. 逆波兰表达式求值</h2>
+<p>(代码随想录链接)[https://programmercarl.com/0150.%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC.html]</p>
+<h3 id="题目-2">题目</h3>
+<figure>
+<img src="2023-02-26T153649.png" alt="LeetCode-150" />
+<figcaption aria-hidden="true">LeetCode-150</figcaption>
+</figure>
+<p>根据逆波兰表达式，求该表达式的值。</p>
+<h3 id="自己的想法-2">自己的想法</h3>
+<p><del>Yet Anther Problem Appeared in WANGDAO.</del></p>
+<p>设两个栈，一个用于存储运算数，一个用于暂存运算符。遍历表达式，遇到运算数就将数据压栈，遇到运算符时，先查看运算符的栈栈顶的运算符，若当前运算符的顺序高于栈顶运算符时，则将运算符入栈，否则取运算数栈顶两个数字，使用当前运算符进行运算，并将结果压入运算数栈中。遍历完成后若运算符栈仍有运算符，继续取出做运算。最后返回运算数栈的栈顶数字即可。</p>
+<h3 id="题解-2">题解</h3>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
+public:
+    bool hasPriority(char a, char b) &#123;                                              &#x2F;&#x2F; 对比运算符优先级
+        if ((a &#x3D;&#x3D; &#39;*&#39; || a &#x3D;&#x3D; &#39;&#x2F;&#39;) &amp;&amp; (b &#x3D;&#x3D; &#39;+&#39; || b &#x3D;&#x3D; &#39;-&#39;))   return true;
+        return false;
+    &#125;
+
+    int evalRPN(vector&lt;string&gt;&amp; tokens) &#123;
+        stack&lt;int&gt; nums;
+        stack&lt;char&gt; ops;
+        for (string s : tokens) &#123;
+            if (s !&#x3D; &quot;+&quot; &amp;&amp; s !&#x3D; &quot;-&quot; &amp;&amp; s !&#x3D; &quot;*&quot; &amp;&amp; s !&#x3D; &quot;&#x2F;&quot;) nums.push(stoi(s));   &#x2F;&#x2F; 将遇到的每个运算数入栈
+            else &#123;
+                char c &#x3D; s[0];
+                if (ops.empty() || !hasPriority(s[0], ops.top())) &#123;                 &#x2F;&#x2F; 满足进行运算的条件
+                    int a &#x3D; nums.top();
+                    nums.pop();
+                    int b &#x3D; nums.top();
+                    nums.pop();
+                    int num &#x3D; 0;
+                    if (c &#x3D;&#x3D; &#39;+&#39;) num &#x3D; a + b;
+                    else if (c &#x3D;&#x3D; &#39;-&#39;) num &#x3D; b - a;
+                    else if (c &#x3D;&#x3D; &#39;*&#39;) num &#x3D; a * b;
+                    else if (c &#x3D;&#x3D; &#39;&#x2F;&#39;) num &#x3D; b &#x2F; a;
+                    nums.push(num);
+                &#125; else &#123;
+                    ops.push(c);
+                &#125;
+            &#125;
+        &#125;
+        return nums.top();
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</div><div class="article-licensing box"><div class="licensing-title"><p>代码随想录算法训练营第11天 | 20. 有效的括号，1047. 删除字符串中的所有相邻重复项，150. 逆波兰表达式求值</p><p><a href="http://wwg.xyz/2023/02/25/algorithm-train-day11/">http://wwg.xyz/2023/02/25/algorithm-train-day11/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-02-25</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-02-26</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">代码随想录</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/02/24/algorithm-train-day10/"><span class="level-item">代码随想录算法训练营第10天 | 栈和队列理论基础，232.用栈实现队列，225.用队列实现栈</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/disqusjs/1.3.0/disqusjs.css"><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script src="https://cdnjs.loli.net/ajax/libs/disqusjs/1.3.0/disqus.js"></script><script>new DisqusJS({
+            shortname: 'giles-blog',
+            apikey: "hncX8dVAHc4EgWZa1RpTAqqxxf3709jaCN4qFDQ42wfsqJzs6k1QoN0W4mJbNape",
+            siteName: "Giles' Blog",
+            identifier: "2023/02/25/algorithm-train-day11/",
+            url: "http://wwg.xyz/2023/02/25/algorithm-train-day11/",
+            title: "代码随想录算法训练营第11天 | 20. 有效的括号，1047. 删除字符串中的所有相邻重复项，150. 逆波兰表达式求值",
+            api: "https://disqus.wwg.xyz/api/",
+            admin: "GilesWW",
+            adminLabel: "Admin",
+            nesting: 4,
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars.githubusercontent.com/u/13916856?v=4" alt="Giles"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Giles</p><p class="is-size-6 is-block">24岁，是学生</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Xi&#039;an, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">18</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">11</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/GilesWong" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Telegram" href="https://t.me/WenceslasW"><i class="fab fa-telegram"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://louyu.cc/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Louyu</span></span><span class="level-right"><span class="level-item tag">louyu.cc</span></span></a></li></ul></div></div></div><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-02-25T07:22:22.000Z">2023-02-25</time></p><p class="title"><a href="/2023/02/25/algorithm-train-day11/">代码随想录算法训练营第11天 | 20. 有效的括号，1047. 删除字符串中的所有相邻重复项，150. 逆波兰表达式求值</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-02-24T00:45:08.000Z">2023-02-24</time></p><p class="title"><a href="/2023/02/24/algorithm-train-day10/">代码随想录算法训练营第10天 | 栈和队列理论基础，232.用栈实现队列，225.用队列实现栈</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-02-23T00:44:00.000Z">2023-02-23</time></p><p class="title"><a href="/2023/02/23/algorithm-train-day9/">代码随想录算法训练营第9天 | 28.实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-02-22T00:38:12.000Z">2023-02-22</time></p><p class="title"><a href="/2023/02/22/algorithm-train-day8/">代码随想录算法训练营第8天 | 344.反转字符串，541.反转字符串II，剑指Offer 05.替换空格，151.翻转字符串里的单词，剑指Offer58-II.左旋转字符串</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-02-21T00:59:09.000Z">2023-02-21</time></p><p class="title"><a href="/2023/02/21/algorithm-train-day7/">代码随想录算法训练营第7天 | 454.四数相加II，383. 赎金信，15.三数之和，18.四数之和，哈希总结</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/02/"><span class="level-start"><span class="level-item">二月 2023</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">四月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/12/"><span class="level-start"><span class="level-item">十二月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/05/"><span class="level-start"><span class="level-item">五月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Clion/"><span class="tag">Clion</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mac/"><span class="tag">Mac</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js/"><span class="tag">Node.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Onedrive/"><span class="tag">Onedrive</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/OpenGL/"><span class="tag">OpenGL</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Serverless/"><span class="tag">Serverless</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Transfer-Learning/"><span class="tag">Transfer Learning</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/"><span class="tag">代码随想录</span><span class="tag">10</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%A6%E4%B9%A0/"><span class="tag">学习</span><span class="tag">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">小程序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">10</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="pub-3509031865667679" data-ad-slot="2734282774" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Giles&#039; Blog</a><p class="is-size-7"><span>&copy; 2023 Giles</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
