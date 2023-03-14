@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>代码随想录算法训练营第2天 |  977.有序数组的平方，209.长度最小的子数组，59.螺旋矩阵II - Giles&#039; Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Giles"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Giles"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="LeetCode 977.有序数组的平方，209.长度最小的子数组，59.螺旋矩阵II"><meta property="og:type" content="blog"><meta property="og:title" content="代码随想录算法训练营第2天 |  977.有序数组的平方，209.长度最小的子数组，59.螺旋矩阵II"><meta property="og:url" content="http://wwg.xyz/algorithm-train-day2/"><meta property="og:site_name" content="Giles&#039; Blog"><meta property="og:description" content="LeetCode 977.有序数组的平方，209.长度最小的子数组，59.螺旋矩阵II"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://wwg.xyz/algorithm-train-day2/2023-02-16T094309.png"><meta property="og:image" content="http://wwg.xyz/algorithm-train-day2/2023-02-16T100551.png"><meta property="og:image" content="http://wwg.xyz/algorithm-train-day2/2023-02-16T101531.png"><meta property="og:image" content="http://wwg.xyz/algorithm-train-day2/209.长度最小的子数组.gif"><meta property="og:image" content="http://wwg.xyz/algorithm-train-day2/2023-02-16T105456.png"><meta property="article:published_time" content="2023-02-16T00:41:45.000Z"><meta property="article:modified_time" content="2023-03-13T08:28:37.689Z"><meta property="article:author" content="Giles"><meta property="article:tag" content="学习"><meta property="article:tag" content="算法"><meta property="article:tag" content="代码随想录"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://wwg.xyz/algorithm-train-day2/2023-02-16T094309.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://wwg.xyz/algorithm-train-day2/"},"headline":"代码随想录算法训练营第2天 |  977.有序数组的平方，209.长度最小的子数组，59.螺旋矩阵II","image":["http://wwg.xyz/algorithm-train-day2/2023-02-16T094309.png","http://wwg.xyz/algorithm-train-day2/2023-02-16T100551.png","http://wwg.xyz/algorithm-train-day2/2023-02-16T101531.png","http://wwg.xyz/algorithm-train-day2/209.长度最小的子数组.gif","http://wwg.xyz/algorithm-train-day2/2023-02-16T105456.png"],"datePublished":"2023-02-16T00:41:45.000Z","dateModified":"2023-03-13T08:28:37.689Z","author":{"@type":"Person","name":"Giles"},"publisher":{"@type":"Organization","name":"Giles' Blog","logo":{"@type":"ImageObject","url":{"text":"Giles' Blog"}}},"description":"LeetCode 977.有序数组的平方，209.长度最小的子数组，59.螺旋矩阵II"}</script><link rel="canonical" href="http://wwg.xyz/algorithm-train-day2/"><link rel="alternate" href="/atom.xml" title="Giles&#039; Blog" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ED55ZDHVH" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-5ED55ZDHVH');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="pub-3509031865667679" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script>
+<script async defer data-website-id="ca05f69d-e239-4450-bf17-725a84896da7" src="https://stats.wwg.xyz/statIndex.js"></script>
+    <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Giles&#039; Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">Resume</a><a class="navbar-item" target="_blank" rel="noopener" href="https://status.wwg.xyz">Server Status</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-02-16T00:41:45.000Z" title="2023/2/16 08:41:45">2023-02-16</time>发表</span><span class="level-item"><time dateTime="2023-03-13T08:28:37.689Z" title="2023/3/13 16:28:37">2023-03-13</time>更新</span><span class="level-item">18 分钟读完 (大约2701个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">代码随想录算法训练营第2天 |  977.有序数组的平方，209.长度最小的子数组，59.螺旋矩阵II</h1><div class="content"><h2 id="有序数组的平方">977.有序数组的平方</h2>
+<p><a
+target="_blank" rel="noopener" href="https://programmercarl.com/0977.%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9.html">代码随想录链接</a></p>
+<h3 id="题目">题目</h3>
+<figure>
+<img src="2023-02-16T094309.png" alt="LeetCode-977" />
+<figcaption aria-hidden="true">LeetCode-977</figcaption>
+</figure>
+<p>给定一个顺序不减的有序数组A，返回一个由A数组中每个值的平方组成的顺序不减数组。</p>
+<h3 id="自己的思考">自己的思考</h3>
+<p>可能还是倾向于暴力法一点，有看到提示说可以用双指针法，但是自己也没想明白应该怎么用<del>(我好蔡啊.jpg)</del></p>
+<h3 id="解法一">解法一</h3>
+<p>暴力法，先就原地计算出来每一项的平方是多少，覆盖到原位置，然后再排个序。</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include&lt;algorithm&gt;
+class Solution &#123;
+public:
+    vector&lt;int&gt; sortedSquares(vector&lt;int&gt;&amp; nums) &#123;
+        for (int i &#x3D; 0; i &lt; nums.size(); i++) &#123; &#x2F;&#x2F; 遍历每个值
+            nums[i] *&#x3D; nums[i];  &#x2F;&#x2F; 求出平方值，写入原位置
+        &#125;
+        sort(nums.begin(), nums.end()); &#x2F;&#x2F; 调用C++的sort函数进行排序
+        return nums;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一个for循环遍历数组，时间复杂度为<span
+class="math inline">\(O(n)\)</span>，C++的sort函数是基于快速排序的优化算法，时间复杂度为<span
+class="math inline">\(O(nlogn)\)</span>。</p>
+<p>使用了常数个变量，空间复杂度为<span
+class="math inline">\(O(1)\)</span>。</p>
+<h3 id="解法二">解法二</h3>
+<p>双指针法，类似于<a href="/algorithm-train-day1/" title="昨天的">昨天的</a>题目，使用两个指针来完成。</p>
+<p>为什么可以使用双指针法呢？要题目给定的条件出发。</p>
+<p>题目给定的数组是顺序不减进行排列的，求得平方值值后需要调整位置的情况，只存在于原数组左侧的负数，平方之后应该被排在右侧的某个位置，而原数组和结果数组的右侧都是较大的值。由这个条件，我们可以使用双指针法，对比两个指针指向的值的平方，较大的值，应该依次<strong>从右至左</strong>写入到结果数组内。</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include&lt;algorithm&gt;
+#include&lt;cmath&gt;
+class Solution &#123;
+public:
+    vector&lt;int&gt; sortedSquares(vector&lt;int&gt;&amp; nums) &#123;
+        vector&lt;int&gt; result(nums.size(), 0); &#x2F;&#x2F; 声明并实例化一个新的数组，大小和原数组一样，并均用0填充
+        int leftIndex &#x3D; 0, rightIndex &#x3D; nums.size() - 1, resultIndex &#x3D; nums.size() - 1; &#x2F;&#x2F; 声明原数组的左右指针，以及结果数组的指针
+        while(leftIndex &lt;&#x3D; rightIndex) &#123; &#x2F;&#x2F; 循环条件
+            if (pow(nums[leftIndex], 2) &gt; pow(nums[rightIndex], 2)) &#123; &#x2F;&#x2F; 若左指针指向的数的平方值要大于右指针指向的数的平方值
+                result[resultIndex--] &#x3D; pow(nums[leftIndex++], 2); &#x2F;&#x2F; 将左指针的值写入到目标数组,并移动左指针和结果数组的指针
+            &#125; else &#123;
+                result[resultIndex--] &#x3D; pow(nums[rightIndex--], 2); &#x2F;&#x2F; 否则，就将右指针指向的数的平方值写入结果数组，并相应调整两个指针
+            &#125;
+        &#125;
+        return result;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>算法中while的循环次数和数组的大小线性相关，时间复杂度为<span
+class="math inline">\(O(n)\)</span>。</p>
+<p>由于使用了一个新的且和原数组大小一致的数组，空间复杂度为<span
+class="math inline">\(O(n)\)</span>。</p>
+<h2 id="长度最小的子数组">209.长度最小的子数组</h2>
+<p><a
+target="_blank" rel="noopener" href="https://programmercarl.com/0209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84.html">代码随想录链接</a></p>
+<h3 id="题目-1">题目</h3>
+<figure>
+<img src="2023-02-16T100551.png" alt="LeetCode-209" />
+<figcaption aria-hidden="true">LeetCode-209</figcaption>
+</figure>
+<h3 id="自己的思考-1">自己的思考</h3>
+<p>暴力法<del>（蔡啊）</del></p>
+<h3 id="失败案例">失败案例</h3>
+<p>使用两个for循环，计算并对比从第一个for循环的索引指向的数开始的每个子序列是否符合条件，若符合条件，记录下最短值。</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
+public:
+    int minSubArrayLen(int target, vector&lt;int&gt;&amp; nums) &#123;
+        int result &#x3D; INT32_MAX;
+        int sum &#x3D; 0;
+        int subLength &#x3D; 0;
+        for (int i &#x3D; 0; i &lt; nums.size(); i++) &#123; &#x2F;&#x2F; 外层for循环，其索引用于标记子序列的开头
+            sum &#x3D; 0;
+            for (int j &#x3D; i; j &lt; nums.size(); j++) &#123; &#x2F;&#x2F; 内层for循环，j表示当前判断的子序列的末尾索引
+                sum +&#x3D; nums[j]; &#x2F;&#x2F; 将当前位置的值加入
+                if (sum &gt;&#x3D; target) &#123; &#x2F;&#x2F; 若满足了大于等于目标值的条件，就计算并对比是否是最短子序列
+                    subLength &#x3D; j - i + 1;
+                    result &#x3D; result &lt; subLength ? result : subLength;
+                    break; &#x2F;&#x2F; 都找到满足的了，再往后找，子序列就变更长了，该考虑以下一位数据开头的子序列了
+                &#125;
+            &#125;
+        &#125;
+        return result &#x3D;&#x3D; INT32_MAX ? 0 : result; &#x2F;&#x2F; 如果result还是初始值，代表没有找到合适的子序列，按题目要求返回0
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>很不幸，由于这个写法的时间复杂度为<span
+class="math inline">\(O(n^2)\)</span>，没有AC，超时了</p>
+<figure>
+<img src="2023-02-16T101531.png" alt="LeetCode-209-寄" />
+<figcaption aria-hidden="true">LeetCode-209-寄</figcaption>
+</figure>
+<h3 id="正确解法">正确解法</h3>
+<p>滑动窗口法</p>
+<p>什么是滑动窗口呢，<a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sliding_window_protocol">这里</a>给出一个百科链接，讲述的是TCP协议中的滑动窗口。</p>
+<p>下面我用自己的语言描述一下滑动窗口。所谓滑动窗口，是指在序列中取一段子序列，其前后边界是可以随时按照情况进行灵活调整的。</p>
+<p>但如果仍然使用上面的两个for循环来表示起始和终止位置的话，那和“灵活”两个字怕是要说再见了。</p>
+<p>可以仅适用一个for循环来表示后指针，在循环内，对左指针进行调整。这里偷一个代码随想录网站上的动图，来更好地说明滑动窗口。</p>
+<figure>
+<img src="209.长度最小的子数组.gif"
+alt="滑动窗口动图示意，图来自代码随想录" />
+<figcaption
+aria-hidden="true">滑动窗口动图示意，图来自代码随想录</figcaption>
+</figure>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
+public:
+    int minSubArrayLen(int target, vector&lt;int&gt;&amp; nums) &#123;
+        int result &#x3D; INT32_MAX;
+        int sum &#x3D; 0;
+        int subLength &#x3D; 0;
+        int leftIndex &#x3D; 0; &#x2F;&#x2F; 左指针
+        for (int rightIndex &#x3D; 0; rightIndex &lt; nums.size(); rightIndex++) &#123; &#x2F;&#x2F; 右指针 
+            sum +&#x3D; nums[rightIndex]; &#x2F;&#x2F; 移动右指针之后，更新当前窗口内元素之和
+            while (sum &gt;&#x3D; target) &#123; &#x2F;&#x2F; 若当前窗口之和符合条件，则进入判断，若不符合条件，则进入for循环的下一次循环
+                subLength &#x3D; rightIndex - leftIndex + 1; &#x2F;&#x2F; 计算当前窗口的长度，并与记录值对比，若小于记录的长度值，则更新记录值
+                result &#x3D; result &lt; subLength ? result : subLength;
+                sum -&#x3D; nums[leftIndex++]; &#x2F;&#x2F; 将窗口左侧向右移动
+            &#125;
+        &#125;
+        return result &#x3D;&#x3D; INT32_MAX ? 0 : result;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个解法使用了一个for循环来遍历数组，for循环内又有一个while循环，<del>所以时间复杂度是<span
+class="math inline">\(O(b^2)\)</span></del>，但是while循环执行一次，左指针就会向右移动一次，而左指针移动的次数是和数组的长度是线性相关的，所以整个过程中while循环的执行次数是<span
+class="math inline">\(O(n)\)</span>，与for循环的次数无关。</p>
+<p>故该解法的时间复杂度为<span class="math inline">\(O(2 * n) =
+O(n)\)</span>。</p>
+<p>使用了常数个变量，空间复杂度为<span
+class="math inline">\(O(1)\)</span>。</p>
+<h2 id="螺旋矩阵ii">59.螺旋矩阵II</h2>
+<p><a
+target="_blank" rel="noopener" href="https://programmercarl.com/0059.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II.html">代码随想录链接</a></p>
+<h3 id="题目-2">题目</h3>
+<figure>
+<img src="2023-02-16T105456.png" alt="LeetCode-59" />
+<figcaption aria-hidden="true">LeetCode-59</figcaption>
+</figure>
+<p>给定一个正整数n，以顺时针方向螺旋填充<span class="math inline">\(n *
+n\)</span>的一个矩阵</p>
+<h3 id="自己的思考-2">自己的思考</h3>
+<p>这题本科的时候绝对做过。需要设定一些控制变量，用于记录当前填充的坐标，但是怎么设置控制变量，是非常关键的地方，<del>然后想不出来了</del></p>
+<h3 id="解法">解法</h3>
+<p>在设计控制变量的时候，要考虑好在什么条件下，需要按照上右下左四个边的顺序进行进行下一个边的填充。</p>
+<p>还要考虑到填充的时候，边与边的重叠部分，应该怎么处理，比如：</p>
+<ul>
+<li>重叠部分由当前边填写</li>
+<li>由下一个边填写</li>
+</ul>
+<p>当然甚至还可以： + 两个边都填写，然后再调整要填写的数字</p>
+<p>这里选择由下一个边填写的方法，原因是在完成一个loop之后，下一个loop开始的位置比较容易计算。</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
+public:
+    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) &#123;
+        vector&lt;vector&lt;int&gt;&gt; result(n, vector&lt;int&gt;(n, 0)); &#x2F;&#x2F; 结果矩阵
+        int startx &#x3D; 0, starty &#x3D; 0; &#x2F;&#x2F; 下一个loop开始时的坐标
+        int offset &#x3D; 1;  &#x2F;&#x2F; 控制填写一条边的时候，应该剩下几个位置不填写，offset初始为1即表示重叠部分在下一个边填写
+        int loop &#x3D; n &#x2F; 2; &#x2F;&#x2F; 需要进行多少次螺旋
+        int mid &#x3D; n &#x2F; 2; &#x2F;&#x2F; 计算是否需要对最中间的位置单独进行填充
+        int count &#x3D; 1; &#x2F;&#x2F; 记录下次填充的数字
+        int i, j; &#x2F;&#x2F; 当前填充的位置坐标
+        while (loop--) &#123;
+            i &#x3D; startx;  &#x2F;&#x2F; 自左上方开始的横纵坐标
+            j &#x3D; starty;
+
+            for (j &#x3D; starty; j &lt; n - offset; j++) result[i][j] &#x3D; count++; &#x2F;&#x2F; 填写上边
+            for (i &#x3D; startx; i &lt; n - offset; i++) result[i][j] &#x3D; count++; &#x2F;&#x2F; 填写右边
+            for (; j &gt; starty; j--) result[i][j] &#x3D; count++; &#x2F;&#x2F; 填写下边，这里的 j &gt; starty 也是为了控制重叠部分在下一条边填写
+            for (; i &gt; startx; i--) result[i][j] &#x3D; count++; &#x2F;&#x2F; 填写左边，这里的 i &gt; startx 同上理
+            
+            startx++; &#x2F;&#x2F; 完成一次四边填写后，调整起始位置
+            starty++;
+
+            offset++; &#x2F;&#x2F; 完成一次四边填写，offset应该+1来控制上边和右边的填写不覆盖掉之前填写的内容
+        &#125;
+
+        if (n % 2) result[mid][mid] &#x3D; count;  &#x2F;&#x2F; 若 n 为基数，需要针对中心位置单独填写
+        return result;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码时间复杂度为<span
+class="math inline">\(O(n^2)\)</span>，空间复杂度为<span
+class="math inline">\(O(n^2)\)</span>。</p>
+<h2 id="数组总结">数组总结</h2>
+<p>在这个数组的专题内，学习到的方法主要有</p>
+<h3 id="二分法">二分法</h3>
+<p>用于查找，主要思想是在有序的数组里，通过左边界和有边界计算出来区间中间位置，根据中间位置的数据与目标数据的大小关系来调整下一次寻找的左右区间。</p>
+<p>关键的一点是坚持自己刚开始设定的对于区间的定义（是左闭右开、左开右闭亦或是左闭右闭），并贯穿到所写题目的整个代码当中。</p>
+<p>时间复杂度为<span class="math inline">\(O(logn)\)</span></p>
+<p>例题：<a
+target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/">LeetCode-704
+二分查找</a></p>
+<h3 id="双指针法">双指针法</h3>
+<p>顾名思义，使用两个指针在一个for循环下，完成两个for循环的工作，使得时间复杂度降低。</p>
+<p>双指针法既可以是同时从一个方向起步，例如<a
+target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/">LeetCode-27</a>；也可以是分别从数组的开始和末尾向中间靠拢，例如<a
+target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/">LeetCode-977</a></p>
+<p>双指针法还经常在链表中使用。</p>
+<h3 id="滑动窗口">滑动窗口</h3>
+<p>滑动窗口可以用于求一个数组中子序列之用，相比于暴力法显著地降低了时间复杂度。</p>
+<p>要理解滑动窗口，关键之处就在于理解窗口的起始位置和结束位置是怎么调整的。例题：<a
+target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/">LeetCode-209</a></p>
+<p>本文上面的部分有滑动窗口的示意图。</p>
+<h3 id="模拟行为">模拟行为</h3>
+<p>例如模拟螺旋填充矩阵。这类题目主要考察对于代码循环边界控制的能力。要做好这类题目，关键是需要坚持好边界上的处理方法，从一而终。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>代码随想录算法训练营第2天 |  977.有序数组的平方，209.长度最小的子数组，59.螺旋矩阵II</p><p><a href="http://wwg.xyz/algorithm-train-day2/">http://wwg.xyz/algorithm-train-day2/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-02-16</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-03-13</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">代码随想录</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/algorithm-train-day3/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">代码随想录算法训练营第3天 | 链表基础，203.移除链表元素，707.设计链表，206.反转链表</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm-train-day1/"><span class="level-item">代码随想录算法训练营第1天 | 704. 二分查找、27. 移除元素</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/disqusjs/1.3.0/disqusjs.css"><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script src="https://cdnjs.loli.net/ajax/libs/disqusjs/1.3.0/disqus.js"></script><script>new DisqusJS({
+            shortname: 'giles-blog',
+            apikey: "hncX8dVAHc4EgWZa1RpTAqqxxf3709jaCN4qFDQ42wfsqJzs6k1QoN0W4mJbNape",
+            siteName: "Giles' Blog",
+            identifier: "algorithm-train-day2/",
+            url: "http://wwg.xyz/algorithm-train-day2/",
+            title: "代码随想录算法训练营第2天 |  977.有序数组的平方，209.长度最小的子数组，59.螺旋矩阵II",
+            api: "https://disqus.wwg.xyz/api/",
+            admin: "GilesWW",
+            adminLabel: "Admin",
+            nesting: 4,
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars.githubusercontent.com/u/13916856?v=4" alt="Giles"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Giles</p><p class="is-size-6 is-block">24岁，是学生</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Xi&#039;an, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">33</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">11</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/GilesWong" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Telegram" href="https://t.me/WenceslasW"><i class="fab fa-telegram"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#有序数组的平方"><span class="level-left"><span class="level-item">1</span><span class="level-item">977.有序数组的平方</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题目"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">题目</span></span></a></li><li><a class="level is-mobile" href="#自己的思考"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">自己的思考</span></span></a></li><li><a class="level is-mobile" href="#解法一"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">解法一</span></span></a></li><li><a class="level is-mobile" href="#解法二"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">解法二</span></span></a></li></ul></li><li><a class="level is-mobile" href="#长度最小的子数组"><span class="level-left"><span class="level-item">2</span><span class="level-item">209.长度最小的子数组</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题目-1"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">题目</span></span></a></li><li><a class="level is-mobile" href="#自己的思考-1"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">自己的思考</span></span></a></li><li><a class="level is-mobile" href="#失败案例"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">失败案例</span></span></a></li><li><a class="level is-mobile" href="#正确解法"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">正确解法</span></span></a></li></ul></li><li><a class="level is-mobile" href="#螺旋矩阵ii"><span class="level-left"><span class="level-item">3</span><span class="level-item">59.螺旋矩阵II</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题目-2"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">题目</span></span></a></li><li><a class="level is-mobile" href="#自己的思考-2"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">自己的思考</span></span></a></li><li><a class="level is-mobile" href="#解法"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">解法</span></span></a></li></ul></li><li><a class="level is-mobile" href="#数组总结"><span class="level-left"><span class="level-item">4</span><span class="level-item">数组总结</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#二分法"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">二分法</span></span></a></li><li><a class="level is-mobile" href="#双指针法"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">双指针法</span></span></a></li><li><a class="level is-mobile" href="#滑动窗口"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">滑动窗口</span></span></a></li><li><a class="level is-mobile" href="#模拟行为"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">模拟行为</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://louyu.cc/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Louyu</span></span><span class="level-right"><span class="level-item tag">louyu.cc</span></span></a></li></ul></div></div></div><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-14T01:41:48.000Z">2023-03-14</time></p><p class="title"><a href="/algorithm-train-day28/">代码随想录算法训练营第28天 | 93.复原IP地址, 78.子集, 90.子集II</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-13T01:46:02.000Z">2023-03-13</time></p><p class="title"><a href="/algorithm-train-day27/">代码随想录算法训练营第27天 | 39.组合总和, 40.组合总和II, 131.分割回文串</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-11T02:07:19.000Z">2023-03-11</time></p><p class="title"><a href="/algorithm-train-day25/">代码随想录算法训练营第25天 | 216.组合总和III, 17.电话号码的字母组合</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-10T00:43:30.000Z">2023-03-10</time></p><p class="title"><a href="/algorithm-train-day24/">代码随想录算法训练营第24天 | 回溯法理论基础, 77.组合</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-09T02:36:45.000Z">2023-03-09</time></p><p class="title"><a href="/algorithm-train-day23/">代码随想录算法训练营第23天 | 669.修剪二叉搜索树, 108.将有序数组转换为二叉搜索树, 538.把二叉搜索树转换为累加树, 二叉树总结</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/03/"><span class="level-start"><span class="level-item">三月 2023</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/02/"><span class="level-start"><span class="level-item">二月 2023</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">四月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/12/"><span class="level-start"><span class="level-item">十二月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/05/"><span class="level-start"><span class="level-item">五月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Clion/"><span class="tag">Clion</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mac/"><span class="tag">Mac</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js/"><span class="tag">Node.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Onedrive/"><span class="tag">Onedrive</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/OpenGL/"><span class="tag">OpenGL</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Serverless/"><span class="tag">Serverless</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Transfer-Learning/"><span class="tag">Transfer Learning</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/"><span class="tag">代码随想录</span><span class="tag">24</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%A6%E4%B9%A0/"><span class="tag">学习</span><span class="tag">27</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">小程序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">25</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="pub-3509031865667679" data-ad-slot="2734282774" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#有序数组的平方"><span class="level-left"><span class="level-item">1</span><span class="level-item">977.有序数组的平方</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题目"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">题目</span></span></a></li><li><a class="level is-mobile" href="#自己的思考"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">自己的思考</span></span></a></li><li><a class="level is-mobile" href="#解法一"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">解法一</span></span></a></li><li><a class="level is-mobile" href="#解法二"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">解法二</span></span></a></li></ul></li><li><a class="level is-mobile" href="#长度最小的子数组"><span class="level-left"><span class="level-item">2</span><span class="level-item">209.长度最小的子数组</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题目-1"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">题目</span></span></a></li><li><a class="level is-mobile" href="#自己的思考-1"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">自己的思考</span></span></a></li><li><a class="level is-mobile" href="#失败案例"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">失败案例</span></span></a></li><li><a class="level is-mobile" href="#正确解法"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">正确解法</span></span></a></li></ul></li><li><a class="level is-mobile" href="#螺旋矩阵ii"><span class="level-left"><span class="level-item">3</span><span class="level-item">59.螺旋矩阵II</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题目-2"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">题目</span></span></a></li><li><a class="level is-mobile" href="#自己的思考-2"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">自己的思考</span></span></a></li><li><a class="level is-mobile" href="#解法"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">解法</span></span></a></li></ul></li><li><a class="level is-mobile" href="#数组总结"><span class="level-left"><span class="level-item">4</span><span class="level-item">数组总结</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#二分法"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">二分法</span></span></a></li><li><a class="level is-mobile" href="#双指针法"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">双指针法</span></span></a></li><li><a class="level is-mobile" href="#滑动窗口"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">滑动窗口</span></span></a></li><li><a class="level is-mobile" href="#模拟行为"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">模拟行为</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Giles&#039; Blog</a><p class="is-size-7"><span>&copy; 2023 Giles</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

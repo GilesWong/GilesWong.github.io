@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>代码随想录算法训练营第1天 | 704. 二分查找、27. 移除元素 - Giles&#039; Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Giles"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Giles"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Leetcode 704. 二分查找、27. 移除元素"><meta property="og:type" content="blog"><meta property="og:title" content="代码随想录算法训练营第1天 | 704. 二分查找、27. 移除元素"><meta property="og:url" content="http://wwg.xyz/algorithm-train-day1/"><meta property="og:site_name" content="Giles&#039; Blog"><meta property="og:description" content="Leetcode 704. 二分查找、27. 移除元素"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://wwg.xyz/algorithm-train-day1/2023-02-14T110203.png"><meta property="og:image" content="http://wwg.xyz/algorithm-train-day1/2023-02-15T094135.png"><meta property="og:image" content="http://wwg.xyz/algorithm-train-day1/2023-02-15T094042.png"><meta property="article:published_time" content="2023-02-15T02:42:49.000Z"><meta property="article:modified_time" content="2023-03-13T08:28:40.491Z"><meta property="article:author" content="Giles"><meta property="article:tag" content="学习"><meta property="article:tag" content="算法"><meta property="article:tag" content="代码随想录"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://wwg.xyz/algorithm-train-day1/2023-02-14T110203.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://wwg.xyz/algorithm-train-day1/"},"headline":"代码随想录算法训练营第1天 | 704. 二分查找、27. 移除元素","image":["http://wwg.xyz/algorithm-train-day1/2023-02-14T110203.png","http://wwg.xyz/algorithm-train-day1/2023-02-15T094135.png","http://wwg.xyz/algorithm-train-day1/2023-02-15T094042.png"],"datePublished":"2023-02-15T02:42:49.000Z","dateModified":"2023-03-13T08:28:40.491Z","author":{"@type":"Person","name":"Giles"},"publisher":{"@type":"Organization","name":"Giles' Blog","logo":{"@type":"ImageObject","url":{"text":"Giles' Blog"}}},"description":"Leetcode 704. 二分查找、27. 移除元素"}</script><link rel="canonical" href="http://wwg.xyz/algorithm-train-day1/"><link rel="alternate" href="/atom.xml" title="Giles&#039; Blog" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ED55ZDHVH" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-5ED55ZDHVH');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="pub-3509031865667679" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script>
+<script async defer data-website-id="ca05f69d-e239-4450-bf17-725a84896da7" src="https://stats.wwg.xyz/statIndex.js"></script>
+    <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Giles&#039; Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">Resume</a><a class="navbar-item" target="_blank" rel="noopener" href="https://status.wwg.xyz">Server Status</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-02-15T02:42:49.000Z" title="2023/2/15 10:42:49">2023-02-15</time>发表</span><span class="level-item"><time dateTime="2023-03-13T08:28:40.491Z" title="2023/3/13 16:28:40">2023-03-13</time>更新</span><span class="level-item">14 分钟读完 (大约2088个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">代码随想录算法训练营第1天 | 704. 二分查找、27. 移除元素</h1><div class="content"><h2 id="希望自己能够坚持下去">希望自己能够坚持下去</h2>
+<p>自己的小破站好久没更了就是说。</p>
+<h2 id="二分查找">二分查找</h2>
+<p><a
+target="_blank" rel="noopener" href="https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html">代码随想录-二分查找</a></p>
+<h3 id="适合条件">适合条件</h3>
+<p>给定一个<strong>有序的</strong>数组，从其中找出<strong>指定的元素</strong>的位置</p>
+<h3 id="思路">思路</h3>
+<p>将查找区间一分为二，通过对比区间中间值与目标值的大小来确定：</p>
+<ul>
+<li>中间值是否就是目标值所在</li>
+<li>若中间值不是目标值，确定下个循环的查找区间的移动方向</li>
+</ul>
+<p>跳出循环的条件，区间的左边界大于区间的右边界</p>
+<h3 id="例题">例题</h3>
+<p><a
+target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/description/">LeetCode-704
+二分查找</a></p>
+<figure>
+<img src="2023-02-14T110203.png" alt="LeetCode-704" />
+<figcaption aria-hidden="true">LeetCode-704</figcaption>
+</figure>
+<p>题目的描述就是给定了有序数组，在O(logn)的时间内找出给定值的索引，若给定值不存在，则输出-1。</p>
+<p>在O(logn)的时间内完成这个操作，必定是需要使用和区间划分有关的方法。</p>
+<p>根据区间定义的不同，有两种解题方法。</p>
+<h4 id="解法一">解法一</h4>
+<p>如果目标值在区间[left, right]内 <pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
+public:
+    int search(vector&lt;int&gt;&amp; nums, int target) &#123;
+        int size &#x3D; nums.size();
+        &#x2F;&#x2F; 下面一行确定初次循环时的查找区间的左右边界
+        int left &#x3D; 0, right &#x3D; size - 1;
+        while (left &lt;&#x3D; right) &#123; &#x2F;&#x2F; 循环结束条件
+            &#x2F;**
+             * 根据左右边界计算出中间位置的索引，
+             * 之所以不使用 mid &#x3D; (left + right) &#x2F; 2 是因为防止溢出
+             *&#x2F;
+            int mid &#x3D; left + ((right - left) &#x2F; 2);
+            if (nums[mid] &#x3D;&#x3D; target) return mid;  &#x2F;&#x2F; 若中间值为目标值，则返回中间值
+            if (nums[mid] &gt; target) &#123; &#x2F;&#x2F; 若中间值大于目标值，即要找的目标值应该在中间值的左侧，则将区间右边界向左调整
+                right &#x3D; mid - 1;
+                continue;
+            &#125;
+            if (nums[mid] &lt; target) &#123; &#x2F;&#x2F; 若中间值小于目标值，即目标值应该在中间值的右侧，则将区间左边界向右调整
+                left &#x3D; mid + 1;
+                continue;
+            &#125;
+        &#125;
+        return -1;  &#x2F;&#x2F; 当找不到目标值时，返回 -1
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+<h4 id="解法二">解法二</h4>
+<p>如果目标值在[left, right)内 <pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
+public:
+    int search(vector&lt;int&gt;&amp; nums, int target) &#123;
+        &#x2F;&#x2F; 下面一行确定初次循环时的查找区间的左右边界
+        int left &#x3D; 0, right &#x3D; nums.size();
+        while (left &lt; right) &#123; &#x2F;&#x2F; 循环结束条件
+            &#x2F;**
+             * 根据左右边界计算出中间位置的索引，
+             * 之所以不使用 mid &#x3D; (left + right) &#x2F; 2 是因为防止溢出
+             *&#x2F;
+            int mid &#x3D; left + ((right - left) &#x2F; 2);
+            if (nums[mid] &#x3D;&#x3D; target) return mid;  &#x2F;&#x2F; 若中间值为目标值，则返回中间值
+            if (nums[mid] &gt; target) &#123; &#x2F;&#x2F; 若中间值大于目标值，即要找的目标值应该在中间值的左侧，则将区间右边界向左调整
+                right &#x3D; mid;
+                continue;
+            &#125;
+            if (nums[mid] &lt; target) &#123; &#x2F;&#x2F; 若中间值小于目标值，即目标值应该在中间值的右侧，则将区间左边界向右调整
+                left &#x3D; mid + 1;
+                continue;
+            &#125;
+        &#125;
+        return -1;  &#x2F;&#x2F; 当找不到目标值时，返回 -1
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+<h3 id="类似题目">类似题目</h3>
+<p><a
+target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/">LeetCode-34
+寻找可能重复的目标值的存在区间</a></p>
+<p>分别利用二分法找最左边的目标值和最右侧的目标值。</p>
+<p><img src="2023-02-15T094135.png" alt="LeetCode-34" />
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
+public:
+    vector&lt;int&gt; searchRange(vector&lt;int&gt;&amp; nums, int target) &#123;
+        int leftBorder &#x3D; getLeftBorder(nums, target);  &#x2F;&#x2F; 分别调用封装好的函数去找左右边界，性能可能稍差，但代码逻辑会清晰些
+        int rightBorder &#x3D; getRightBorder(nums, target);
+        if (leftBorder &#x3D;&#x3D; -2 || rightBorder &#x3D;&#x3D; -2) return &#123;-1, -1&#125;; &#x2F;&#x2F; 不存在目标值的返回
+        if (rightBorder - leftBorder &gt; 1) return &#123;leftBorder + 1, rightBorder - 1&#125;;
+        return &#123;-1, -1&#125;;
+    &#125;
+
+    int getLeftBorder(vector&lt;int&gt; &amp;nums, int target) &#123;&#x2F;&#x2F; 找左边界，其实是找目标值的左侧紧挨着的非目标值的数
+        int left &#x3D; 0, right &#x3D; nums.size() - 1;
+        int leftBorder &#x3D; -2;
+        while (left &lt;&#x3D; right) &#123; &#x2F;&#x2F; 循环结束条件
+            int mid &#x3D; left + ((right - left) &#x2F; 2); &#x2F;&#x2F; 求中间位置
+            if (nums[mid] &gt;&#x3D; target) &#123;&#x2F;&#x2F; 由于要找的是左边界，当中间值大于等于目标值时，应当将当前寻找的边界取中间值左侧
+                right &#x3D; mid - 1; &#x2F;&#x2F; 右边界取在中间值左侧
+                leftBorder &#x3D; right; &#x2F;&#x2F; 为了处理可能存在的中间值等于目标值的情况，要将寻找的左边界置为当前的右边界
+            &#125; else &#123; &#x2F;&#x2F; 若中间值小于目标值，证明要找的边界在中间值右边
+                left &#x3D; mid + 1;
+            &#125;
+        &#125;
+        return leftBorder;
+    &#125;
+
+    int getRightBorder(vector&lt;int&gt; &amp;nums, int target) &#123; &#x2F;&#x2F; 找右边界，其实是找目标值右侧紧挨着的非目标值的数
+        int left &#x3D; 0, right &#x3D; nums.size() - 1;
+        int rightBorder &#x3D; -2;
+        while (left &lt;&#x3D; right) &#123; &#x2F;&#x2F; 循环结束条件
+            int mid &#x3D; left + ((right - left) &#x2F; 2);
+            if (nums[mid] &gt; target) &#123; &#x2F;&#x2F; 中间值大于目标，应该取左区间
+                right &#x3D; mid - 1;
+            &#125; else &#123; &#x2F;&#x2F; 中间值小于等于目标，应该取右区间，并更新rightBorder为右区间的首位
+                left &#x3D; mid + 1;
+                rightBorder &#x3D; left;
+            &#125;
+        &#125;
+        return rightBorder;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+<h2 id="移除元素">移除元素</h2>
+<p><a
+target="_blank" rel="noopener" href="https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html">代码随想录-移除元素</a></p>
+<h3 id="题目要求">题目要求</h3>
+<p>给定一个数组，和一个值，将数组中等于给定值的数据移出，返回剩下的数据组成的数组以及该数组的大小。
+<img src="2023-02-15T094042.png" alt="LeetCode-27" /></p>
+<h3 id="思路-1">思路</h3>
+<h4 id="解法一-1">解法一</h4>
+<p>暴力法，<del>没有什么是for循环嵌套不能解决的（然后时间复杂度就上去了捏）</del></p>
+<p>思路是，一个for循环用于遍历给定数组，遍历过程中若遇到与给定值相同的数，则使用一个新的for循环，将当前位置之后的全部数据，向前移动一位，同时还需要注意将遍历的索引置于正确位置。</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
+public:
+    int removeElement(vector&lt;int&gt;&amp; nums, int val) &#123;
+        int size &#x3D; nums.size(); &#x2F;&#x2F; 记录数组的实时大小
+        for (int i &#x3D; 0; i &lt; size; i++) &#123; &#x2F;&#x2F; 遍历数组
+            if (nums[i] &#x3D;&#x3D; val) &#123; &#x2F;&#x2F; 若等于目标值，就使用一个新的for循环将后续数据向前移动一位
+                for (int j &#x3D; i; j &lt; size - 1; j++) &#123;
+                    nums[j] &#x3D; nums[j + 1];
+                &#125;
+                i--; &#x2F;&#x2F; 移动后，当前位置数据发生变化，该位置需要重新判断一次
+                size--; &#x2F;&#x2F; 覆盖掉了一位数据，数组大小-1
+            &#125;
+        &#125;
+        return size;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>两个for循环且每个循环的循环次数与给定数组的大小线性有关，故时间复杂度为<span
+class="math inline">\(O(n^2)\)</span>。</p>
+<p>使用了常数个变量，故空间复杂度为<span
+class="math inline">\(O(1)\)</span>。</p>
+<h4 id="解法二-1">解法二</h4>
+<p>双指针法</p>
+<p>思想是同时保留两个指针，快指针用于遍历原数组，慢指针用于保存结果数组。当快指针遇到与给定值相同的数据时，什么也不做，只是单纯地将快指针移动到下一位；若快指针遇见了非给定值的数，则将快指针当前指向的数拷贝至慢指针指向的位置，并将慢指针后移一位。</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
+public:
+    int removeElement(vector&lt;int&gt;&amp; nums, int val) &#123;
+        int slowIndex &#x3D; 0; &#x2F;&#x2F; 用于指向结果数组的末尾
+        for (int fastIndex &#x3D; 0; fastIndex &lt; nums.size(); fastIndex++) &#123; &#x2F;&#x2F; 遍历数组
+            if (val !&#x3D; nums[fastIndex]) &#123; &#x2F;&#x2F; 若遇到了非给定值的数，则将其保存下来，复制至slowIndex指向的位置，slowIndex向后移一位
+                nums[slowIndex++] &#x3D; nums[fastIndex];
+            &#125;
+            &#x2F;&#x2F; 若遇到了给定值的数，则什么都不做，相当于将其丢弃
+        &#125;
+        return slowIndex;  &#x2F;&#x2F; slowIndex在最后一次复制操作后的自增，正好为结果数组的大小
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>使用了一个for循环，循环的次数和数组大小线性相关，故时间复杂度为<span
+class="math inline">\(O(n)\)</span>。</p>
+<p>使用了常数个变量，故空间复杂度为<span
+class="math inline">\(O(1)\)</span>。</p>
+<h4 id="解法三">解法三</h4>
+<p>另一种双指针法</p>
+<p>类似于快速排序分区的过程，左指针从数组左侧出发，依次寻找一个等于给定值的数，等待被替换，找到后，右指针从数组末尾出发，找到一个不为给定值的数据，用于替换左指针指向的数据。</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
+public:
+    int removeElement(vector&lt;int&gt;&amp; nums, int val) &#123;
+        int left &#x3D; 0, right &#x3D; nums.size() - 1; &#x2F;&#x2F; 左右指针的起始位置
+        while (left &lt;&#x3D; right) &#123; &#x2F;&#x2F; 循环进行条件
+            while (left &lt;&#x3D; right &amp;&amp; nums[left] !&#x3D; val) &#123; &#x2F;&#x2F; 从左侧寻找一个与给定值相同的数，等待被替换
+                left++;
+            &#125;
+            while (left &lt;&#x3D; right &amp;&amp; nums[right] &#x3D;&#x3D; val) &#123; &#x2F;&#x2F; 从右侧寻找一个非给定值的数，用于替换左指针找到的数
+                right--;
+            &#125;
+            if (left &lt; right) &#123;  &#x2F;&#x2F; 确保是因为找到了被替换数据和替换数据，才进行替换
+                nums[left++] &#x3D; nums[right--];
+            &#125;
+        &#125;
+        return left;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码中循环次数和数组大小线性相关，故时间复杂度为<span
+class="math inline">\(O(n)\)</span>，使用了常数个变量，故空间复杂度为<span
+class="math inline">\(O(1)\)</span>。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>代码随想录算法训练营第1天 | 704. 二分查找、27. 移除元素</p><p><a href="http://wwg.xyz/algorithm-train-day1/">http://wwg.xyz/algorithm-train-day1/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-02-15</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-03-13</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">代码随想录</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/algorithm-train-day2/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">代码随想录算法训练营第2天 |  977.有序数组的平方，209.长度最小的子数组，59.螺旋矩阵II</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cs329p-slides-transfer-learning/"><span class="level-item">11.1 迁移学习【斯坦福21秋季：实用机器学习中文版】</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/disqusjs/1.3.0/disqusjs.css"><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script src="https://cdnjs.loli.net/ajax/libs/disqusjs/1.3.0/disqus.js"></script><script>new DisqusJS({
+            shortname: 'giles-blog',
+            apikey: "hncX8dVAHc4EgWZa1RpTAqqxxf3709jaCN4qFDQ42wfsqJzs6k1QoN0W4mJbNape",
+            siteName: "Giles' Blog",
+            identifier: "algorithm-train-day1/",
+            url: "http://wwg.xyz/algorithm-train-day1/",
+            title: "代码随想录算法训练营第1天 | 704. 二分查找、27. 移除元素",
+            api: "https://disqus.wwg.xyz/api/",
+            admin: "GilesWW",
+            adminLabel: "Admin",
+            nesting: 4,
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars.githubusercontent.com/u/13916856?v=4" alt="Giles"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Giles</p><p class="is-size-6 is-block">24岁，是学生</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Xi&#039;an, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">33</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">11</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/GilesWong" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Telegram" href="https://t.me/WenceslasW"><i class="fab fa-telegram"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://louyu.cc/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Louyu</span></span><span class="level-right"><span class="level-item tag">louyu.cc</span></span></a></li></ul></div></div></div><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-14T01:41:48.000Z">2023-03-14</time></p><p class="title"><a href="/algorithm-train-day28/">代码随想录算法训练营第28天 | 93.复原IP地址, 78.子集, 90.子集II</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-13T01:46:02.000Z">2023-03-13</time></p><p class="title"><a href="/algorithm-train-day27/">代码随想录算法训练营第27天 | 39.组合总和, 40.组合总和II, 131.分割回文串</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-11T02:07:19.000Z">2023-03-11</time></p><p class="title"><a href="/algorithm-train-day25/">代码随想录算法训练营第25天 | 216.组合总和III, 17.电话号码的字母组合</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-10T00:43:30.000Z">2023-03-10</time></p><p class="title"><a href="/algorithm-train-day24/">代码随想录算法训练营第24天 | 回溯法理论基础, 77.组合</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-09T02:36:45.000Z">2023-03-09</time></p><p class="title"><a href="/algorithm-train-day23/">代码随想录算法训练营第23天 | 669.修剪二叉搜索树, 108.将有序数组转换为二叉搜索树, 538.把二叉搜索树转换为累加树, 二叉树总结</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/03/"><span class="level-start"><span class="level-item">三月 2023</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/02/"><span class="level-start"><span class="level-item">二月 2023</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">四月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/12/"><span class="level-start"><span class="level-item">十二月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/05/"><span class="level-start"><span class="level-item">五月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Clion/"><span class="tag">Clion</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Mac/"><span class="tag">Mac</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js/"><span class="tag">Node.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Onedrive/"><span class="tag">Onedrive</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/OpenGL/"><span class="tag">OpenGL</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Serverless/"><span class="tag">Serverless</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Transfer-Learning/"><span class="tag">Transfer Learning</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/"><span class="tag">代码随想录</span><span class="tag">24</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%A6%E4%B9%A0/"><span class="tag">学习</span><span class="tag">27</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">小程序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">25</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="pub-3509031865667679" data-ad-slot="2734282774" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><!--!--></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Giles&#039; Blog</a><p class="is-size-7"><span>&copy; 2023 Giles</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
