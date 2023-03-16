@@ -50,35 +50,7 @@ n)\)</span>。</p>
 <p>优化方法是使用KMP算法来进行字符串匹配，可惜考研的时候只在王道上学了KMP怎么样手工计算next数组，代码莫得掌握。</p>
 <p>KMP太长了，感觉自己讲不明白，详细的说明可以去看上面代码随想录的链接。这里只说明一下KMP的思想就是：字符串某个位置出现不匹配的时候，可以不用从头开始匹配，直接根据next数组跳转至已经匹配过得一部分。</p>
 <h3 id="题解">题解</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    void getNext(string &amp;s, int* next) &#123;        &#x2F;&#x2F; 获取字符串的next数组
-        int j &#x3D; 0;                              &#x2F;&#x2F; j是前缀末尾，初始指向首位
-        next[0] &#x3D; j;                            &#x2F;&#x2F; 后面一位的值为回退到字符串初始位置
-        for (int i &#x3D; 1; i &lt; s.size(); i++) &#123;    &#x2F;&#x2F; i指向后缀末尾
-            while (j &gt; 0 &amp;&amp; s[i] !&#x3D; s[j]) &#123;     &#x2F;&#x2F; 前缀末尾不等于后缀末尾时，前缀末尾向前回退
-                j &#x3D; next[j - 1];
-            &#125;
-            if (s[i] &#x3D;&#x3D; s[j]) j++;              &#x2F;&#x2F; 找到相同的前后缀
-            next[i] &#x3D; j;                        &#x2F;&#x2F; 将前缀的长度赋给next数组中的next[i]
-        &#125;
-    &#125;
-
-    int strStr(string haystack, string needle) &#123;
-        if (needle.size() &#x3D;&#x3D; 0) return 0;
-        int next[needle.size()];
-        getNext(needle, next);                  &#x2F;&#x2F; 根据needle获取next数组
-        int j &#x3D; 0;                              &#x2F;&#x2F; j用来指向needle中的字符
-        for (int i &#x3D; 0; i &lt; haystack.size(); i++) &#123; &#x2F;&#x2F; i用来指向haystack里的字符
-            while (j &gt; 0 &amp;&amp; haystack[i] !&#x3D; needle[j]) j &#x3D; next[j - 1]; &#x2F;&#x2F; 若字符不相同，needle的指针根据next数组回退
-            if (haystack[i] &#x3D;&#x3D; needle[j]) j++;   &#x2F;&#x2F; 相同时，needle指针往后探索
-            if (j &#x3D;&#x3D; needle.size()) &#123;            &#x2F;&#x2F; needle指针探索到了needle的末尾时，证明匹配完成
-                return (i - needle.size() + 1);
-            &#125;
-        &#125;
-        return -1;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getNext</span><span class="hljs-params">(string &amp;s, <span class="hljs-type">int</span>* next)</span> </span>&#123;        <span class="hljs-comment">// 获取字符串的next数组</span><br>        <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;                              <span class="hljs-comment">// j是前缀末尾，初始指向首位</span><br>        next[<span class="hljs-number">0</span>] = j;                            <span class="hljs-comment">// 后面一位的值为回退到字符串初始位置</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; s.<span class="hljs-built_in">size</span>(); i++) &#123;    <span class="hljs-comment">// i指向后缀末尾</span><br>            <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; s[i] != s[j]) &#123;     <span class="hljs-comment">// 前缀末尾不等于后缀末尾时，前缀末尾向前回退</span><br>                j = next[j - <span class="hljs-number">1</span>];<br>            &#125;<br>            <span class="hljs-keyword">if</span> (s[i] == s[j]) j++;              <span class="hljs-comment">// 找到相同的前后缀</span><br>            next[i] = j;                        <span class="hljs-comment">// 将前缀的长度赋给next数组中的next[i]</span><br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">strStr</span><span class="hljs-params">(string haystack, string needle)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (needle.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> next[needle.<span class="hljs-built_in">size</span>()];<br>        <span class="hljs-built_in">getNext</span>(needle, next);                  <span class="hljs-comment">// 根据needle获取next数组</span><br>        <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;                              <span class="hljs-comment">// j用来指向needle中的字符</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; haystack.<span class="hljs-built_in">size</span>(); i++) &#123; <span class="hljs-comment">// i用来指向haystack里的字符</span><br>            <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; haystack[i] != needle[j]) j = next[j - <span class="hljs-number">1</span>]; <span class="hljs-comment">// 若字符不相同，needle的指针根据next数组回退</span><br>            <span class="hljs-keyword">if</span> (haystack[i] == needle[j]) j++;   <span class="hljs-comment">// 相同时，needle指针往后探索</span><br>            <span class="hljs-keyword">if</span> (j == needle.<span class="hljs-built_in">size</span>()) &#123;            <span class="hljs-comment">// needle指针探索到了needle的末尾时，证明匹配完成</span><br>                <span class="hljs-keyword">return</span> (i - needle.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="重复的子字符串">459.重复的子字符串</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2.html">代码随想录链接</a></p>
@@ -96,36 +68,10 @@ class="math inline">\(m * x\)</span>，且s的最长相同前后缀长度必定�
 <span class="math inline">\((m - 1) *
 x\)</span>，通过这个条件，就可以根据next数组判断是否满足题设。</p>
 <h3 id="题解-1">题解</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    void getNext(int *next, const string &amp;s) &#123;              &#x2F;&#x2F; 和上题一样，根据给定字符串获得一个next数组
-        int j &#x3D; 0;
-        next[0] &#x3D; 0;
-        for (int i &#x3D; 1; i &lt; s.size(); i++) &#123;
-            while (j &gt; 0 &amp;&amp; s[i] !&#x3D; s[j]) j &#x3D; next[j - 1];
-            if (s[i] &#x3D;&#x3D; s[j]) j++;
-            next[i] &#x3D; j;
-        &#125;
-    &#125;
-
-    bool repeatedSubstringPattern(string s) &#123;
-        if (s.size() &#x3D;&#x3D; 0)  return false;
-        int next[s.size()];
-        getNext(next, s);
-        int len &#x3D; s.size();
-        if (next[len - 1] !&#x3D; 0 &amp;&amp; (len % (len - next[len - 1]) &#x3D;&#x3D; 0)) &#123;     &#x2F;&#x2F; 如果next数组的最后一位不指向0，且字符串长度能够整除以最长前后缀以外的部分的长度，则满足条件
-            return true;
-        &#125;
-        return false;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getNext</span><span class="hljs-params">(<span class="hljs-type">int</span> *next, <span class="hljs-type">const</span> string &amp;s)</span> </span>&#123;              <span class="hljs-comment">// 和上题一样，根据给定字符串获得一个next数组</span><br>        <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br>        next[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; s.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; s[i] != s[j]) j = next[j - <span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (s[i] == s[j]) j++;<br>            next[i] = j;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">repeatedSubstringPattern</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (s.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>)  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-type">int</span> next[s.<span class="hljs-built_in">size</span>()];<br>        <span class="hljs-built_in">getNext</span>(next, s);<br>        <span class="hljs-type">int</span> len = s.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">if</span> (next[len - <span class="hljs-number">1</span>] != <span class="hljs-number">0</span> &amp;&amp; (len % (len - next[len - <span class="hljs-number">1</span>]) == <span class="hljs-number">0</span>)) &#123;     <span class="hljs-comment">// 如果next数组的最后一位不指向0，且字符串长度能够整除以最长前后缀以外的部分的长度，则满足条件</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="字符串总结">字符串总结</h2>
 <p>字符串，其实可以看做是字符的数组。在C++中，字符串可以是
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">char a[5] &#x3D; &quot;asd&quot;;
-\\ 也可以是
-vector&lt;char&gt; vc;
-\\ 还可以是
-string s;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-type">char</span> a[<span class="hljs-number">5</span>] = <span class="hljs-string">&quot;asd&quot;</span>;<br>\\ 也可以是<br>vector&lt;<span class="hljs-type">char</span>&gt; vc;<br>\\ 还可以是<br>string s;<br></code></pre></td></tr></table></figure></p>
 <p>使用char的数组来组成一个字符串，需要自行判断'\0‘来检测字符串的结尾，string则不用，且string类型提供了更多的接口来进行字符串处理。所以在遇到字符串问题的时候，尽量还是使用string类型。</p>
 <h3 id="双指针法">双指针法</h3>
 <p>和数组中的双指针法非常相似，无论是翻转，还是去除某些元素。</p>

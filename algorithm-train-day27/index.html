@@ -47,31 +47,7 @@ target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-su
 <h3 id="自己的想法">自己的想法</h3>
 <p>就模板题, 按照回溯法总结的模板就可以.</p>
 <h3 id="题解">题解</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private:
-    vector&lt;vector&lt;int&gt;&gt; result;
-    vector&lt;int&gt; current;
-    int sum &#x3D; 0;
-    void backtracing(vector&lt;int&gt; &amp;candidates, int target, int startIndex) &#123;
-        if (sum &gt;&#x3D; target) &#123;
-            if (sum &#x3D;&#x3D; target) result.push_back(current);       &#x2F;&#x2F; 满足之和等于目标值就记录下来
-            return;
-        &#125;
-
-        for (int i &#x3D; startIndex; i &lt; candidates.size(); i++) &#123;
-            sum +&#x3D; candidates[i];
-            current.push_back(candidates[i]);
-            backtracing(candidates, target, i);                 &#x2F;&#x2F; 由于可以重复选取已经选过的值, startIndex的传参为i
-            sum -&#x3D; candidates[i];
-            current.pop_back();
-        &#125;
-    &#125;
-public:
-    vector&lt;vector&lt;int&gt;&gt; combinationSum(vector&lt;int&gt;&amp; candidates, int target) &#123;
-        backtracing(candidates, target, 0);
-        return this -&gt; result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>    vector&lt;<span class="hljs-type">int</span>&gt; current;<br>    <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracing</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;candidates, <span class="hljs-type">int</span> target, <span class="hljs-type">int</span> startIndex)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (sum &gt;= target) &#123;<br>            <span class="hljs-keyword">if</span> (sum == target) result.<span class="hljs-built_in">push_back</span>(current);       <span class="hljs-comment">// 满足之和等于目标值就记录下来</span><br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = startIndex; i &lt; candidates.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            sum += candidates[i];<br>            current.<span class="hljs-built_in">push_back</span>(candidates[i]);<br>            <span class="hljs-built_in">backtracing</span>(candidates, target, i);                 <span class="hljs-comment">// 由于可以重复选取已经选过的值, startIndex的传参为i</span><br>            sum -= candidates[i];<br>            current.<span class="hljs-built_in">pop_back</span>();<br>        &#125;<br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">combinationSum</span>(vector&lt;<span class="hljs-type">int</span>&gt;&amp; candidates, <span class="hljs-type">int</span> target) &#123;<br>        <span class="hljs-built_in">backtracing</span>(candidates, target, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span> -&gt; result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="组合总和ii">40.组合总和II</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0040.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII.html">代码随想录链接</a></p>
@@ -85,38 +61,7 @@ target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-su
 <p>可以将相同的元素排在一起, 也就是排序, 然后再通过额外的变量,
 保证两个相同的元素只出现一次时, 只考虑一遍情况.</p>
 <h3 id="题解-1">题解</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private:
-    vector&lt;vector&lt;int&gt;&gt; result;
-    vector&lt;int&gt; current;
-    int sum &#x3D; 0;
-    void backtracing(vector&lt;int&gt; &amp;candidates, int target, int startIndex, vector&lt;bool&gt; &amp;used) &#123;
-        if (sum &gt; target)   return;
-        if (sum &#x3D;&#x3D; target) &#123;
-            result.push_back(current);
-            return;
-        &#125;
-
-        for (int i &#x3D; startIndex; i &lt; candidates.size(); i++) &#123;
-            if (i &gt; 0 &amp;&amp; candidates[i] &#x3D;&#x3D; candidates[i - 1] &amp;&amp; !used[i - 1]) continue;  &#x2F;&#x2F; 如果和左侧的值相同, 且左侧的值未被使用, 代表当前处理的情况和左侧值被选中但本位置的值未被选中的情况相同, 不应再重复考虑
-
-            sum +&#x3D; candidates[i];
-            used[i] &#x3D; true;
-            current.push_back(candidates[i]);
-            backtracing(candidates, target, i + 1, used);   &#x2F;&#x2F; 由于每个位置的值只能取一次, 所以递归时startIndex的参数需要是i+1
-            sum -&#x3D; candidates[i];
-            used[i] &#x3D; false;
-            current.pop_back();
-        &#125;
-    &#125;
-public:
-    vector&lt;vector&lt;int&gt;&gt; combinationSum2(vector&lt;int&gt;&amp; candidates, int target) &#123;
-        vector&lt;bool&gt; used(candidates.size(), false);        &#x2F;&#x2F; 初始化一个用于标记某个位置的元素是否被取出的布尔型数组
-        sort(candidates.begin(), candidates.end());         &#x2F;&#x2F; 通过排序将一样的值排列在一起
-        backtracing(candidates, target, 0, used);
-        return this -&gt; result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>    vector&lt;<span class="hljs-type">int</span>&gt; current;<br>    <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracing</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;candidates, <span class="hljs-type">int</span> target, <span class="hljs-type">int</span> startIndex, vector&lt;<span class="hljs-type">bool</span>&gt; &amp;used)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (sum &gt; target)   <span class="hljs-keyword">return</span>;<br>        <span class="hljs-keyword">if</span> (sum == target) &#123;<br>            result.<span class="hljs-built_in">push_back</span>(current);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = startIndex; i &lt; candidates.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; candidates[i] == candidates[i - <span class="hljs-number">1</span>] &amp;&amp; !used[i - <span class="hljs-number">1</span>]) <span class="hljs-keyword">continue</span>;  <span class="hljs-comment">// 如果和左侧的值相同, 且左侧的值未被使用, 代表当前处理的情况和左侧值被选中但本位置的值未被选中的情况相同, 不应再重复考虑</span><br><br>            sum += candidates[i];<br>            used[i] = <span class="hljs-literal">true</span>;<br>            current.<span class="hljs-built_in">push_back</span>(candidates[i]);<br>            <span class="hljs-built_in">backtracing</span>(candidates, target, i + <span class="hljs-number">1</span>, used);   <span class="hljs-comment">// 由于每个位置的值只能取一次, 所以递归时startIndex的参数需要是i+1</span><br>            sum -= candidates[i];<br>            used[i] = <span class="hljs-literal">false</span>;<br>            current.<span class="hljs-built_in">pop_back</span>();<br>        &#125;<br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">combinationSum2</span>(vector&lt;<span class="hljs-type">int</span>&gt;&amp; candidates, <span class="hljs-type">int</span> target) &#123;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">used</span><span class="hljs-params">(candidates.size(), <span class="hljs-literal">false</span>)</span></span>;        <span class="hljs-comment">// 初始化一个用于标记某个位置的元素是否被取出的布尔型数组</span><br>        <span class="hljs-built_in">sort</span>(candidates.<span class="hljs-built_in">begin</span>(), candidates.<span class="hljs-built_in">end</span>());         <span class="hljs-comment">// 通过排序将一样的值排列在一起</span><br>        <span class="hljs-built_in">backtracing</span>(candidates, target, <span class="hljs-number">0</span>, used);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span> -&gt; result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="分割回文串">131.分割回文串</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.html">代码随想录链接</a></p>
@@ -133,37 +78,7 @@ for循环横向遍历的是当前字符串不断从startIndex开始向右延长,
 <p>在分割的过程中如果一种分割方法产生的子串不是回文,
 则应该立即结束这种分割方式, 不应进行纵向递归.</p>
 <h3 id="题解-2">题解</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private:
-    vector&lt;vector&lt;string&gt;&gt; result;
-    vector&lt;string&gt; current;
-    void backtracing(const string &amp;s, int startIndex) &#123;
-        if (startIndex &gt;&#x3D; s.size()) &#123;   &#x2F;&#x2F; 如果递归到了startIndex大于等于字符串长度的位置, 说明current内目前存的都是回文子串, 应该保存当前结果
-            result.push_back(current);
-            return;
-        &#125;
-
-        for (int i &#x3D; startIndex; i &lt; s.size(); i++) &#123;
-            if (isPalindrome(s, startIndex, i)) &#123;
-                current.push_back(s.substr(startIndex, i - startIndex + 1));    &#x2F;&#x2F; 当前以startIndex开头, 以i结尾的字符串是回文时, 才应该推入current,并进行纵向递归
-            &#125; else continue;
-            backtracing(s, i + 1);  &#x2F;&#x2F; 递归分割下一个当前子串之后一个字符开始的字符串
-            current.pop_back();
-        &#125;
-    &#125;
-
-    bool isPalindrome(const string &amp;s, int start, int end) &#123;        &#x2F;&#x2F; 双指针法判断是否为回文
-        for (int i &#x3D; start, j &#x3D; end; i &lt; j; i++, j--) &#123;
-            if (s[i] !&#x3D; s[j]) return false;
-        &#125;
-        return true;
-    &#125;
-public:
-    vector&lt;vector&lt;string&gt;&gt; partition(string s) &#123;
-        backtracing(s, 0);
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    vector&lt;vector&lt;string&gt;&gt; result;<br>    vector&lt;string&gt; current;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracing</span><span class="hljs-params">(<span class="hljs-type">const</span> string &amp;s, <span class="hljs-type">int</span> startIndex)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (startIndex &gt;= s.<span class="hljs-built_in">size</span>()) &#123;   <span class="hljs-comment">// 如果递归到了startIndex大于等于字符串长度的位置, 说明current内目前存的都是回文子串, 应该保存当前结果</span><br>            result.<span class="hljs-built_in">push_back</span>(current);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = startIndex; i &lt; s.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isPalindrome</span>(s, startIndex, i)) &#123;<br>                current.<span class="hljs-built_in">push_back</span>(s.<span class="hljs-built_in">substr</span>(startIndex, i - startIndex + <span class="hljs-number">1</span>));    <span class="hljs-comment">// 当前以startIndex开头, 以i结尾的字符串是回文时, 才应该推入current,并进行纵向递归</span><br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-built_in">backtracing</span>(s, i + <span class="hljs-number">1</span>);  <span class="hljs-comment">// 递归分割下一个当前子串之后一个字符开始的字符串</span><br>            current.<span class="hljs-built_in">pop_back</span>();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isPalindrome</span><span class="hljs-params">(<span class="hljs-type">const</span> string &amp;s, <span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span> </span>&#123;        <span class="hljs-comment">// 双指针法判断是否为回文</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = start, j = end; i &lt; j; i++, j--) &#123;<br>            <span class="hljs-keyword">if</span> (s[i] != s[j]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;string&gt;&gt; <span class="hljs-built_in">partition</span>(string s) &#123;<br>        <span class="hljs-built_in">backtracing</span>(s, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 </div><div class="article-licensing box"><div class="licensing-title"><p>代码随想录算法训练营第27天 | 39.组合总和, 40.组合总和II, 131.分割回文串</p><p><a href="http://wwg.xyz/algorithm-train-day27/">http://wwg.xyz/algorithm-train-day27/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-03-13</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-03-13</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">代码随想录</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/algorithm-train-day28/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">代码随想录算法训练营第28天 | 93.复原IP地址, 78.子集, 90.子集II</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm-train-day25/"><span class="level-item">代码随想录算法训练营第25天 | 216.组合总和III, 17.电话号码的字母组合</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
             id: "b290b37271722f235233d8aa4abcecf3",
             repo: "GilesWong.github.io",

@@ -51,10 +51,10 @@ STL是开源软件，源码可读性甚高。</p></li>
 deque, list等。</p>
 <p>目前使用最广泛的SGI
 STL中，deque是默认的栈的底层实现。开发者也可以指定栈的底层实现。</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">std::stack&lt;int, std::vector&lt;int&gt; &gt; stack;  &#x2F;&#x2F; 使用vector为底层容器的栈<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++">std::stack&lt;<span class="hljs-type">int</span>, std::vector&lt;<span class="hljs-type">int</span>&gt; &gt; stack;  <span class="hljs-comment">// 使用vector为底层容器的栈</span><br></code></pre></td></tr></table></figure>
 <p>队列的情况一样，SGI
 STL中队列一样是以deque为默认情况下的底部结构。也可以手动指定：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">std::queue&lt;int, std::list&lt;int&gt;&gt; queue; &#x2F;&#x2F; 定义以list为底层容器的队列<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++">std::queue&lt;<span class="hljs-type">int</span>, std::list&lt;<span class="hljs-type">int</span>&gt;&gt; queue; <span class="hljs-comment">// 定义以list为底层容器的队列</span><br></code></pre></td></tr></table></figure>
 <h2 id="用栈实现队列">232.用栈实现队列</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0232.%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97.html#">代码随想录链接</a></p>
@@ -67,43 +67,7 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0232.%E7%94%A8%E
 <h3 id="自己的想法">自己的想法</h3>
 <p>使用两个栈，A栈负责接收输入的数据，在遇到取队首或者出队操作时，若B栈为空，将A栈的元素依次弹出并压入B栈，此时B栈栈顶即为“队首”，若B栈不为空，直接操作B栈栈顶即可。</p>
 <h3 id="解法">解法</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class MyQueue &#123;
-private:
-    stack&lt;int&gt; in, out;                 &#x2F;&#x2F; 用于接收输入数据和输出数据的两个栈
-public:
-    MyQueue() &#123;
-
-    &#125;
-    
-    void push(int x) &#123;
-        in.push(x);                     &#x2F;&#x2F; 直接放入in栈中
-    &#125;
-    
-    int pop() &#123;
-        if (out.empty()) &#123;              &#x2F;&#x2F; 若输出栈out为空
-            while (!in.empty()) &#123;       &#x2F;&#x2F; 将in栈中的所有元素弹出并压入out栈
-                out.push(in.top());
-                in.pop();
-            &#125;
-        &#125;
-        if (!out.empty()) &#123;             &#x2F;&#x2F; 当out栈不为空时，取值并弹出元素
-            int val &#x3D; out.top();
-            out.pop();
-            return val;
-        &#125;
-        return -1;
-    &#125;
-    
-    int peek() &#123;
-        int frontVal &#x3D; this -&gt; pop();     &#x2F;&#x2F; 调用已经写好的pop函数来获得队首值
-        out.push(frontVal);               &#x2F;&#x2F; 将值放置到原位置上
-        return frontVal;
-    &#125;
-    
-    bool empty() &#123;
-        return in.empty() &amp;&amp; out.empty();
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyQueue</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    stack&lt;<span class="hljs-type">int</span>&gt; in, out;                 <span class="hljs-comment">// 用于接收输入数据和输出数据的两个栈</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">MyQueue</span>() &#123;<br><br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<br>        in.<span class="hljs-built_in">push</span>(x);                     <span class="hljs-comment">// 直接放入in栈中</span><br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (out.<span class="hljs-built_in">empty</span>()) &#123;              <span class="hljs-comment">// 若输出栈out为空</span><br>            <span class="hljs-keyword">while</span> (!in.<span class="hljs-built_in">empty</span>()) &#123;       <span class="hljs-comment">// 将in栈中的所有元素弹出并压入out栈</span><br>                out.<span class="hljs-built_in">push</span>(in.<span class="hljs-built_in">top</span>());<br>                in.<span class="hljs-built_in">pop</span>();<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (!out.<span class="hljs-built_in">empty</span>()) &#123;             <span class="hljs-comment">// 当out栈不为空时，取值并弹出元素</span><br>            <span class="hljs-type">int</span> val = out.<span class="hljs-built_in">top</span>();<br>            out.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-keyword">return</span> val;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">peek</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-type">int</span> frontVal = <span class="hljs-keyword">this</span> -&gt; <span class="hljs-built_in">pop</span>();     <span class="hljs-comment">// 调用已经写好的pop函数来获得队首值</span><br>        out.<span class="hljs-built_in">push</span>(frontVal);               <span class="hljs-comment">// 将值放置到原位置上</span><br>        <span class="hljs-keyword">return</span> frontVal;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">empty</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> in.<span class="hljs-built_in">empty</span>() &amp;&amp; out.<span class="hljs-built_in">empty</span>();<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="用队列实现栈">225.用队列实现栈</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0225.%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88.html">代码随想录链接</a></p>
@@ -116,42 +80,7 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0225.%E7%94%A8%E
 <h3 id="自己的想法-1">自己的想法</h3>
 <p>重点在处理出栈操作。思路是将队列中的元素不断出队，直到原来在队尾（即“栈顶”）的元素到达队首，再对队首进行出队操作即可。</p>
 <h3 id="解法-1">解法</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class MyStack &#123;
-private:
-    queue&lt;int&gt; q;
-public:
-    MyStack() &#123;
-
-    &#125;
-    
-    void push(int x) &#123;              &#x2F;&#x2F; “压栈”操作，直接进队
-        q.push(x);
-    &#125;
-    
-    int pop() &#123;
-        int size &#x3D; q.size();        &#x2F;&#x2F; 获得元素个数
-        int tmp;
-        while (--size) &#123;            &#x2F;&#x2F; 重复（队长 - 1）次
-            tmp &#x3D; q.front();        &#x2F;&#x2F; 队首出队并重新入队
-            q.pop();
-            q.push(tmp);
-        &#125;
-        int val &#x3D; q.front();        &#x2F;&#x2F; 取此时队首并返回
-        q.pop();
-        return val;
-    &#125;
-    
-    int top() &#123;
-        int topVal &#x3D; this -&gt; pop(); &#x2F;&#x2F; 重复利用上面的函数，获得“栈顶”
-        q.push(topVal);             &#x2F;&#x2F; 将该元素重新入队，复原栈
-        return topVal;
-    &#125;
-    
-    bool empty() &#123;
-        return q.empty();
-    &#125;
-&#125;;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyStack</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    queue&lt;<span class="hljs-type">int</span>&gt; q;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">MyStack</span>() &#123;<br><br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;              <span class="hljs-comment">// “压栈”操作，直接进队</span><br>        q.<span class="hljs-built_in">push</span>(x);<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-type">int</span> size = q.<span class="hljs-built_in">size</span>();        <span class="hljs-comment">// 获得元素个数</span><br>        <span class="hljs-type">int</span> tmp;<br>        <span class="hljs-keyword">while</span> (--size) &#123;            <span class="hljs-comment">// 重复（队长 - 1）次</span><br>            tmp = q.<span class="hljs-built_in">front</span>();        <span class="hljs-comment">// 队首出队并重新入队</span><br>            q.<span class="hljs-built_in">pop</span>();<br>            q.<span class="hljs-built_in">push</span>(tmp);<br>        &#125;<br>        <span class="hljs-type">int</span> val = q.<span class="hljs-built_in">front</span>();        <span class="hljs-comment">// 取此时队首并返回</span><br>        q.<span class="hljs-built_in">pop</span>();<br>        <span class="hljs-keyword">return</span> val;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">top</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-type">int</span> topVal = <span class="hljs-keyword">this</span> -&gt; <span class="hljs-built_in">pop</span>(); <span class="hljs-comment">// 重复利用上面的函数，获得“栈顶”</span><br>        q.<span class="hljs-built_in">push</span>(topVal);             <span class="hljs-comment">// 将该元素重新入队，复原栈</span><br>        <span class="hljs-keyword">return</span> topVal;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">empty</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> q.<span class="hljs-built_in">empty</span>();<br>    &#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
 </div><div class="article-licensing box"><div class="licensing-title"><p>代码随想录算法训练营第10天 | 栈和队列理论基础，232.用栈实现队列，225.用队列实现栈</p><p><a href="http://wwg.xyz/algorithm-train-day10/">http://wwg.xyz/algorithm-train-day10/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-02-24</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-03-13</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">代码随想录</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/algorithm-train-day11/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">代码随想录算法训练营第11天 | 20. 有效的括号，1047. 删除字符串中的所有相邻重复项，150. 逆波兰表达式求值</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm-train-day9/"><span class="level-item">代码随想录算法训练营第9天 | 28.实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
             id: "6d46112cbf9413bbf435bbad2938c665",
             repo: "GilesWong.github.io",

@@ -45,58 +45,9 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0104.%E4%BA%8C%E
 <p>层序遍历一下, 返回最后一层深度.</p>
 <h3 id="题解">题解</h3>
 <p>层序遍历:</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;**
- * Definition for a binary tree node.
- * struct TreeNode &#123;
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-public:
-    int maxDepth(TreeNode* root) &#123;
-        if (!root) return 0;
-        int depth &#x3D; 0;
-        queue&lt;TreeNode *&gt; que;
-        que.push(root);
-        while (!que.empty()) &#123;
-            int qsize &#x3D; que.size();
-            depth++;                                &#x2F;&#x2F; 每遍历一层, depth就自增1
-            for (int i &#x3D; 0; i &lt; qsize; i++) &#123;
-                TreeNode *node &#x3D; que.front();
-                que.pop();
-                if (node -&gt; left) que.push(node -&gt; left);
-                if (node -&gt; right) que.push(node -&gt; right);
-            &#125;
-        &#125;
-        return depth;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxDepth</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> depth = <span class="hljs-number">0</span>;<br>        queue&lt;TreeNode *&gt; que;<br>        que.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-keyword">while</span> (!que.<span class="hljs-built_in">empty</span>()) &#123;<br>            <span class="hljs-type">int</span> qsize = que.<span class="hljs-built_in">size</span>();<br>            depth++;                                <span class="hljs-comment">// 每遍历一层, depth就自增1</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; qsize; i++) &#123;<br>                TreeNode *node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-keyword">if</span> (node -&gt; left) que.<span class="hljs-built_in">push</span>(node -&gt; left);<br>                <span class="hljs-keyword">if</span> (node -&gt; right) que.<span class="hljs-built_in">push</span>(node -&gt; right);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> depth;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>递归法:</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;**
- * Definition for a binary tree node.
- * struct TreeNode &#123;
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-
-public:
-    int maxDepth(TreeNode* root) &#123;
-        if (!root) return 0;
-
-        return 1 + max(maxDepth(root -&gt; left), maxDepth(root -&gt; right));    &#x2F;&#x2F; 左侧节点个数 + 右侧节点个数 + 自身
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxDepth</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + <span class="hljs-built_in">max</span>(<span class="hljs-built_in">maxDepth</span>(root -&gt; left), <span class="hljs-built_in">maxDepth</span>(root -&gt; right));    <span class="hljs-comment">// 左侧节点个数 + 右侧节点个数 + 自身</span><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="二叉树的最小深度">111.二叉树的最小深度</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0111.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6.html">代码随想录链接</a></p>
@@ -107,59 +58,9 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0111.%E4%BA%8C%E
 <p>层序遍历, 在遇到第一个无左右孩子的节点时, 返回当前深度.</p>
 <h3 id="题解-1">题解</h3>
 <p>层序遍历:</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;**
- * Definition for a binary tree node.
- * struct TreeNode &#123;
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-public:
-    int minDepth(TreeNode* root) &#123;
-        if (!root) return 0;
-        queue&lt;TreeNode *&gt; que;
-        que.push(root);
-        int level &#x3D; 0;
-        while (!que.empty()) &#123;
-            level++;
-            int qsize &#x3D; que.size();
-            for (int i &#x3D; 0; i &lt; qsize; i++) &#123;
-                TreeNode *node &#x3D; que.front();
-                que.pop();
-                if (!(node -&gt; left) &amp;&amp; !(node -&gt; right)) return level;      &#x2F;&#x2F; 遇到无左右孩子的节点就返回当前深度
-                if (node -&gt; left) que.push(node -&gt; left);
-                if (node -&gt; right) que.push(node -&gt; right);
-            &#125;
-        &#125;
-        return level;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minDepth</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        queue&lt;TreeNode *&gt; que;<br>        que.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-type">int</span> level = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (!que.<span class="hljs-built_in">empty</span>()) &#123;<br>            level++;<br>            <span class="hljs-type">int</span> qsize = que.<span class="hljs-built_in">size</span>();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; qsize; i++) &#123;<br>                TreeNode *node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-keyword">if</span> (!(node -&gt; left) &amp;&amp; !(node -&gt; right)) <span class="hljs-keyword">return</span> level;      <span class="hljs-comment">// 遇到无左右孩子的节点就返回当前深度</span><br>                <span class="hljs-keyword">if</span> (node -&gt; left) que.<span class="hljs-built_in">push</span>(node -&gt; left);<br>                <span class="hljs-keyword">if</span> (node -&gt; right) que.<span class="hljs-built_in">push</span>(node -&gt; right);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> level;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>递归:</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;**
- * Definition for a binary tree node.
- * struct TreeNode &#123;
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-public:
-    int minDepth(TreeNode* root) &#123;
-        if (root &#x3D;&#x3D; nullptr) return 0;
-        if ((root -&gt; left &#x3D;&#x3D; nullptr) &amp;&amp; (root -&gt; right !&#x3D; nullptr)) return 1 + minDepth(root -&gt; right);    &#x2F;&#x2F; 只有右孩子就只计算右子树的最小深度
-        if ((root -&gt; left !&#x3D; nullptr) &amp;&amp; (root -&gt; right &#x3D;&#x3D; nullptr)) return 1 + minDepth(root -&gt; left);     &#x2F;&#x2F; 只有左孩子就只计算左子树的最小深度
-        return 1 + min(minDepth(root -&gt; left), minDepth(root -&gt; right));    &#x2F;&#x2F; 左右孩子都有就取左右子树的最小值
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minDepth</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">nullptr</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> ((root -&gt; left == <span class="hljs-literal">nullptr</span>) &amp;&amp; (root -&gt; right != <span class="hljs-literal">nullptr</span>)) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + <span class="hljs-built_in">minDepth</span>(root -&gt; right);    <span class="hljs-comment">// 只有右孩子就只计算右子树的最小深度</span><br>        <span class="hljs-keyword">if</span> ((root -&gt; left != <span class="hljs-literal">nullptr</span>) &amp;&amp; (root -&gt; right == <span class="hljs-literal">nullptr</span>)) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + <span class="hljs-built_in">minDepth</span>(root -&gt; left);     <span class="hljs-comment">// 只有左孩子就只计算左子树的最小深度</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + <span class="hljs-built_in">min</span>(<span class="hljs-built_in">minDepth</span>(root -&gt; left), <span class="hljs-built_in">minDepth</span>(root -&gt; right));    <span class="hljs-comment">// 左右孩子都有就取左右子树的最小值</span><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="完全二叉树的节点个数">222.完全二叉树的节点个数</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0222.%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E8%8A%82%E7%82%B9%E4%B8%AA%E6%95%B0.html">代码随想录链接</a></p>
@@ -172,56 +73,9 @@ class="math inline">\(O(n)\)</span>.</p>
 <p>应该要针对于完全二叉树的特性, 使用一些方法来降低时间复杂度.</p>
 <h3 id="题解-2">题解</h3>
 <p>当做普通二叉树来层序遍历:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">&#x2F;**
- * Definition for a binary tree node.
- * struct TreeNode &#123;
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-public:
-    int countNodes(TreeNode* root) &#123;
-        if (!root) return 0;
-        int count &#x3D; 0;
-        queue&lt;TreeNode *&gt; que;
-        que.push(root);
-        while (!que.empty()) &#123;
-            int qsize &#x3D; que.size();
-            for (int i &#x3D; 0; i &lt; qsize; i++) &#123;
-                TreeNode *node &#x3D; que.front();
-                que.pop();
-                count++;    &#x2F;&#x2F; 查个数
-                if (node -&gt; left) que.push(node -&gt; left);
-                if (node -&gt; right) que.push(node -&gt; right);
-            &#125;
-        &#125;
-        return count;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">countNodes</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;<br>        queue&lt;TreeNode *&gt; que;<br>        que.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-keyword">while</span> (!que.<span class="hljs-built_in">empty</span>()) &#123;<br>            <span class="hljs-type">int</span> qsize = que.<span class="hljs-built_in">size</span>();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; qsize; i++) &#123;<br>                TreeNode *node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                count++;    <span class="hljs-comment">// 查个数</span><br>                <span class="hljs-keyword">if</span> (node -&gt; left) que.<span class="hljs-built_in">push</span>(node -&gt; left);<br>                <span class="hljs-keyword">if</span> (node -&gt; right) que.<span class="hljs-built_in">push</span>(node -&gt; right);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>当做普通二叉树来递归:</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;**
- * Definition for a binary tree node.
- * struct TreeNode &#123;
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-public:
-    int countNodes(TreeNode* root) &#123;
-        if (!root) return 0;
-        return 1 + countNodes(root -&gt; left) + countNodes(root -&gt; right);
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">countNodes</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + <span class="hljs-built_in">countNodes</span>(root -&gt; left) + <span class="hljs-built_in">countNodes</span>(root -&gt; right);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>针对完全二叉树的特性, 来优化时间复杂度.
 完全二叉树的叶子结点一定是积累在最后一层的靠左部分.
 其中部分子树是满二叉树, 满足从任意节点出发,
@@ -229,38 +83,7 @@ public:
 判断当前节点出发的树是否是满二叉树, 如果是, 用公式计算即可, 如果不是,
 再使用类似于上面的递归方法来统计节点个数.</p>
 <p>针对完全二叉树的方法:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">&#x2F;**
- * Definition for a binary tree node.
- * struct TreeNode &#123;
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-public:
-    int countNodes(TreeNode* root) &#123;
-        if (!root) return 0;
-        TreeNode *left &#x3D; root -&gt; left;
-        TreeNode *right &#x3D; root -&gt; right;
-        int leftDepth &#x3D; 0, rightDepth &#x3D; 0;
-        while (left) &#123;              &#x2F;&#x2F; 最左下节点的高度差
-            left &#x3D; left -&gt; left;
-            leftDepth++;
-        &#125;
-        while (right) &#123;             &#x2F;&#x2F; 最右下节点的高度差
-            right &#x3D; right -&gt; right;
-            rightDepth++;
-        &#125;
-        if (leftDepth &#x3D;&#x3D; rightDepth) &#123;  &#x2F;&#x2F; 高度差一致, 说明这个子树是完全二叉树, 快速计算个数
-            return (2 &lt;&lt; leftDepth) - 1;
-        &#125;
-        return countNodes(root -&gt; left) + countNodes(root -&gt; right) + 1;    &#x2F;&#x2F; 若子树不是完全二叉树, 就递归计算这个子树的个数
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">countNodes</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        TreeNode *left = root -&gt; left;<br>        TreeNode *right = root -&gt; right;<br>        <span class="hljs-type">int</span> leftDepth = <span class="hljs-number">0</span>, rightDepth = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (left) &#123;              <span class="hljs-comment">// 最左下节点的高度差</span><br>            left = left -&gt; left;<br>            leftDepth++;<br>        &#125;<br>        <span class="hljs-keyword">while</span> (right) &#123;             <span class="hljs-comment">// 最右下节点的高度差</span><br>            right = right -&gt; right;<br>            rightDepth++;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (leftDepth == rightDepth) &#123;  <span class="hljs-comment">// 高度差一致, 说明这个子树是完全二叉树, 快速计算个数</span><br>            <span class="hljs-keyword">return</span> (<span class="hljs-number">2</span> &lt;&lt; leftDepth) - <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">countNodes</span>(root -&gt; left) + <span class="hljs-built_in">countNodes</span>(root -&gt; right) + <span class="hljs-number">1</span>;    <span class="hljs-comment">// 若子树不是完全二叉树, 就递归计算这个子树的个数</span><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 </div><div class="article-licensing box"><div class="licensing-title"><p>代码随想录算法训练营第16天 | 104.二叉树的最大深度, 111.二叉树的最小深度, 222.完全二叉树的节点个数</p><p><a href="http://wwg.xyz/algorithm-train-day16/">http://wwg.xyz/algorithm-train-day16/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-03-02</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-03-13</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">代码随想录</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/algorithm-train-day17/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">代码随想录算法训练营第17天 | 110.平衡二叉树, 257. 二叉树的所有路径, 404.左叶子之和</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm-train-day15/"><span class="level-item">代码随想录算法训练营第15天 | 二叉树层序遍历, 226.翻转二叉树, 101.对称二叉树</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
             id: "4d5910475b2c74f2498ef258d112b5b8",
             repo: "GilesWong.github.io",

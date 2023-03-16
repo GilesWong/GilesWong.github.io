@@ -107,11 +107,7 @@ class="math inline">\(2 * i + 2\)</span>。</p>
 </ul>
 <p>优先访问同一深度的节点。有层次遍历。</p>
 <h3 id="二叉树的定义">二叉树的定义</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">struct TreeNode &#123;
-    int data;
-    TreeNode *left;
-    TreeNode *right;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">TreeNode</span> &#123;<br>    <span class="hljs-type">int</span> data;<br>    TreeNode *left;<br>    TreeNode *right;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="二叉树递归遍历">二叉树递归遍历</h2>
 <p>例题:</p>
 <ul>
@@ -124,198 +120,28 @@ target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-po
 </ul>
 <p>递归遍历的写法比较简单，按照前中后三种遍历方式的定义来写即可。</p>
 <p>前序遍历：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private:
-    void preOrderTravel(TreeNode *root, vector&lt;int&gt; &amp;result) &#123;
-        if (root &#x3D;&#x3D; NULL) return;
-        result.push_back(root -&gt; val);          &#x2F;&#x2F; 先访问该节点
-        preOrderTravel(root -&gt; left, result);   &#x2F;&#x2F; 再访问左右节点
-        preOrderTravel(root -&gt; right, result);
-    &#125;
-public:
-    vector&lt;int&gt; preorderTraversal(TreeNode* root) &#123;
-        vector&lt;int&gt; result;
-        if (root &#x3D;&#x3D; NULL) return result;
-        preOrderTravel(root, result);
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">preOrderTravel</span><span class="hljs-params">(TreeNode *root, vector&lt;<span class="hljs-type">int</span>&gt; &amp;result)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;<br>        result.<span class="hljs-built_in">push_back</span>(root -&gt; val);          <span class="hljs-comment">// 先访问该节点</span><br>        <span class="hljs-built_in">preOrderTravel</span>(root -&gt; left, result);   <span class="hljs-comment">// 再访问左右节点</span><br>        <span class="hljs-built_in">preOrderTravel</span>(root -&gt; right, result);<br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">preorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> result;<br>        <span class="hljs-built_in">preOrderTravel</span>(root, result);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>中序遍历:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private:
-    void inOrderTravel(TreeNode *root, vector&lt;int&gt; &amp;result) &#123;
-        if (!root) return;
-        inOrderTravel(root -&gt; left, result);    &#x2F;&#x2F; 先访问左节点
-        result.push_back(root -&gt; val);          &#x2F;&#x2F; 再访问中间节点
-        inOrderTravel(root -&gt; right, result);   &#x2F;&#x2F; 最后访问右节点
-    &#125;
-public:
-    vector&lt;int&gt; inorderTraversal(TreeNode* root) &#123;
-        vector&lt;int&gt; result;
-        if (!root) return result;
-        inOrderTravel(root, result);
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">inOrderTravel</span><span class="hljs-params">(TreeNode *root, vector&lt;<span class="hljs-type">int</span>&gt; &amp;result)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span>;<br>        <span class="hljs-built_in">inOrderTravel</span>(root -&gt; left, result);    <span class="hljs-comment">// 先访问左节点</span><br>        result.<span class="hljs-built_in">push_back</span>(root -&gt; val);          <span class="hljs-comment">// 再访问中间节点</span><br>        <span class="hljs-built_in">inOrderTravel</span>(root -&gt; right, result);   <span class="hljs-comment">// 最后访问右节点</span><br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">inorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> result;<br>        <span class="hljs-built_in">inOrderTravel</span>(root, result);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>后序遍历:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private:
-    void postOrderTravel(TreeNode *root, vector&lt;int&gt; &amp;result) &#123;
-        if (root &#x3D;&#x3D; NULL) return;
-        postOrderTravel(root -&gt; left, result);  &#x2F;&#x2F; 先访问左节点
-        postOrderTravel(root -&gt; right, result); &#x2F;&#x2F; 再访问右节点
-        result.push_back(root -&gt; val);          &#x2F;&#x2F; 最后访问中间节点
-    &#125;
-public:
-    vector&lt;int&gt; postorderTraversal(TreeNode* root) &#123;
-        vector&lt;int&gt; result;
-        if (!root) return result;
-        postOrderTravel(root, result);
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">postOrderTravel</span><span class="hljs-params">(TreeNode *root, vector&lt;<span class="hljs-type">int</span>&gt; &amp;result)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;<br>        <span class="hljs-built_in">postOrderTravel</span>(root -&gt; left, result);  <span class="hljs-comment">// 先访问左节点</span><br>        <span class="hljs-built_in">postOrderTravel</span>(root -&gt; right, result); <span class="hljs-comment">// 再访问右节点</span><br>        result.<span class="hljs-built_in">push_back</span>(root -&gt; val);          <span class="hljs-comment">// 最后访问中间节点</span><br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">postorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> result;<br>        <span class="hljs-built_in">postOrderTravel</span>(root, result);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="二叉树迭代遍历">二叉树迭代遍历</h2>
 <p>使用迭代来完成二叉树的遍历也是一个重点.二叉树的迭代遍历中,最主要的部分是对栈的调用.</p>
 <p>前序遍历:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    vector&lt;int&gt; preorderTraversal(TreeNode* root) &#123;
-        vector&lt;int&gt; result;
-        if (root &#x3D;&#x3D; NULL) return result;
-        stack&lt;TreeNode*&gt; st;                            &#x2F;&#x2F; 用来遍历节点的栈
-        st.push(root);                                  &#x2F;&#x2F; 将根节点入栈
-        while (!st.empty()) &#123;                           &#x2F;&#x2F; 栈不为空时
-            TreeNode *node &#x3D; st.top();                  &#x2F;&#x2F; 取栈顶并出栈
-            st.pop();
-            result.push_back(node -&gt; val);              &#x2F;&#x2F; 访问节点
-            if (node -&gt; right) st.push(node -&gt; right);  &#x2F;&#x2F; 左右子节点存在时,先压入右子节点,再压入左子节点
-            if (node -&gt; left) st.push(node -&gt; left);
-        &#125;
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">preorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> result;<br>        stack&lt;TreeNode*&gt; st;                            <span class="hljs-comment">// 用来遍历节点的栈</span><br>        st.<span class="hljs-built_in">push</span>(root);                                  <span class="hljs-comment">// 将根节点入栈</span><br>        <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>()) &#123;                           <span class="hljs-comment">// 栈不为空时</span><br>            TreeNode *node = st.<span class="hljs-built_in">top</span>();                  <span class="hljs-comment">// 取栈顶并出栈</span><br>            st.<span class="hljs-built_in">pop</span>();<br>            result.<span class="hljs-built_in">push_back</span>(node -&gt; val);              <span class="hljs-comment">// 访问节点</span><br>            <span class="hljs-keyword">if</span> (node -&gt; right) st.<span class="hljs-built_in">push</span>(node -&gt; right);  <span class="hljs-comment">// 左右子节点存在时,先压入右子节点,再压入左子节点</span><br>            <span class="hljs-keyword">if</span> (node -&gt; left) st.<span class="hljs-built_in">push</span>(node -&gt; left);<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>中序遍历:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    vector&lt;int&gt; inorderTraversal(TreeNode* root) &#123;
-        vector&lt;int&gt; result;
-        if (!root) return result;
-        stack&lt;TreeNode*&gt; st;
-        TreeNode* cur &#x3D; root;                   &#x2F;&#x2F; 中序遍历中处理顺序和访问顺序不一致,需要额外指针辅助
-        while (cur !&#x3D; NULL || !st.empty()) &#123;    &#x2F;&#x2F; 当指针不为空或者栈不为空时
-            if (cur) &#123;                          &#x2F;&#x2F; 如果指针不为空
-                st.push(cur);                   &#x2F;&#x2F; 指针节点压栈,指针左移
-                cur &#x3D; cur -&gt; left;
-            &#125; else &#123;                            &#x2F;&#x2F; 若指针为空,意味着遇到了一颗子树遍历完成,需要进行中间节点的访问
-                cur &#x3D; st.top();
-                st.pop();
-                result.push_back(cur -&gt; val);
-                cur &#x3D; cur -&gt; right;             &#x2F;&#x2F; 访问中间节点完毕后,指针右移
-            &#125;
-        &#125;
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">inorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> result;<br>        stack&lt;TreeNode*&gt; st;<br>        TreeNode* cur = root;                   <span class="hljs-comment">// 中序遍历中处理顺序和访问顺序不一致,需要额外指针辅助</span><br>        <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">NULL</span> || !st.<span class="hljs-built_in">empty</span>()) &#123;    <span class="hljs-comment">// 当指针不为空或者栈不为空时</span><br>            <span class="hljs-keyword">if</span> (cur) &#123;                          <span class="hljs-comment">// 如果指针不为空</span><br>                st.<span class="hljs-built_in">push</span>(cur);                   <span class="hljs-comment">// 指针节点压栈,指针左移</span><br>                cur = cur -&gt; left;<br>            &#125; <span class="hljs-keyword">else</span> &#123;                            <span class="hljs-comment">// 若指针为空,意味着遇到了一颗子树遍历完成,需要进行中间节点的访问</span><br>                cur = st.<span class="hljs-built_in">top</span>();<br>                st.<span class="hljs-built_in">pop</span>();<br>                result.<span class="hljs-built_in">push_back</span>(cur -&gt; val);<br>                cur = cur -&gt; right;             <span class="hljs-comment">// 访问中间节点完毕后,指针右移</span><br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>后序遍历:</p>
 <p>后序遍历的顺序是左右中,可以通过中右左的顺序逆转来完成.</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    vector&lt;int&gt; postorderTraversal(TreeNode* root) &#123;
-        vector&lt;int&gt; result;
-        if (!root) return result;
-        stack&lt;TreeNode*&gt; st;
-        st.push(root);
-        while (!st.empty()) &#123;                       &#x2F;&#x2F; 与前序遍历的代码相似,不过交换了左右节点的压栈顺序
-            TreeNode *cur &#x3D; st.top();
-            st.pop();
-            result.push_back(cur -&gt; val);
-            if (cur -&gt; left) st.push(cur -&gt; left);
-            if (cur -&gt; right) st.push(cur -&gt; right);
-        &#125;
-        reverse(result.begin(), result.end());      &#x2F;&#x2F; 逆转访问记录来获得目标顺序的记录
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">postorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> result;<br>        stack&lt;TreeNode*&gt; st;<br>        st.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>()) &#123;                       <span class="hljs-comment">// 与前序遍历的代码相似,不过交换了左右节点的压栈顺序</span><br>            TreeNode *cur = st.<span class="hljs-built_in">top</span>();<br>            st.<span class="hljs-built_in">pop</span>();<br>            result.<span class="hljs-built_in">push_back</span>(cur -&gt; val);<br>            <span class="hljs-keyword">if</span> (cur -&gt; left) st.<span class="hljs-built_in">push</span>(cur -&gt; left);<br>            <span class="hljs-keyword">if</span> (cur -&gt; right) st.<span class="hljs-built_in">push</span>(cur -&gt; right);<br>        &#125;<br>        <span class="hljs-built_in">reverse</span>(result.<span class="hljs-built_in">begin</span>(), result.<span class="hljs-built_in">end</span>());      <span class="hljs-comment">// 逆转访问记录来获得目标顺序的记录</span><br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="二叉树统一迭代法">二叉树统一迭代法</h2>
 <p>上面的迭代法写的方式不够统一. 下面是三种遍历比较统一的写法.</p>
 <p>前序遍历:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    vector&lt;int&gt; preorderTraversal(TreeNode* root) &#123;
-        vector&lt;int&gt; result;
-        if (root &#x3D;&#x3D; NULL) return result;
-        stack&lt;TreeNode*&gt; st;
-        st.push(root);                                      &#x2F;&#x2F; 压入根节点
-        while (!st.empty()) &#123;                               &#x2F;&#x2F; 栈不为空时
-            TreeNode *node &#x3D; st.top();                      &#x2F;&#x2F; 取栈顶
-            if (node) &#123;                                     &#x2F;&#x2F; 若栈顶元素不是空指针,则弹出并将不为空的右指针和左指针压入
-                st.pop();
-                if (node -&gt; right) st.push(node -&gt; right);
-                if (node -&gt; left) st.push(node -&gt; left);
-                st.push(node);                              &#x2F;&#x2F; 再压入节点本身
-                st.push(NULL);                              &#x2F;&#x2F; 压入一个空指针,表示需要访问该节点
-            &#125; else &#123;                                        &#x2F;&#x2F; 栈顶是空指针时
-                st.pop();
-                node &#x3D; st.top();                            &#x2F;&#x2F; 获得需要访问的节点并进行访问
-                st.pop();
-                result.push_back(node -&gt; val);
-            &#125;
-        &#125;
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">preorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> result;<br>        stack&lt;TreeNode*&gt; st;<br>        st.<span class="hljs-built_in">push</span>(root);                                      <span class="hljs-comment">// 压入根节点</span><br>        <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>()) &#123;                               <span class="hljs-comment">// 栈不为空时</span><br>            TreeNode *node = st.<span class="hljs-built_in">top</span>();                      <span class="hljs-comment">// 取栈顶</span><br>            <span class="hljs-keyword">if</span> (node) &#123;                                     <span class="hljs-comment">// 若栈顶元素不是空指针,则弹出并将不为空的右指针和左指针压入</span><br>                st.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-keyword">if</span> (node -&gt; right) st.<span class="hljs-built_in">push</span>(node -&gt; right);<br>                <span class="hljs-keyword">if</span> (node -&gt; left) st.<span class="hljs-built_in">push</span>(node -&gt; left);<br>                st.<span class="hljs-built_in">push</span>(node);                              <span class="hljs-comment">// 再压入节点本身</span><br>                st.<span class="hljs-built_in">push</span>(<span class="hljs-literal">NULL</span>);                              <span class="hljs-comment">// 压入一个空指针,表示需要访问该节点</span><br>            &#125; <span class="hljs-keyword">else</span> &#123;                                        <span class="hljs-comment">// 栈顶是空指针时</span><br>                st.<span class="hljs-built_in">pop</span>();<br>                node = st.<span class="hljs-built_in">top</span>();                            <span class="hljs-comment">// 获得需要访问的节点并进行访问</span><br>                st.<span class="hljs-built_in">pop</span>();<br>                result.<span class="hljs-built_in">push_back</span>(node -&gt; val);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>中序遍历:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    vector&lt;int&gt; preorderTraversal(TreeNode* root) &#123;
-        vector&lt;int&gt; result;
-        if (root &#x3D;&#x3D; NULL) return result;
-        stack&lt;TreeNode*&gt; st;
-        st.push(root);                                      &#x2F;&#x2F; 压入根节点
-        while (!st.empty()) &#123;                               &#x2F;&#x2F; 栈不为空时
-            TreeNode *node &#x3D; st.top();                      &#x2F;&#x2F; 取栈顶
-            if (node) &#123;                                     &#x2F;&#x2F; 若栈顶元素不是空指针,则弹出并将不为空的右指针,节点指针和访问标记,左指针压入
-                st.pop();
-                if (node -&gt; right) st.push(node -&gt; right);
-                st.push(node);                              &#x2F;&#x2F; 压入节点本身
-                st.push(NULL);                              &#x2F;&#x2F; 压入一个空指针,表示需要访问该节点
-                if (node -&gt; left) st.push(node -&gt; left); 
-            &#125; else &#123;                                        &#x2F;&#x2F; 栈顶是空指针时
-                st.pop();
-                node &#x3D; st.top();                            &#x2F;&#x2F; 获得需要访问的节点并进行访问
-                st.pop();
-                result.push_back(node -&gt; val);
-            &#125;
-        &#125;
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">preorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> result;<br>        stack&lt;TreeNode*&gt; st;<br>        st.<span class="hljs-built_in">push</span>(root);                                      <span class="hljs-comment">// 压入根节点</span><br>        <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>()) &#123;                               <span class="hljs-comment">// 栈不为空时</span><br>            TreeNode *node = st.<span class="hljs-built_in">top</span>();                      <span class="hljs-comment">// 取栈顶</span><br>            <span class="hljs-keyword">if</span> (node) &#123;                                     <span class="hljs-comment">// 若栈顶元素不是空指针,则弹出并将不为空的右指针,节点指针和访问标记,左指针压入</span><br>                st.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-keyword">if</span> (node -&gt; right) st.<span class="hljs-built_in">push</span>(node -&gt; right);<br>                st.<span class="hljs-built_in">push</span>(node);                              <span class="hljs-comment">// 压入节点本身</span><br>                st.<span class="hljs-built_in">push</span>(<span class="hljs-literal">NULL</span>);                              <span class="hljs-comment">// 压入一个空指针,表示需要访问该节点</span><br>                <span class="hljs-keyword">if</span> (node -&gt; left) st.<span class="hljs-built_in">push</span>(node -&gt; left); <br>            &#125; <span class="hljs-keyword">else</span> &#123;                                        <span class="hljs-comment">// 栈顶是空指针时</span><br>                st.<span class="hljs-built_in">pop</span>();<br>                node = st.<span class="hljs-built_in">top</span>();                            <span class="hljs-comment">// 获得需要访问的节点并进行访问</span><br>                st.<span class="hljs-built_in">pop</span>();<br>                result.<span class="hljs-built_in">push_back</span>(node -&gt; val);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>后序遍历:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    vector&lt;int&gt; preorderTraversal(TreeNode* root) &#123;
-        vector&lt;int&gt; result;
-        if (root &#x3D;&#x3D; NULL) return result;
-        stack&lt;TreeNode*&gt; st;
-        st.push(root);                                      &#x2F;&#x2F; 压入根节点
-        while (!st.empty()) &#123;                               &#x2F;&#x2F; 栈不为空时
-            TreeNode *node &#x3D; st.top();                      &#x2F;&#x2F; 取栈顶
-            if (node) &#123;                                     &#x2F;&#x2F; 若栈顶元素不是空指针,则弹出并将节点指针和访问标记,不为空的右指针,左指针压入
-                st.pop();
-                st.push(node);                              &#x2F;&#x2F; 压入节点本身
-                st.push(NULL);                              &#x2F;&#x2F; 压入一个空指针,表示需要访问该节点
-                if (node -&gt; right) st.push(node -&gt; right);
-                if (node -&gt; left) st.push(node -&gt; left); 
-            &#125; else &#123;                                        &#x2F;&#x2F; 栈顶是空指针时
-                st.pop();
-                node &#x3D; st.top();                            &#x2F;&#x2F; 获得需要访问的节点并进行访问
-                st.pop();
-                result.push_back(node -&gt; val);
-            &#125;
-        &#125;
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">preorderTraversal</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> result;<br>        stack&lt;TreeNode*&gt; st;<br>        st.<span class="hljs-built_in">push</span>(root);                                      <span class="hljs-comment">// 压入根节点</span><br>        <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>()) &#123;                               <span class="hljs-comment">// 栈不为空时</span><br>            TreeNode *node = st.<span class="hljs-built_in">top</span>();                      <span class="hljs-comment">// 取栈顶</span><br>            <span class="hljs-keyword">if</span> (node) &#123;                                     <span class="hljs-comment">// 若栈顶元素不是空指针,则弹出并将节点指针和访问标记,不为空的右指针,左指针压入</span><br>                st.<span class="hljs-built_in">pop</span>();<br>                st.<span class="hljs-built_in">push</span>(node);                              <span class="hljs-comment">// 压入节点本身</span><br>                st.<span class="hljs-built_in">push</span>(<span class="hljs-literal">NULL</span>);                              <span class="hljs-comment">// 压入一个空指针,表示需要访问该节点</span><br>                <span class="hljs-keyword">if</span> (node -&gt; right) st.<span class="hljs-built_in">push</span>(node -&gt; right);<br>                <span class="hljs-keyword">if</span> (node -&gt; left) st.<span class="hljs-built_in">push</span>(node -&gt; left); <br>            &#125; <span class="hljs-keyword">else</span> &#123;                                        <span class="hljs-comment">// 栈顶是空指针时</span><br>                st.<span class="hljs-built_in">pop</span>();<br>                node = st.<span class="hljs-built_in">top</span>();                            <span class="hljs-comment">// 获得需要访问的节点并进行访问</span><br>                st.<span class="hljs-built_in">pop</span>();<br>                result.<span class="hljs-built_in">push_back</span>(node -&gt; val);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 </div><div class="article-licensing box"><div class="licensing-title"><p>代码随想录算法训练营第14天 | 二叉树理论基础，二叉树遍历</p><p><a href="http://wwg.xyz/algorithm-train-day14/">http://wwg.xyz/algorithm-train-day14/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-02-28</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-03-13</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">代码随想录</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/algorithm-train-day15/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">代码随想录算法训练营第15天 | 二叉树层序遍历, 226.翻转二叉树, 101.对称二叉树</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm-train-day13/"><span class="level-item">代码随想录算法训练营第13天 | LeetCode - 239.滑动窗口最大值，347.前 K 个高频元素，栈和队列总结</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
             id: "3e911297d25d9e1c5770035534c354a6",
             repo: "GilesWong.github.io",

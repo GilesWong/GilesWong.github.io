@@ -47,55 +47,10 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0654.%E6%9C%80%E
 <p>题目就很递归, 且给人的感觉像是前序遍历.</p>
 <h3 id="题解">题解</h3>
 <p>递归法:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    TreeNode* constructMaximumBinaryTree(vector&lt;int&gt;&amp; nums) &#123;
-        if (nums.size() &#x3D;&#x3D; 0) return NULL;
-        if (nums.size() &#x3D;&#x3D; 1) return new TreeNode(nums[0]); &#x2F;&#x2F; 特殊情况处理
-        int pivotIndex &#x3D; 0, maxVal &#x3D; INT_MIN;
-        for (int i &#x3D; 0; i &lt; nums.size(); i++)               &#x2F;&#x2F; 找最大值并根据最大值建立新节点.
-            if (nums[i] &gt; maxVal) &#123;
-                maxVal &#x3D; nums[i];
-                pivotIndex &#x3D; i;
-            &#125;
-        TreeNode *root &#x3D; new TreeNode(nums[pivotIndex]);
-
-        vector&lt;int&gt; leftTreeNodes(nums.begin(), nums.begin() + pivotIndex);     &#x2F;&#x2F; 左右分区
-        vector&lt;int&gt; rightTreeNodes(nums.begin() + pivotIndex + 1, nums.end());
-
-        root -&gt; left &#x3D; constructMaximumBinaryTree(leftTreeNodes);               &#x2F;&#x2F; 递归地建立左右子树
-        root -&gt; right &#x3D; constructMaximumBinaryTree(rightTreeNodes);
-
-        return root;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">constructMaximumBinaryTree</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (nums.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>        <span class="hljs-keyword">if</span> (nums.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>(nums[<span class="hljs-number">0</span>]); <span class="hljs-comment">// 特殊情况处理</span><br>        <span class="hljs-type">int</span> pivotIndex = <span class="hljs-number">0</span>, maxVal = INT_MIN;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++)               <span class="hljs-comment">// 找最大值并根据最大值建立新节点.</span><br>            <span class="hljs-keyword">if</span> (nums[i] &gt; maxVal) &#123;<br>                maxVal = nums[i];<br>                pivotIndex = i;<br>            &#125;<br>        TreeNode *root = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>(nums[pivotIndex]);<br><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">leftTreeNodes</span><span class="hljs-params">(nums.begin(), nums.begin() + pivotIndex)</span></span>;     <span class="hljs-comment">// 左右分区</span><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">rightTreeNodes</span><span class="hljs-params">(nums.begin() + pivotIndex + <span class="hljs-number">1</span>, nums.end())</span></span>;<br><br>        root -&gt; left = <span class="hljs-built_in">constructMaximumBinaryTree</span>(leftTreeNodes);               <span class="hljs-comment">// 递归地建立左右子树</span><br>        root -&gt; right = <span class="hljs-built_in">constructMaximumBinaryTree</span>(rightTreeNodes);<br><br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>优化版的递归法: (主要优化在了没有建立新的数组, 每次递归时,
 直接在原数组上进行分区)</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private:
-    TreeNode* constructMaximumBinaryTreeRecursive(vector&lt;int&gt;&amp;nums, int left, int right) &#123;
-        if (left &gt;&#x3D; right) return NULL;         &#x2F;&#x2F; 分区采用左闭右开区间, 左侧边界不能大于等于右侧边界
-
-        int pivotIndex &#x3D; left, maxVal &#x3D; INT_MIN;    &#x2F;&#x2F; 找分区中最大值并建立新节点
-        for (int i &#x3D; left; i &lt; right; i++)
-            if (nums[i] &gt; maxVal) &#123;
-                maxVal &#x3D; nums[i];
-                pivotIndex &#x3D; i;
-            &#125;
-        
-        TreeNode *root &#x3D; new TreeNode(nums[pivotIndex]);
-
-        root -&gt; left &#x3D; constructMaximumBinaryTreeRecursive(nums, left, pivotIndex);     &#x2F;&#x2F; 根据分区建立左右子树
-        root -&gt; right &#x3D; constructMaximumBinaryTreeRecursive(nums, pivotIndex + 1, right);
-
-        return root;
-
-    &#125;
-public:
-    TreeNode* constructMaximumBinaryTree(vector&lt;int&gt;&amp; nums) &#123;
-        return constructMaximumBinaryTreeRecursive(nums, 0, nums.size());
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">constructMaximumBinaryTreeRecursive</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp;nums, <span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (left &gt;= right) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;         <span class="hljs-comment">// 分区采用左闭右开区间, 左侧边界不能大于等于右侧边界</span><br><br>        <span class="hljs-type">int</span> pivotIndex = left, maxVal = INT_MIN;    <span class="hljs-comment">// 找分区中最大值并建立新节点</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = left; i &lt; right; i++)<br>            <span class="hljs-keyword">if</span> (nums[i] &gt; maxVal) &#123;<br>                maxVal = nums[i];<br>                pivotIndex = i;<br>            &#125;<br>        <br>        TreeNode *root = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>(nums[pivotIndex]);<br><br>        root -&gt; left = <span class="hljs-built_in">constructMaximumBinaryTreeRecursive</span>(nums, left, pivotIndex);     <span class="hljs-comment">// 根据分区建立左右子树</span><br>        root -&gt; right = <span class="hljs-built_in">constructMaximumBinaryTreeRecursive</span>(nums, pivotIndex + <span class="hljs-number">1</span>, right);<br><br>        <span class="hljs-keyword">return</span> root;<br><br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">constructMaximumBinaryTree</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">constructMaximumBinaryTreeRecursive</span>(nums, <span class="hljs-number">0</span>, nums.<span class="hljs-built_in">size</span>());<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="合并二叉树">617.合并二叉树</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0617.%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91.html">代码随想录链接</a></p>
@@ -109,60 +64,9 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0617.%E5%90%88%E
 <h3 id="题解-1">题解</h3>
 <p>递归法:(<del>作为懒狗只写了中序遍历,</del>
 前序和后序只需要调整值相加的语句的位置就能完成)</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private:
-    TreeNode* traversal(TreeNode *root1, TreeNode* root2) &#123;
-        if (!root1 &amp;&amp; !root2) return nullptr;
-        if (root1 &amp;&amp; !root2) return root1;  &#x2F;&#x2F; 处理一棵树上的一侧子树不存在而另一棵树上相应子树存在的情况
-        if (!root1 &amp;&amp; root2) return root2;
-
-        root1 -&gt; left &#x3D; traversal(root1 -&gt; left, root2 -&gt; left);    &#x2F;&#x2F; 递归合并左子树
-        root1 -&gt; val +&#x3D; root2 -&gt; val;
-        root1 -&gt; right &#x3D; traversal(root1 -&gt; right, root2 -&gt; right); &#x2F;&#x2F; 递归合并右子树
-
-        return root1;
-    &#125;
-public:
-    TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) &#123;
-        return traversal(root1, root2);
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">traversal</span><span class="hljs-params">(TreeNode *root1, TreeNode* root2)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root1 &amp;&amp; !root2) <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>        <span class="hljs-keyword">if</span> (root1 &amp;&amp; !root2) <span class="hljs-keyword">return</span> root1;  <span class="hljs-comment">// 处理一棵树上的一侧子树不存在而另一棵树上相应子树存在的情况</span><br>        <span class="hljs-keyword">if</span> (!root1 &amp;&amp; root2) <span class="hljs-keyword">return</span> root2;<br><br>        root1 -&gt; left = <span class="hljs-built_in">traversal</span>(root1 -&gt; left, root2 -&gt; left);    <span class="hljs-comment">// 递归合并左子树</span><br>        root1 -&gt; val += root2 -&gt; val;<br>        root1 -&gt; right = <span class="hljs-built_in">traversal</span>(root1 -&gt; right, root2 -&gt; right); <span class="hljs-comment">// 递归合并右子树</span><br><br>        <span class="hljs-keyword">return</span> root1;<br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">mergeTrees</span><span class="hljs-params">(TreeNode* root1, TreeNode* root2)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">traversal</span>(root1, root2);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>迭代法:(把要比较的节点成对地入栈比较, 像101.对称二叉树那题一样)</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) &#123;
-        if (!root1) return root2;
-        if (!root2) return root1;
-        stack&lt;TreeNode*&gt; st;
-        st.push(root2);
-        st.push(root1);
-        while (!st.empty()) &#123;
-            TreeNode *node1 &#x3D; st.top(); st.pop();   &#x2F;&#x2F; 连取两个节点进行对比
-            TreeNode *node2 &#x3D; st.top(); st.pop();
-
-            node1 -&gt; val +&#x3D; node2 -&gt; val;           &#x2F;&#x2F; 两个节点进行值相加
-
-            if (node1 -&gt; left &amp;&amp; node2 -&gt; left) &#123;   &#x2F;&#x2F; 都存在左子树, 左子树入栈合并
-                st.push(node2 -&gt; left);
-                st.push(node1 -&gt; left);
-            &#125;
-
-            if (node1 -&gt; right &amp;&amp; node2 -&gt; right) &#123; &#x2F;&#x2F; 都存在右子树, 右子树入栈合并
-                st.push(node2 -&gt; right);
-                st.push(node1 -&gt; right);
-            &#125;
-
-            if (!(node1 -&gt; left) &amp;&amp; node2 -&gt; left) &#123;&#x2F;&#x2F; 处理一侧不存在的情况
-                node1 -&gt; left &#x3D; node2 -&gt; left;
-            &#125;
-
-            if (!(node1 -&gt; right) &amp;&amp; node2 -&gt; right) &#123;
-                node1 -&gt; right &#x3D; node2 -&gt; right;
-            &#125;
-        &#125;
-        return root1;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">mergeTrees</span><span class="hljs-params">(TreeNode* root1, TreeNode* root2)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root1) <span class="hljs-keyword">return</span> root2;<br>        <span class="hljs-keyword">if</span> (!root2) <span class="hljs-keyword">return</span> root1;<br>        stack&lt;TreeNode*&gt; st;<br>        st.<span class="hljs-built_in">push</span>(root2);<br>        st.<span class="hljs-built_in">push</span>(root1);<br>        <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>()) &#123;<br>            TreeNode *node1 = st.<span class="hljs-built_in">top</span>(); st.<span class="hljs-built_in">pop</span>();   <span class="hljs-comment">// 连取两个节点进行对比</span><br>            TreeNode *node2 = st.<span class="hljs-built_in">top</span>(); st.<span class="hljs-built_in">pop</span>();<br><br>            node1 -&gt; val += node2 -&gt; val;           <span class="hljs-comment">// 两个节点进行值相加</span><br><br>            <span class="hljs-keyword">if</span> (node1 -&gt; left &amp;&amp; node2 -&gt; left) &#123;   <span class="hljs-comment">// 都存在左子树, 左子树入栈合并</span><br>                st.<span class="hljs-built_in">push</span>(node2 -&gt; left);<br>                st.<span class="hljs-built_in">push</span>(node1 -&gt; left);<br>            &#125;<br><br>            <span class="hljs-keyword">if</span> (node1 -&gt; right &amp;&amp; node2 -&gt; right) &#123; <span class="hljs-comment">// 都存在右子树, 右子树入栈合并</span><br>                st.<span class="hljs-built_in">push</span>(node2 -&gt; right);<br>                st.<span class="hljs-built_in">push</span>(node1 -&gt; right);<br>            &#125;<br><br>            <span class="hljs-keyword">if</span> (!(node1 -&gt; left) &amp;&amp; node2 -&gt; left) &#123;<span class="hljs-comment">// 处理一侧不存在的情况</span><br>                node1 -&gt; left = node2 -&gt; left;<br>            &#125;<br><br>            <span class="hljs-keyword">if</span> (!(node1 -&gt; right) &amp;&amp; node2 -&gt; right) &#123;<br>                node1 -&gt; right = node2 -&gt; right;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> root1;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="二叉搜索树中的搜索">700.二叉搜索树中的搜索</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0700.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%90%9C%E7%B4%A2.html">代码随想录链接</a></p>
@@ -173,34 +77,9 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0700.%E4%BA%8C%E
 <p>就...搜呗, (根节点)大了往左边找, 小了往右边找.</p>
 <h3 id="题解-2">题解</h3>
 <p>递归法:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private:
-    TreeNode* traversal(TreeNode* root, int val) &#123;
-        if (!root) return nullptr;
-        if (root -&gt; val &#x3D;&#x3D; val) return root; &#x2F;&#x2F; 符合了就这个节点
-        if (root -&gt; val &gt; val) return traversal(root -&gt; left, val); &#x2F;&#x2F; 大了往左边找
-        if (root -&gt; val &lt; val) return traversal(root -&gt; right, val);&#x2F;&#x2F; 小了往右边找
-        return nullptr;         &#x2F;&#x2F; &quot;我不到啊&quot;
-    &#125;
-public:
-    TreeNode* searchBST(TreeNode* root, int val) &#123;
-        return traversal(root, val);
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">traversal</span><span class="hljs-params">(TreeNode* root, <span class="hljs-type">int</span> val)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>        <span class="hljs-keyword">if</span> (root -&gt; val == val) <span class="hljs-keyword">return</span> root; <span class="hljs-comment">// 符合了就这个节点</span><br>        <span class="hljs-keyword">if</span> (root -&gt; val &gt; val) <span class="hljs-keyword">return</span> <span class="hljs-built_in">traversal</span>(root -&gt; left, val); <span class="hljs-comment">// 大了往左边找</span><br>        <span class="hljs-keyword">if</span> (root -&gt; val &lt; val) <span class="hljs-keyword">return</span> <span class="hljs-built_in">traversal</span>(root -&gt; right, val);<span class="hljs-comment">// 小了往右边找</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;         <span class="hljs-comment">// &quot;我不到啊&quot;</span><br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">searchBST</span><span class="hljs-params">(TreeNode* root, <span class="hljs-type">int</span> val)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">traversal</span>(root, val);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>迭代法:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    TreeNode* searchBST(TreeNode* root, int val) &#123;
-        if (!root) return nullptr;
-        TreeNode *cur &#x3D; root;       &#x2F;&#x2F; 像不像遍历链表那样
-        while (cur) &#123;
-            if (cur -&gt; val &#x3D;&#x3D; val) return cur;
-            if (cur -&gt; val &gt; val) cur &#x3D; cur -&gt; left;    &#x2F;&#x2F; 大了往左边找
-            else cur &#x3D; cur -&gt; right;                    &#x2F;&#x2F; 小了往右边找
-        &#125;
-        return nullptr; &#x2F;&#x2F; 没找到
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">searchBST</span><span class="hljs-params">(TreeNode* root, <span class="hljs-type">int</span> val)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>        TreeNode *cur = root;       <span class="hljs-comment">// 像不像遍历链表那样</span><br>        <span class="hljs-keyword">while</span> (cur) &#123;<br>            <span class="hljs-keyword">if</span> (cur -&gt; val == val) <span class="hljs-keyword">return</span> cur;<br>            <span class="hljs-keyword">if</span> (cur -&gt; val &gt; val) cur = cur -&gt; left;    <span class="hljs-comment">// 大了往左边找</span><br>            <span class="hljs-keyword">else</span> cur = cur -&gt; right;                    <span class="hljs-comment">// 小了往右边找</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>; <span class="hljs-comment">// 没找到</span><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="验证二叉搜索树">98.验证二叉搜索树</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0098.%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html">代码随想录链接</a></p>
@@ -215,55 +94,9 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0098.%E9%AA%8C%E
 <h3 id="题解-3">题解</h3>
 <p>其实就中序遍历, 再加个遍历结果单调性的判断.</p>
 <p>递归法:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private:
-    vector&lt;int&gt; result;
-    void traversal(TreeNode *root) &#123;
-        if (!root) return;
-        traversal(root -&gt; left);
-        result.push_back(root -&gt; val);  &#x2F;&#x2F; 中序遍历
-        traversal(root -&gt; right);
-    &#125;
-public:
-    bool isValidBST(TreeNode* root) &#123;
-        traversal(root);
-        for (int i &#x3D; 1; i &lt; result.size(); i++) &#123;   &#x2F;&#x2F; 遍历结果单调性判断
-            if (result[i] &lt;&#x3D; result[i - 1]) return false;
-        &#125;
-        return true;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    vector&lt;<span class="hljs-type">int</span>&gt; result;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">traversal</span><span class="hljs-params">(TreeNode *root)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span>;<br>        <span class="hljs-built_in">traversal</span>(root -&gt; left);<br>        result.<span class="hljs-built_in">push_back</span>(root -&gt; val);  <span class="hljs-comment">// 中序遍历</span><br>        <span class="hljs-built_in">traversal</span>(root -&gt; right);<br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isValidBST</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-built_in">traversal</span>(root);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; result.<span class="hljs-built_in">size</span>(); i++) &#123;   <span class="hljs-comment">// 遍历结果单调性判断</span><br>            <span class="hljs-keyword">if</span> (result[i] &lt;= result[i - <span class="hljs-number">1</span>]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>迭代法:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    bool isValidBST(TreeNode* root) &#123;
-        if (!root) return true;
-        vector&lt;int&gt; result;
-        stack&lt;TreeNode*&gt; st;
-        st.push(root);
-        while (!st.empty()) &#123;   &#x2F;&#x2F; 中序遍历
-            TreeNode *node &#x3D; st.top();
-            if (node) &#123;
-                st.pop();
-                if (node -&gt; right) st.push(node -&gt; right);
-
-                st.push(node);
-                st.push(NULL);
-
-                if (node -&gt; left) st.push(node -&gt; left);
-            &#125; else &#123;
-                st.pop();
-                node &#x3D; st.top();
-                st.pop();
-                result.push_back(node -&gt; val);
-            &#125;
-        &#125;
-        for (int i &#x3D; 1; i &lt; result.size(); i++) &#x2F;&#x2F; 遍历结果单调性判断
-            if (result[i] &lt;&#x3D; result[i - 1])
-                return false;
-        return true;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isValidBST</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        stack&lt;TreeNode*&gt; st;<br>        st.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>()) &#123;   <span class="hljs-comment">// 中序遍历</span><br>            TreeNode *node = st.<span class="hljs-built_in">top</span>();<br>            <span class="hljs-keyword">if</span> (node) &#123;<br>                st.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-keyword">if</span> (node -&gt; right) st.<span class="hljs-built_in">push</span>(node -&gt; right);<br><br>                st.<span class="hljs-built_in">push</span>(node);<br>                st.<span class="hljs-built_in">push</span>(<span class="hljs-literal">NULL</span>);<br><br>                <span class="hljs-keyword">if</span> (node -&gt; left) st.<span class="hljs-built_in">push</span>(node -&gt; left);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                st.<span class="hljs-built_in">pop</span>();<br>                node = st.<span class="hljs-built_in">top</span>();<br>                st.<span class="hljs-built_in">pop</span>();<br>                result.<span class="hljs-built_in">push_back</span>(node -&gt; val);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; result.<span class="hljs-built_in">size</span>(); i++) <span class="hljs-comment">// 遍历结果单调性判断</span><br>            <span class="hljs-keyword">if</span> (result[i] &lt;= result[i - <span class="hljs-number">1</span>])<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 </div><div class="article-licensing box"><div class="licensing-title"><p>代码随想录算法训练营第20天 | 654.最大二叉树, 617.合并二叉树, 700.二叉搜索树中的搜索, 98.验证二叉搜索树</p><p><a href="http://wwg.xyz/algorithm-train-day20/">http://wwg.xyz/algorithm-train-day20/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-03-06</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-03-13</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">代码随想录</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/algorithm-train-day21/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">代码随想录算法训练营第21天 | 530.二叉搜索树的最小绝对差, 501.二叉搜索树中的众数, 236. 二叉树的最近公共祖先</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm-train-day18/"><span class="level-item">代码随想录算法训练营第18天 | 513.找树左下角的值, 112. 路径总和, 113.路径总和ii, 105.从前序与中序遍历序列构造二叉树, 106.从中序与后序遍历序列构造二叉树</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
             id: "afa246bd82430024b89ad3e2d1224cf3",
             repo: "GilesWong.github.io",

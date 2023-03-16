@@ -47,34 +47,7 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0024.%E4%B8%A4%E
 <h3 id="自己的想法">自己的想法</h3>
 <p>使用假表头，遍历时使用一个cur指针指向在需要交换的一对节点的前面一个节点，然后对这一对节点的位置进行交换。</p>
 <h3 id="解法">解法</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">&#x2F;**
- * Definition for singly-linked list.
- * struct ListNode &#123;
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) &#123;&#125;
- *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;
- *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-public:
-    ListNode* swapPairs(ListNode* head) &#123;
-        ListNode* dummyHead &#x3D; new ListNode(0, head); &#x2F;&#x2F; 一个假表头，并使用构造函数将next指向head节点
-        ListNode* cur &#x3D; dummyHead;                   &#x2F;&#x2F; cur指针用于遍历链表
-        while(cur !&#x3D; NULL &amp;&amp; cur -&gt; next !&#x3D; NULL) &#123;  &#x2F;&#x2F; 如果cur指针为空，或者cur节点后没有节点的话，就跳出循环
-            if (cur -&gt; next -&gt; next &#x3D;&#x3D; NULL) break;  &#x2F;&#x2F; 如果cur指针指向的节点没有一对节点的话，结束
-            ListNode* first &#x3D; cur -&gt; next;           &#x2F;&#x2F; 取cur指向的节点后的第一个节点，即奇数位节点
-            ListNode* second &#x3D; first -&gt; next;        &#x2F;&#x2F; 取要交换的偶数位节点
-            ListNode* third &#x3D; second -&gt; next;        &#x2F;&#x2F; 取偶数位节点后的节点
-            cur -&gt; next &#x3D; second;                    &#x2F;&#x2F; 将偶数位节点向前置，置于奇数位节点之前
-            second -&gt; next &#x3D; first;                  &#x2F;&#x2F; 将奇数位节点置于偶数位节点之后
-            first -&gt; next &#x3D; third;                   &#x2F;&#x2F; 将原来偶数位节点之后的节点置于奇数位节点之后
-            cur &#x3D; first;                             &#x2F;&#x2F; 移动cur指针
-        &#125;
-        return dummyHead -&gt; next;                    &#x2F;&#x2F; 返回真表头
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * struct ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode *next;</span><br><span class="hljs-comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">swapPairs</span><span class="hljs-params">(ListNode* head)</span> </span>&#123;<br>        ListNode* dummyHead = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>, head); <span class="hljs-comment">// 一个假表头，并使用构造函数将next指向head节点</span><br>        ListNode* cur = dummyHead;                   <span class="hljs-comment">// cur指针用于遍历链表</span><br>        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">NULL</span> &amp;&amp; cur -&gt; next != <span class="hljs-literal">NULL</span>) &#123;  <span class="hljs-comment">// 如果cur指针为空，或者cur节点后没有节点的话，就跳出循环</span><br>            <span class="hljs-keyword">if</span> (cur -&gt; next -&gt; next == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">break</span>;  <span class="hljs-comment">// 如果cur指针指向的节点没有一对节点的话，结束</span><br>            ListNode* first = cur -&gt; next;           <span class="hljs-comment">// 取cur指向的节点后的第一个节点，即奇数位节点</span><br>            ListNode* second = first -&gt; next;        <span class="hljs-comment">// 取要交换的偶数位节点</span><br>            ListNode* third = second -&gt; next;        <span class="hljs-comment">// 取偶数位节点后的节点</span><br>            cur -&gt; next = second;                    <span class="hljs-comment">// 将偶数位节点向前置，置于奇数位节点之前</span><br>            second -&gt; next = first;                  <span class="hljs-comment">// 将奇数位节点置于偶数位节点之后</span><br>            first -&gt; next = third;                   <span class="hljs-comment">// 将原来偶数位节点之后的节点置于奇数位节点之后</span><br>            cur = first;                             <span class="hljs-comment">// 移动cur指针</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> dummyHead -&gt; next;                    <span class="hljs-comment">// 返回真表头</span><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>对链表进行遍历，时间复杂度为<span
 class="math inline">\(O(n)\)</span>；使用了常数个额外变量，空间复杂度为<span
 class="math inline">\(O(1)\)</span>。</p>
@@ -97,33 +70,7 @@ class="math inline">\((n -
 1)\)</span>步，举个例子，如果要删除倒数第2个节点，当fast指向末尾节点时，slow指向的是fast前的一个节点，此时fast和slow之间的步数差距不是2，而是1。</p>
 <p>为了能在单链表中正确删除给定位置的节点，还可以让fast在寻找末尾的时候少走一步，这样fast和slow指针一起移动结束之时，slow指针指向的是要被删除的节点之前的节点，便于进行链表操作。</p>
 <h3 id="解法-1">解法</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">&#x2F;**
- * Definition for singly-linked list.
- * struct ListNode &#123;
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) &#123;&#125;
- *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;
- *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-public:
-    ListNode* removeNthFromEnd(ListNode* head, int n) &#123;
-        ListNode* dummyHead &#x3D; new ListNode(0, head);                    &#x2F;&#x2F; 利用构造函数声明一个假表头并让其next指针指向head节点
-        ListNode* slow &#x3D; dummyHead, *fast &#x3D; dummyHead;                  &#x2F;&#x2F; 快慢指针
-        n--;                                                            &#x2F;&#x2F; 计算步数差
-        while (n-- &amp;&amp; fast !&#x3D; NULL) fast &#x3D; fast -&gt; next;                &#x2F;&#x2F; 让fast指针先走
-        while (fast -&gt; next !&#x3D; NULL &amp;&amp; fast -&gt; next -&gt; next !&#x3D; NULL) &#123;  &#x2F;&#x2F; 当fast指针在倒数第二个节点的时候就停下来，这样slow就在要删除的节点的上一个节点停下来了
-            fast &#x3D; fast -&gt; next;                                        &#x2F;&#x2F; slow和fast指针同时前进
-            slow &#x3D; slow -&gt; next;
-        &#125;
-        ListNode* toDel &#x3D; slow -&gt; next;                                 &#x2F;&#x2F; 根据上面的思路，此时slow节点的next指针指向的就是要删除的节点，在此标注
-        slow -&gt; next &#x3D; toDel -&gt; next;                                   &#x2F;&#x2F; 将slow节点的next指针指向要删除的节点的下一个节点，将要删除的节点剥离链表
-        delete toDel;                                                   &#x2F;&#x2F; 释放删除的节点的内存空间
-        return dummyHead -&gt; next;                                       &#x2F;&#x2F; 返回真表头
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * struct ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode *next;</span><br><span class="hljs-comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">removeNthFromEnd</span><span class="hljs-params">(ListNode* head, <span class="hljs-type">int</span> n)</span> </span>&#123;<br>        ListNode* dummyHead = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>, head);                    <span class="hljs-comment">// 利用构造函数声明一个假表头并让其next指针指向head节点</span><br>        ListNode* slow = dummyHead, *fast = dummyHead;                  <span class="hljs-comment">// 快慢指针</span><br>        n--;                                                            <span class="hljs-comment">// 计算步数差</span><br>        <span class="hljs-keyword">while</span> (n-- &amp;&amp; fast != <span class="hljs-literal">NULL</span>) fast = fast -&gt; next;                <span class="hljs-comment">// 让fast指针先走</span><br>        <span class="hljs-keyword">while</span> (fast -&gt; next != <span class="hljs-literal">NULL</span> &amp;&amp; fast -&gt; next -&gt; next != <span class="hljs-literal">NULL</span>) &#123;  <span class="hljs-comment">// 当fast指针在倒数第二个节点的时候就停下来，这样slow就在要删除的节点的上一个节点停下来了</span><br>            fast = fast -&gt; next;                                        <span class="hljs-comment">// slow和fast指针同时前进</span><br>            slow = slow -&gt; next;<br>        &#125;<br>        ListNode* toDel = slow -&gt; next;                                 <span class="hljs-comment">// 根据上面的思路，此时slow节点的next指针指向的就是要删除的节点，在此标注</span><br>        slow -&gt; next = toDel -&gt; next;                                   <span class="hljs-comment">// 将slow节点的next指针指向要删除的节点的下一个节点，将要删除的节点剥离链表</span><br>        <span class="hljs-keyword">delete</span> toDel;                                                   <span class="hljs-comment">// 释放删除的节点的内存空间</span><br>        <span class="hljs-keyword">return</span> dummyHead -&gt; next;                                       <span class="hljs-comment">// 返回真表头</span><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>上面的这个代码实现和代码随想录里的C++代码实现有些许的不同，主要区别是在如何处理fast指针的位置，使得slow指针能够停留在要删除的节点的上一个节点处。代码随想录里的做法循环的跳出条件是，fast为空时，slow指针要指向被删除节点的上一个节点，所以fast指针不仅要比slow指针多走n步，甚至还要再多1步；而上面的实现中，fast指针最终停在了末尾节点的上一个节点。作用是一样的。</p>
 <p>上面的实现中，时间复杂度为<span
 class="math inline">\(O(n)\)</span>，空间复杂度为<span
@@ -140,40 +87,7 @@ target="_blank" rel="noopener" href="https://programmercarl.com/%E9%9D%A2%E8%AF%
 <h3 id="自己的想法-2">自己的想法</h3>
 <p>先通过遍历两个链表，获得两个链表分别的长度，再让长链表的遍历指针先走等于长度差的步数，接着让长短链表的遍历指针同时移动，当这两个指针指向同一个节点时，就找到了重合相交部分的起始节点。</p>
 <h3 id="解法-2">解法</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">&#x2F;**
- * Definition for singly-linked list.
- * struct ListNode &#123;
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-public:
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) &#123;
-        ListNode *dummyA &#x3D; headA, *dummyB &#x3D; headB;      &#x2F;&#x2F; 假表头
-        ListNode *curA &#x3D; dummyA, *curB &#x3D; dummyB;        &#x2F;&#x2F; 用来计算长度的遍历指针
-        int lengthA &#x3D; 0, lengthB &#x3D; 0;                   &#x2F;&#x2F; 长度的变量
-        while (curA !&#x3D; NULL &amp;&amp; curA -&gt; next !&#x3D; NULL) &#123;  &#x2F;&#x2F; 查A的长度
-            curA &#x3D; curA -&gt; next;
-            lengthA++;
-        &#125;
-        while (curB !&#x3D; NULL &amp;&amp; curB -&gt; next !&#x3D; NULL) &#123;  &#x2F;&#x2F; 查B的长度
-            curB &#x3D; curB -&gt; next;
-            lengthB++;
-        &#125;
-        ListNode *curLongerList &#x3D; lengthA &gt;&#x3D; lengthB ? dummyA : dummyB;             &#x2F;&#x2F; 根据长度对比，分别确定长链表和锻炼表
-        ListNode *curShorterList &#x3D; lengthA &lt; lengthB ? dummyA : dummyB;
-        int steps &#x3D; lengthA &gt;&#x3D; lengthB ? (lengthA - lengthB) : (lengthB - lengthA); &#x2F;&#x2F; 计算步数差
-        while (steps--) curLongerList &#x3D; curLongerList -&gt; next;                      &#x2F;&#x2F; 长链表先走
-        while (curLongerList &amp;&amp; curShorterList) &#123;                                   &#x2F;&#x2F; 长短链表遍历指针同时移动
-            if (curLongerList &#x3D;&#x3D; curShorterList) return curLongerList;              &#x2F;&#x2F; 当两条链表的遍历指针指向同一个节点时，返回该节点指针
-            curLongerList &#x3D; curLongerList -&gt; next;                                  &#x2F;&#x2F; 否则，两个指针继续移动
-            curShorterList &#x3D; curShorterList -&gt; next;
-        &#125;
-        return NULL;                                &#x2F;&#x2F; 如果一直没有指向同一个节点，证明两链表无相交部分
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * struct ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode *next;</span><br><span class="hljs-comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode *<span class="hljs-title">getIntersectionNode</span><span class="hljs-params">(ListNode *headA, ListNode *headB)</span> </span>&#123;<br>        ListNode *dummyA = headA, *dummyB = headB;      <span class="hljs-comment">// 假表头</span><br>        ListNode *curA = dummyA, *curB = dummyB;        <span class="hljs-comment">// 用来计算长度的遍历指针</span><br>        <span class="hljs-type">int</span> lengthA = <span class="hljs-number">0</span>, lengthB = <span class="hljs-number">0</span>;                   <span class="hljs-comment">// 长度的变量</span><br>        <span class="hljs-keyword">while</span> (curA != <span class="hljs-literal">NULL</span> &amp;&amp; curA -&gt; next != <span class="hljs-literal">NULL</span>) &#123;  <span class="hljs-comment">// 查A的长度</span><br>            curA = curA -&gt; next;<br>            lengthA++;<br>        &#125;<br>        <span class="hljs-keyword">while</span> (curB != <span class="hljs-literal">NULL</span> &amp;&amp; curB -&gt; next != <span class="hljs-literal">NULL</span>) &#123;  <span class="hljs-comment">// 查B的长度</span><br>            curB = curB -&gt; next;<br>            lengthB++;<br>        &#125;<br>        ListNode *curLongerList = lengthA &gt;= lengthB ? dummyA : dummyB;             <span class="hljs-comment">// 根据长度对比，分别确定长链表和锻炼表</span><br>        ListNode *curShorterList = lengthA &lt; lengthB ? dummyA : dummyB;<br>        <span class="hljs-type">int</span> steps = lengthA &gt;= lengthB ? (lengthA - lengthB) : (lengthB - lengthA); <span class="hljs-comment">// 计算步数差</span><br>        <span class="hljs-keyword">while</span> (steps--) curLongerList = curLongerList -&gt; next;                      <span class="hljs-comment">// 长链表先走</span><br>        <span class="hljs-keyword">while</span> (curLongerList &amp;&amp; curShorterList) &#123;                                   <span class="hljs-comment">// 长短链表遍历指针同时移动</span><br>            <span class="hljs-keyword">if</span> (curLongerList == curShorterList) <span class="hljs-keyword">return</span> curLongerList;              <span class="hljs-comment">// 当两条链表的遍历指针指向同一个节点时，返回该节点指针</span><br>            curLongerList = curLongerList -&gt; next;                                  <span class="hljs-comment">// 否则，两个指针继续移动</span><br>            curShorterList = curShorterList -&gt; next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;                                <span class="hljs-comment">// 如果一直没有指向同一个节点，证明两链表无相交部分</span><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>和代码随想录上的C++实现也还是有些许的差别，主要是在确定长短链表那里。</p>
 <p>上面的实现遍历了两次链表，时间复杂度为<span class="math inline">\(O(2
 * n) = O(n)\)</span>，使用了常数个变量，空间复杂度为<span
@@ -219,32 +133,7 @@ class="math inline">\((x + y)\)</span>。由上面的式子可得：</p>
 <p>即此时新指针与慢指针的差距为环形结构的长度的<span
 class="math inline">\(n\)</span>倍，在新指针与慢指针同时一步一步前进的条件下，两者最终还是会在环装结构入口处相遇。</p>
 <h3 id="解法-3">解法</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">&#x2F;**
- * Definition for singly-linked list.
- * struct ListNode &#123;
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-public:
-    ListNode *detectCycle(ListNode *head) &#123;
-        ListNode *fast &#x3D; head, *slow &#x3D; head;
-        while (fast !&#x3D; NULL &amp;&amp; fast -&gt; next !&#x3D; NULL) &#123;
-            slow &#x3D; slow -&gt; next;
-            fast &#x3D; fast -&gt; next -&gt; next;
-            if (slow &#x3D;&#x3D; fast) break;
-        &#125;
-        if (fast &#x3D;&#x3D; NULL || fast -&gt; next &#x3D;&#x3D; NULL) return NULL;
-        ListNode *prob &#x3D; head;
-        while (prob !&#x3D; slow) &#123;
-            prob &#x3D; prob -&gt; next;
-            slow &#x3D; slow -&gt; next;
-        &#125;
-        return prob;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * struct ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode *next;</span><br><span class="hljs-comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode *<span class="hljs-title">detectCycle</span><span class="hljs-params">(ListNode *head)</span> </span>&#123;<br>        ListNode *fast = head, *slow = head;<br>        <span class="hljs-keyword">while</span> (fast != <span class="hljs-literal">NULL</span> &amp;&amp; fast -&gt; next != <span class="hljs-literal">NULL</span>) &#123;<br>            slow = slow -&gt; next;<br>            fast = fast -&gt; next -&gt; next;<br>            <span class="hljs-keyword">if</span> (slow == fast) <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (fast == <span class="hljs-literal">NULL</span> || fast -&gt; next == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>        ListNode *prob = head;<br>        <span class="hljs-keyword">while</span> (prob != slow) &#123;<br>            prob = prob -&gt; next;<br>            slow = slow -&gt; next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> prob;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>不知道怎么说这个时间复杂度为好。。。空间复杂度为<span
 class="math inline">\(O(1)\)</span>。</p>
 <h2 id="链表总结">链表总结</h2>

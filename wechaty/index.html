@@ -66,19 +66,7 @@ Leancloud、Heroku 容器等，减少服务器的开支）</li>
 <p><img src="img-4425.jpg" alt="img-4425.jpg" /> <img src="img-4418.jpg"
 alt="img-4418.jpg" /></p>
 <h2 id="项目结构">项目结构</h2>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">|</span>-- wechaty-xiaowang
-    <span class="token operator">|</span>-- index.js  //主程序
-    <span class="token operator">|</span>-- package-lock.json
-    <span class="token operator">|</span>-- package.json
-    <span class="token operator">|</span>-- puppet-config.js  //pupet参数
-    <span class="token operator">|</span>-- serverchan.js  //通过方糖报告错误
-    <span class="token operator">|</span>-- tulingbot.js   //图灵机器人
-    <span class="token operator">|</span>-- cloudFunctions // 运行在腾讯云上的云函数爬虫
-        <span class="token operator">|</span>-- dailyEnglishTest  //英语每日一题
-        <span class="token operator">|</span>-- dailySentence   //英语每日一句
-        <span class="token operator">|</span>-- moringNews  //每日早报
-        <span class="token operator">|</span>-- rainDetection   //降雨提醒
-        <span class="token operator">|</span>-- weatherTip  //早晨问好，及天气预报<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">|-- wechaty-xiaowang<br>    |-- index.js  //主程序<br>    |-- package-lock.json<br>    |-- package.json<br>    |-- puppet-config.js  //pupet参数<br>    |-- serverchan.js  //通过方糖报告错误<br>    |-- tulingbot.js   //图灵机器人<br>    |-- cloudFunctions // 运行在腾讯云上的云函数爬虫<br>        |-- dailyEnglishTest  //英语每日一题<br>        |-- dailySentence   //英语每日一句<br>        |-- moringNews  //每日早报<br>        |-- rainDetection   //降雨提醒<br>        |-- weatherTip  //早晨问好，及天气预报<br></code></pre></td></tr></table></figure>
 <h2 id="架构说明">架构说明</h2>
 <ul>
 <li>服务器端 Express + Wechaty 开放一个 HTTP 接口用于访问，传入 HTTP
@@ -92,8 +80,7 @@ alt="img-4418.jpg" /></p>
 <li>上传至服务器</li>
 <li>在其目录下，获取所有用到的 NPM 包</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i<br><br></code></pre></td></tr></table></figure>
 <ul>
 <li>使用<code>node index.js</code>命令，启动wechaty，并扫码登录</li>
 <li>（可选）调试好之后，可选择使用pm2等工具维持wechaty的运行</li>

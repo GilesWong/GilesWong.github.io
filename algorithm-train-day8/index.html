@@ -51,17 +51,7 @@ class="math inline">\(O(1)\)</span>的空间意味着，对于字符串的逆转
 <p>因为本题的关键点就在于逆转操作，故不可以直接使用reverse函数完成。</p>
 <p>使用双指针法，将左右指针分别指向字符串的起始位置和末尾，交换两个指针指向的字符，并将指针向中间靠拢。</p>
 <h3 id="解法">解法</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    void reverseString(vector&lt;char&gt;&amp; s) &#123;
-        int left &#x3D; 0, right &#x3D; s.size() - 1;     &#x2F;&#x2F; 初始化左右指针
-        while (left &lt; right) &#123;                  &#x2F;&#x2F; 左右指针结束循环条件
-            swap(s[left], s[right]);            &#x2F;&#x2F; 交换左右指针的值
-            left++;                             &#x2F;&#x2F; 左右指针分别向中间移动
-            right--;
-        &#125;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">reverseString</span><span class="hljs-params">(vector&lt;<span class="hljs-type">char</span>&gt;&amp; s)</span> </span>&#123;<br>        <span class="hljs-type">int</span> left = <span class="hljs-number">0</span>, right = s.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>;     <span class="hljs-comment">// 初始化左右指针</span><br>        <span class="hljs-keyword">while</span> (left &lt; right) &#123;                  <span class="hljs-comment">// 左右指针结束循环条件</span><br>            <span class="hljs-built_in">swap</span>(s[left], s[right]);            <span class="hljs-comment">// 交换左右指针的值</span><br>            left++;                             <span class="hljs-comment">// 左右指针分别向中间移动</span><br>            right--;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>时间复杂度为<span
 class="math inline">\(O(n)\)</span>，空间复杂度为<span
 class="math inline">\(O(1)\)</span>。</p>
@@ -77,19 +67,7 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0541.%E5%8F%8D%E
 <h3 id="自己的想法-1">自己的想法</h3>
 <p>使用一个for循环来确定每2k个字符所形成的字符串的左侧起始区间，判断自该位置起始的剩余字符串的长度是否大于等于k，若大于等于k，则翻转自该位置起的k个字符所形成的字符串；若剩余长度小于k，则翻转剩余字符。</p>
 <h3 id="解法-1">解法</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    string reverseStr(string s, int k) &#123;
-        for (int i &#x3D; 0; i &lt; s.size(); i +&#x3D; 2 * k) &#123;         &#x2F;&#x2F; 确定每2k个字符形成的字符串的起始位置
-            if (i + k &lt;&#x3D; s.size()) &#123;                        &#x2F;&#x2F; 若剩余字符个数大于等于k
-                reverse(s.begin() + i, s.begin() + i + k);  &#x2F;&#x2F; 翻转k个字符
-            &#125; else &#123;                                        &#x2F;&#x2F; 否则就翻转剩下的字符
-                reverse(s.begin() + i, s.end());
-            &#125;
-        &#125;
-        return s;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">string <span class="hljs-title">reverseStr</span><span class="hljs-params">(string s, <span class="hljs-type">int</span> k)</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-built_in">size</span>(); i += <span class="hljs-number">2</span> * k) &#123;         <span class="hljs-comment">// 确定每2k个字符形成的字符串的起始位置</span><br>            <span class="hljs-keyword">if</span> (i + k &lt;= s.<span class="hljs-built_in">size</span>()) &#123;                        <span class="hljs-comment">// 若剩余字符个数大于等于k</span><br>                <span class="hljs-built_in">reverse</span>(s.<span class="hljs-built_in">begin</span>() + i, s.<span class="hljs-built_in">begin</span>() + i + k);  <span class="hljs-comment">// 翻转k个字符</span><br>            &#125; <span class="hljs-keyword">else</span> &#123;                                        <span class="hljs-comment">// 否则就翻转剩下的字符</span><br>                <span class="hljs-built_in">reverse</span>(s.<span class="hljs-built_in">begin</span>() + i, s.<span class="hljs-built_in">end</span>());<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> s;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="剑指offer-05.替换空格">剑指Offer 05.替换空格</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/%E5%89%91%E6%8C%87Offer05.%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC.html">代码随想录链接</a></p>
@@ -107,44 +85,9 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0027.%E7%A7%BB%E
 '2', '%'；若遇见空格之外的字符，则直接拷贝至指针B指向的位置。</p>
 <h3 id="解法一">解法一</h3>
 <p>暴力法</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    string replaceSpace(string s) &#123;
-        string result;
-        for (char c: s) &#123;
-            if (c &#x3D;&#x3D; &#39; &#39;) &#123;
-                result.append(&quot;%20&quot;);
-            &#125; else result.push_back(c);
-        &#125;
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">string <span class="hljs-title">replaceSpace</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        string result;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c: s) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27; &#x27;</span>) &#123;<br>                result.<span class="hljs-built_in">append</span>(<span class="hljs-string">&quot;%20&quot;</span>);<br>            &#125; <span class="hljs-keyword">else</span> result.<span class="hljs-built_in">push_back</span>(c);<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h3 id="解法二">解法二</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    string replaceSpace(string s) &#123;
-        int blankCount &#x3D; 0;
-        for (char c: s) &#123;           &#x2F;&#x2F; 统计空格的个数
-            if (c &#x3D;&#x3D; &#39; &#39;) &#123;
-                blankCount++;
-            &#125; 
-        &#125;
-        int oldPointer &#x3D; s.size() - 1;                  &#x2F;&#x2F; 指针A指向原字符串的末尾
-        s.resize(2 * blankCount + s.size());            &#x2F;&#x2F; 扩展字符串至替换后应该有的长度
-        int newPointer &#x3D; s.size() - 1;                  &#x2F;&#x2F; 指针B指向新字符串的末尾
-        while (blankCount) &#123;                            &#x2F;&#x2F; 当空格没有被替换完毕时
-            if (s[oldPointer] &#x3D;&#x3D; &#39; &#39;) &#123;                 &#x2F;&#x2F; 如果指针A遇到了一个空格
-                s[newPointer--] &#x3D; &#39;0&#39;;                  &#x2F;&#x2F; 依次插入替换的字符
-                s[newPointer--] &#x3D; &#39;2&#39;;
-                s[newPointer--] &#x3D; &#39;%&#39;;
-                blankCount--;                           &#x2F;&#x2F; 空格计数器减1
-                oldPointer--;                           &#x2F;&#x2F; 指针A向前移动
-            &#125; else s[newPointer--] &#x3D; s[oldPointer--];   &#x2F;&#x2F; 遇到的不是空格，就直接拷贝原字符
-        &#125;
-
-        return s;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">string <span class="hljs-title">replaceSpace</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        <span class="hljs-type">int</span> blankCount = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c: s) &#123;           <span class="hljs-comment">// 统计空格的个数</span><br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27; &#x27;</span>) &#123;<br>                blankCount++;<br>            &#125; <br>        &#125;<br>        <span class="hljs-type">int</span> oldPointer = s.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>;                  <span class="hljs-comment">// 指针A指向原字符串的末尾</span><br>        s.<span class="hljs-built_in">resize</span>(<span class="hljs-number">2</span> * blankCount + s.<span class="hljs-built_in">size</span>());            <span class="hljs-comment">// 扩展字符串至替换后应该有的长度</span><br>        <span class="hljs-type">int</span> newPointer = s.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>;                  <span class="hljs-comment">// 指针B指向新字符串的末尾</span><br>        <span class="hljs-keyword">while</span> (blankCount) &#123;                            <span class="hljs-comment">// 当空格没有被替换完毕时</span><br>            <span class="hljs-keyword">if</span> (s[oldPointer] == <span class="hljs-string">&#x27; &#x27;</span>) &#123;                 <span class="hljs-comment">// 如果指针A遇到了一个空格</span><br>                s[newPointer--] = <span class="hljs-string">&#x27;0&#x27;</span>;                  <span class="hljs-comment">// 依次插入替换的字符</span><br>                s[newPointer--] = <span class="hljs-string">&#x27;2&#x27;</span>;<br>                s[newPointer--] = <span class="hljs-string">&#x27;%&#x27;</span>;<br>                blankCount--;                           <span class="hljs-comment">// 空格计数器减1</span><br>                oldPointer--;                           <span class="hljs-comment">// 指针A向前移动</span><br>            &#125; <span class="hljs-keyword">else</span> s[newPointer--] = s[oldPointer--];   <span class="hljs-comment">// 遇到的不是空格，就直接拷贝原字符</span><br>        &#125;<br><br>        <span class="hljs-keyword">return</span> s;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>时间复杂度为<span
 class="math inline">\(O(n)\)</span>，空间复杂度为<span
 class="math inline">\(O(1)\)</span>。</p>
@@ -161,34 +104,7 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0151.%E7%BF%BB%E
 <p>字符串中的一些部分翻转而另外一些保持原形，就可以考虑使用先整体翻转再部分翻转来解决。</p>
 <p>在这个题目中，可以先去除多余的空格，再将整个字符串翻转，最后再以单词为分区，进行分区内的翻转。</p>
 <h3 id="解法-2">解法</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    string reverseWords(string s) &#123;
-        int fast &#x3D; 0, slow &#x3D; 0;                                     &#x2F;&#x2F; 同27.移除元素，使用双指针法移除元素
-        while (s[fast] &#x3D;&#x3D; &#39; &#39; &amp;&amp; fast &lt; s.size()) fast++;           &#x2F;&#x2F; 移除开头的空格
-        while (fast &lt; s.size()) &#123;                                   &#x2F;&#x2F; 每碰见一个空格，就像慢指针的位置写入一个空格，并将快指针移至下一个不为空格的位置
-            if (s[fast] &#x3D;&#x3D; &#39; &#39;) &#123;
-                s[slow++] &#x3D; &#39; &#39;;
-                while (s[fast] &#x3D;&#x3D; &#39; &#39; &amp;&amp; fast &lt; s.size()) fast++;
-            &#125; else &#123;
-                s[slow++] &#x3D; s[fast++];                              &#x2F;&#x2F; fast指针不指向空格时，拷贝fast指针指向的内容至slow指针
-            &#125;
-        &#125;
-        if (s[slow - 1] &#x3D;&#x3D; &#39; &#39;) &#123;                                   &#x2F;&#x2F; 去除末尾可能多出来的一个空格
-            slow--;
-        &#125;
-        s.resize(slow);                                             &#x2F;&#x2F; 调整s的大小，该大小为去除多余空格之后的字符串大小
-        reverse(s.begin(), s.end());                                &#x2F;&#x2F; 翻转整个字符串
-        int start &#x3D; 0;                                              &#x2F;&#x2F; 标记每个单词的起始位置
-        for (int i &#x3D; 0; i &lt;&#x3D; s.size(); i++) &#123;                       &#x2F;&#x2F; 遍历字符串，找单词之间的空格
-            if (i &#x3D;&#x3D; s.size() || s[i] &#x3D;&#x3D; &#39; &#39;) &#123;                     &#x2F;&#x2F; 遇到了空格或者字符串末尾
-                reverse(s.begin() + start, s.begin() + i);          &#x2F;&#x2F; 翻转[start, i)区间的字符串
-                start &#x3D; i + 1;                                      &#x2F;&#x2F; 移动单词起始位置至空格后的字符
-            &#125;
-        &#125;
-        return s;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">string <span class="hljs-title">reverseWords</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        <span class="hljs-type">int</span> fast = <span class="hljs-number">0</span>, slow = <span class="hljs-number">0</span>;                                     <span class="hljs-comment">// 同27.移除元素，使用双指针法移除元素</span><br>        <span class="hljs-keyword">while</span> (s[fast] == <span class="hljs-string">&#x27; &#x27;</span> &amp;&amp; fast &lt; s.<span class="hljs-built_in">size</span>()) fast++;           <span class="hljs-comment">// 移除开头的空格</span><br>        <span class="hljs-keyword">while</span> (fast &lt; s.<span class="hljs-built_in">size</span>()) &#123;                                   <span class="hljs-comment">// 每碰见一个空格，就像慢指针的位置写入一个空格，并将快指针移至下一个不为空格的位置</span><br>            <span class="hljs-keyword">if</span> (s[fast] == <span class="hljs-string">&#x27; &#x27;</span>) &#123;<br>                s[slow++] = <span class="hljs-string">&#x27; &#x27;</span>;<br>                <span class="hljs-keyword">while</span> (s[fast] == <span class="hljs-string">&#x27; &#x27;</span> &amp;&amp; fast &lt; s.<span class="hljs-built_in">size</span>()) fast++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                s[slow++] = s[fast++];                              <span class="hljs-comment">// fast指针不指向空格时，拷贝fast指针指向的内容至slow指针</span><br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (s[slow - <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27; &#x27;</span>) &#123;                                   <span class="hljs-comment">// 去除末尾可能多出来的一个空格</span><br>            slow--;<br>        &#125;<br>        s.<span class="hljs-built_in">resize</span>(slow);                                             <span class="hljs-comment">// 调整s的大小，该大小为去除多余空格之后的字符串大小</span><br>        <span class="hljs-built_in">reverse</span>(s.<span class="hljs-built_in">begin</span>(), s.<span class="hljs-built_in">end</span>());                                <span class="hljs-comment">// 翻转整个字符串</span><br>        <span class="hljs-type">int</span> start = <span class="hljs-number">0</span>;                                              <span class="hljs-comment">// 标记每个单词的起始位置</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= s.<span class="hljs-built_in">size</span>(); i++) &#123;                       <span class="hljs-comment">// 遍历字符串，找单词之间的空格</span><br>            <span class="hljs-keyword">if</span> (i == s.<span class="hljs-built_in">size</span>() || s[i] == <span class="hljs-string">&#x27; &#x27;</span>) &#123;                     <span class="hljs-comment">// 遇到了空格或者字符串末尾</span><br>                <span class="hljs-built_in">reverse</span>(s.<span class="hljs-built_in">begin</span>() + start, s.<span class="hljs-built_in">begin</span>() + i);          <span class="hljs-comment">// 翻转[start, i)区间的字符串</span><br>                start = i + <span class="hljs-number">1</span>;                                      <span class="hljs-comment">// 移动单词起始位置至空格后的字符</span><br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> s;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="剑指-offer-58-ii.左旋转字符串">剑指 Offer
 58-II.左旋转字符串</h2>
 <p><a
@@ -205,15 +121,7 @@ target="_blank" rel="noopener" href="https://programmercarl.com/%E5%89%91%E6%8C%
 class="math inline">\([0, size - k)\)</span>区间的字符，最后反转<span
 class="math inline">\([size - k, size)\)</span>部分即可。</p>
 <h3 id="解法-3">解法</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    string reverseLeftWords(string s, int n) &#123;
-        reverse(s.begin(), s.end());            &#x2F;&#x2F; 翻转整个字符串
-        reverse(s.begin(), s.end() - n);        &#x2F;&#x2F; 翻转[0, size - k)
-        reverse(s.end() - n, s.end());          &#x2F;&#x2F; 翻转[size - k, size)
-        return s;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">string <span class="hljs-title">reverseLeftWords</span><span class="hljs-params">(string s, <span class="hljs-type">int</span> n)</span> </span>&#123;<br>        <span class="hljs-built_in">reverse</span>(s.<span class="hljs-built_in">begin</span>(), s.<span class="hljs-built_in">end</span>());            <span class="hljs-comment">// 翻转整个字符串</span><br>        <span class="hljs-built_in">reverse</span>(s.<span class="hljs-built_in">begin</span>(), s.<span class="hljs-built_in">end</span>() - n);        <span class="hljs-comment">// 翻转[0, size - k)</span><br>        <span class="hljs-built_in">reverse</span>(s.<span class="hljs-built_in">end</span>() - n, s.<span class="hljs-built_in">end</span>());          <span class="hljs-comment">// 翻转[size - k, size)</span><br>        <span class="hljs-keyword">return</span> s;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 </div><div class="article-licensing box"><div class="licensing-title"><p>代码随想录算法训练营第8天 | 344.反转字符串，541.反转字符串II，剑指Offer 05.替换空格，151.翻转字符串里的单词，剑指Offer58-II.左旋转字符串</p><p><a href="http://wwg.xyz/algorithm-train-day8/">http://wwg.xyz/algorithm-train-day8/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-02-22</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-03-13</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">代码随想录</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/algorithm-train-day9/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">代码随想录算法训练营第9天 | 28.实现 strStr()，459.重复的子字符串，字符串总结，双指针回顾</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm-train-day7/"><span class="level-item">代码随想录算法训练营第7天 | 454.四数相加II，383. 赎金信，15.三数之和，18.四数之和，哈希总结</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
             id: "14bef1052a40719c6ce824db526326cb",
             repo: "GilesWong.github.io",

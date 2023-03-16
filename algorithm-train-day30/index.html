@@ -51,82 +51,9 @@ target="_blank" rel="noopener" href="https://leetcode.cn/problems/reconstruct-it
 <p>看了卡哥的思路才发现好像不用写那么麻烦hhh.</p>
 <h3 id="题解">题解</h3>
 <p>自己的写法: (过了部分测试样例)</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">bool cmp(const vector&lt;string&gt; &amp;a, const vector&lt;string&gt; &amp;b) &#123;
-    for (int i &#x3D; 0; i &lt; b.size(); i++) &#123;
-        if (a[i] &#x3D;&#x3D; b[i]) continue;
-        return a[i] &lt; b[i];
-    &#125;
-    return false;
-&#125;
-
-class Solution &#123;
-private:
-    vector&lt;vector&lt;string&gt;&gt; possibleSolution;
-    vector&lt;string&gt; path;
-    int ticketUsed &#x3D; 0;
-    int totalTickets;
-    void backtracing(vector&lt;vector&lt;string&gt;&gt; &amp;tickets, vector&lt;bool&gt; &amp;used, string airport) &#123;
-        if (ticketUsed &#x3D;&#x3D; tickets.size()) &#123;
-            possibleSolution.push_back(path);
-            return;
-        &#125;
-
-        for (int i &#x3D; 0; i &lt; tickets.size(); i++) &#123;
-            if (tickets[i][0] &#x3D;&#x3D; airport &amp;&amp; !used[i]) &#123;
-                used[i] &#x3D; true;
-                ticketUsed++;
-                path.push_back(tickets[i][1]);
-                backtracing(tickets, used, tickets[i][1]);
-                used[i] &#x3D; false;
-                ticketUsed--;
-                path.pop_back();
-            &#125;
-        &#125;
-    &#125;
-
-public:
-    vector&lt;string&gt; findItinerary(vector&lt;vector&lt;string&gt;&gt;&amp; tickets) &#123;
-        this -&gt; totalTickets &#x3D; tickets.size();
-        vector&lt;bool&gt; used(tickets.size(), false);
-        path.push_back(&quot;JFK&quot;);
-        backtracing(tickets, used, &quot;JFK&quot;);
-        sort(possibleSolution.begin(), possibleSolution.end(), cmp);
-        return possibleSolution[0];
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-type">const</span> vector&lt;string&gt; &amp;a, <span class="hljs-type">const</span> vector&lt;string&gt; &amp;b)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; b.<span class="hljs-built_in">size</span>(); i++) &#123;<br>        <span class="hljs-keyword">if</span> (a[i] == b[i]) <span class="hljs-keyword">continue</span>;<br>        <span class="hljs-keyword">return</span> a[i] &lt; b[i];<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    vector&lt;vector&lt;string&gt;&gt; possibleSolution;<br>    vector&lt;string&gt; path;<br>    <span class="hljs-type">int</span> ticketUsed = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> totalTickets;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracing</span><span class="hljs-params">(vector&lt;vector&lt;string&gt;&gt; &amp;tickets, vector&lt;<span class="hljs-type">bool</span>&gt; &amp;used, string airport)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (ticketUsed == tickets.<span class="hljs-built_in">size</span>()) &#123;<br>            possibleSolution.<span class="hljs-built_in">push_back</span>(path);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; tickets.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">if</span> (tickets[i][<span class="hljs-number">0</span>] == airport &amp;&amp; !used[i]) &#123;<br>                used[i] = <span class="hljs-literal">true</span>;<br>                ticketUsed++;<br>                path.<span class="hljs-built_in">push_back</span>(tickets[i][<span class="hljs-number">1</span>]);<br>                <span class="hljs-built_in">backtracing</span>(tickets, used, tickets[i][<span class="hljs-number">1</span>]);<br>                used[i] = <span class="hljs-literal">false</span>;<br>                ticketUsed--;<br>                path.<span class="hljs-built_in">pop_back</span>();<br>            &#125;<br>        &#125;<br>    &#125;<br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;string&gt; <span class="hljs-title">findItinerary</span><span class="hljs-params">(vector&lt;vector&lt;string&gt;&gt;&amp; tickets)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span> -&gt; totalTickets = tickets.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">used</span><span class="hljs-params">(tickets.size(), <span class="hljs-literal">false</span>)</span></span>;<br>        path.<span class="hljs-built_in">push_back</span>(<span class="hljs-string">&quot;JFK&quot;</span>);<br>        <span class="hljs-built_in">backtracing</span>(tickets, used, <span class="hljs-string">&quot;JFK&quot;</span>);<br>        <span class="hljs-built_in">sort</span>(possibleSolution.<span class="hljs-built_in">begin</span>(), possibleSolution.<span class="hljs-built_in">end</span>(), cmp);<br>        <span class="hljs-keyword">return</span> possibleSolution[<span class="hljs-number">0</span>];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>AC了的代码:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private:
-    unordered_map&lt;string, map&lt;string, int&gt;&gt; targets;    &#x2F;&#x2F; 使用这个结构来存储两个机场之间还剩几张机票, 后面使用map可以使得key按从小到大顺序存储, 不用再额外处理多个结果去字典排序最小的情况
-    bool backtracing(int ticketNum, vector&lt;string&gt; &amp;result) &#123;
-        if (result.size() &#x3D;&#x3D; ticketNum + 1) &#123;   &#x2F;&#x2F; result个数等于机场票数+1时证明用完了所有机票, 保存结果
-            return true;
-        &#125;
-
-        for (pair&lt;const string, int&gt; &amp;target : targets[result.back()]) &#123; &#x2F;&#x2F; 取当前机场出发的机票, 按目的地进行遍历
-            if (target.second &gt; 0) &#123;    &#x2F;&#x2F; 如果到一个目的地还有票没用完
-                result.push_back(target.first); &#x2F;&#x2F; 回溯法开始, 在路径中推入目的地
-                target.second--;    &#x2F;&#x2F; 没用过的票数-1
-                if (backtracing(ticketNum, result)) return true;    &#x2F;&#x2F; 如果纵向递归找到了答案, 就立刻返回
-                result.pop_back();  &#x2F;&#x2F; 否则回溯
-                target.second++;
-            &#125;
-        &#125;
-        return false;   &#x2F;&#x2F; 没找到答案, 结束本层循环
-    &#125;
-
-
-public:
-    vector&lt;string&gt; findItinerary(vector&lt;vector&lt;string&gt;&gt;&amp; tickets) &#123;
-        vector&lt;string&gt; result;
-        for (const vector&lt;string&gt; &amp;vec : tickets) &#123; &#x2F;&#x2F; 根据给定的机票处理来统计机场与机场之间的票数
-            targets[vec[0]][vec[1]]++;
-        &#125;
-        result.push_back(&quot;JFK&quot;);    &#x2F;&#x2F; 按题目要求, 从&quot;JFK&quot;出发
-        backtracing(tickets.size(), result);
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    unordered_map&lt;string, map&lt;string, <span class="hljs-type">int</span>&gt;&gt; targets;    <span class="hljs-comment">// 使用这个结构来存储两个机场之间还剩几张机票, 后面使用map可以使得key按从小到大顺序存储, 不用再额外处理多个结果去字典排序最小的情况</span><br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">backtracing</span><span class="hljs-params">(<span class="hljs-type">int</span> ticketNum, vector&lt;string&gt; &amp;result)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (result.<span class="hljs-built_in">size</span>() == ticketNum + <span class="hljs-number">1</span>) &#123;   <span class="hljs-comment">// result个数等于机场票数+1时证明用完了所有机票, 保存结果</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (pair&lt;<span class="hljs-type">const</span> string, <span class="hljs-type">int</span>&gt; &amp;target : targets[result.<span class="hljs-built_in">back</span>()]) &#123; <span class="hljs-comment">// 取当前机场出发的机票, 按目的地进行遍历</span><br>            <span class="hljs-keyword">if</span> (target.second &gt; <span class="hljs-number">0</span>) &#123;    <span class="hljs-comment">// 如果到一个目的地还有票没用完</span><br>                result.<span class="hljs-built_in">push_back</span>(target.first); <span class="hljs-comment">// 回溯法开始, 在路径中推入目的地</span><br>                target.second--;    <span class="hljs-comment">// 没用过的票数-1</span><br>                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">backtracing</span>(ticketNum, result)) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;    <span class="hljs-comment">// 如果纵向递归找到了答案, 就立刻返回</span><br>                result.<span class="hljs-built_in">pop_back</span>();  <span class="hljs-comment">// 否则回溯</span><br>                target.second++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;   <span class="hljs-comment">// 没找到答案, 结束本层循环</span><br>    &#125;<br><br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;string&gt; <span class="hljs-title">findItinerary</span><span class="hljs-params">(vector&lt;vector&lt;string&gt;&gt;&amp; tickets)</span> </span>&#123;<br>        vector&lt;string&gt; result;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> vector&lt;string&gt; &amp;vec : tickets) &#123; <span class="hljs-comment">// 根据给定的机票处理来统计机场与机场之间的票数</span><br>            targets[vec[<span class="hljs-number">0</span>]][vec[<span class="hljs-number">1</span>]]++;<br>        &#125;<br>        result.<span class="hljs-built_in">push_back</span>(<span class="hljs-string">&quot;JFK&quot;</span>);    <span class="hljs-comment">// 按题目要求, 从&quot;JFK&quot;出发</span><br>        <span class="hljs-built_in">backtracing</span>(tickets.<span class="hljs-built_in">size</span>(), result);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="n皇后">51. N皇后</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0051.N%E7%9A%87%E5%90%8E.html">代码随想录链接</a></p>
@@ -142,48 +69,7 @@ class="math inline">\(n\)</span>个皇后,
 纵向的递归探索下一行, 且只当当前行摆放位置符合要求时,
 才进行纵向递归.</p>
 <h3 id="题解-1">题解</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private: 
-    vector&lt;vector&lt;string&gt;&gt; result;  &#x2F;&#x2F; 保存所有可能的结果
-    void backtracing(int n, int row, vector&lt;string&gt; &amp;board) &#123;
-        if (row &#x3D;&#x3D; n) &#123;     &#x2F;&#x2F; 纵向递归超过了最后一行, 证明前面行都被填写了, 保存结果并结束本次递归
-            result.push_back(board);
-            return;
-        &#125;
-
-        for (int i &#x3D; 0; i &lt; n; i++) &#123;   &#x2F;&#x2F; for循环横向确定本行的皇后要放在哪里
-            if (isPositionAvailable(row, i, n, board)) &#123;    &#x2F;&#x2F; 若遍历到的位置合适, 则进行纵向回溯递归
-                board[row][i] &#x3D; &#39;Q&#39;;
-                backtracing(n, row + 1, board);
-                board[row][i] &#x3D; &#39;.&#39;;
-            &#125;
-        &#125;
-    &#125;
-    bool isPositionAvailable(int x, int y, int n, vector&lt;string&gt; &amp;board) &#123;  &#x2F;&#x2F; 判断给定的位置是否符合摆放一个皇后的要求
-        int curx &#x3D; x, cury &#x3D; y;
-        while (--curx &gt; -1 &amp;&amp; --cury &gt; -1) &#123;    &#x2F;&#x2F; 找左上方的斜线
-            if (board[curx][cury] &#x3D;&#x3D; &#39;Q&#39;) return false;
-        &#125;
-        curx &#x3D; x; cury &#x3D; y;
-        while (--curx &gt; -1 &amp;&amp; ++cury &lt; n) &#123;     &#x2F;&#x2F; 找右上方的斜线
-            if (board[curx][cury] &#x3D;&#x3D; &#39;Q&#39;) return false;
-        &#125;
-        curx &#x3D; -1; cury &#x3D; y;
-        while (++curx &lt; x) &#123;                    &#x2F;&#x2F; 找同一列
-            if (board[curx][cury] &#x3D;&#x3D; &#39;Q&#39;) return false;
-        &#125;
-        return true;
-        &#x2F;**
-         * 为啥不找左下和右下呢, 因为纵向递归还没走到那里, 还没填到那些位置
-         *&#x2F;
-    &#125;
-public:
-    vector&lt;vector&lt;string&gt;&gt; solveNQueens(int n) &#123;
-        vector&lt;string&gt; board(n, string(n, &#39;.&#39;));
-        backtracing(n, 0, board);
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>: <br>    vector&lt;vector&lt;string&gt;&gt; result;  <span class="hljs-comment">// 保存所有可能的结果</span><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtracing</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> row, vector&lt;string&gt; &amp;board)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (row == n) &#123;     <span class="hljs-comment">// 纵向递归超过了最后一行, 证明前面行都被填写了, 保存结果并结束本次递归</span><br>            result.<span class="hljs-built_in">push_back</span>(board);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;   <span class="hljs-comment">// for循环横向确定本行的皇后要放在哪里</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isPositionAvailable</span>(row, i, n, board)) &#123;    <span class="hljs-comment">// 若遍历到的位置合适, 则进行纵向回溯递归</span><br>                board[row][i] = <span class="hljs-string">&#x27;Q&#x27;</span>;<br>                <span class="hljs-built_in">backtracing</span>(n, row + <span class="hljs-number">1</span>, board);<br>                board[row][i] = <span class="hljs-string">&#x27;.&#x27;</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isPositionAvailable</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> n, vector&lt;string&gt; &amp;board)</span> </span>&#123;  <span class="hljs-comment">// 判断给定的位置是否符合摆放一个皇后的要求</span><br>        <span class="hljs-type">int</span> curx = x, cury = y;<br>        <span class="hljs-keyword">while</span> (--curx &gt; <span class="hljs-number">-1</span> &amp;&amp; --cury &gt; <span class="hljs-number">-1</span>) &#123;    <span class="hljs-comment">// 找左上方的斜线</span><br>            <span class="hljs-keyword">if</span> (board[curx][cury] == <span class="hljs-string">&#x27;Q&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        curx = x; cury = y;<br>        <span class="hljs-keyword">while</span> (--curx &gt; <span class="hljs-number">-1</span> &amp;&amp; ++cury &lt; n) &#123;     <span class="hljs-comment">// 找右上方的斜线</span><br>            <span class="hljs-keyword">if</span> (board[curx][cury] == <span class="hljs-string">&#x27;Q&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        curx = <span class="hljs-number">-1</span>; cury = y;<br>        <span class="hljs-keyword">while</span> (++curx &lt; x) &#123;                    <span class="hljs-comment">// 找同一列</span><br>            <span class="hljs-keyword">if</span> (board[curx][cury] == <span class="hljs-string">&#x27;Q&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 为啥不找左下和右下呢, 因为纵向递归还没走到那里, 还没填到那些位置</span><br><span class="hljs-comment">         */</span><br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;string&gt;&gt; <span class="hljs-built_in">solveNQueens</span>(<span class="hljs-type">int</span> n) &#123;<br>        <span class="hljs-function">vector&lt;string&gt; <span class="hljs-title">board</span><span class="hljs-params">(n, string(n, <span class="hljs-string">&#x27;.&#x27;</span>))</span></span>;<br>        <span class="hljs-built_in">backtracing</span>(n, <span class="hljs-number">0</span>, board);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="解数独">37. 解数独</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0037.%E8%A7%A3%E6%95%B0%E7%8B%AC.html">代码随想录链接</a></p>
@@ -197,44 +83,7 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0037.%E8%A7%A3%E
 纵向的递归来找下一个空位填数字, 同样是在填的合适的时候,
 才填并进行递归的, 所以还需要一个函数来判断某个位置填一个数是否可行.</p>
 <h3 id="题解-2">题解</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-    bool backtracing(vector&lt;vector&lt;char&gt;&gt; &amp;board) &#123;
-        for (int i &#x3D; 0; i &lt; board.size(); i++) &#123;
-            for (int j &#x3D; 0; j &lt; board[0].size(); j++) &#123; 
-                if (board[i][j] &#x3D;&#x3D; &#39;.&#39;) &#123;   &#x2F;&#x2F; 找一个空位置
-                    for (char c &#x3D; &#39;1&#39;; c &lt;&#x3D; &#39;9&#39;; c++) &#123; &#x2F;&#x2F; 对这个空位置分别试图填进去不同的数字
-                        if (isPlaceAvailable(i, j, c, board)) &#123; &#x2F;&#x2F; 如果一个数字填到这里合适的话, 就填入并进行递归
-                            board[i][j] &#x3D; c;
-                            if (backtracing(board)) return true;    &#x2F;&#x2F; 找到了一种解法的话就返回true, 停止搜索
-                            board[i][j] &#x3D; &#39;.&#39;;
-                        &#125;
-                    &#125;
-                    return false;   &#x2F;&#x2F; 当前位置没找到合适的数, 返回false
-                &#125;
-            &#125;
-        &#125;
-        return true;    &#x2F;&#x2F; 所有位置都填完了, 返回true
-    &#125;
-
-    bool isPlaceAvailable(int row, int col, char c, vector&lt;vector&lt;char&gt;&gt; &amp;board) &#123;  &#x2F;&#x2F; 判断在一个位置上填一个数是否合适
-        for (int i &#x3D; 0; i &lt; board[0].size(); i++)   &#x2F;&#x2F; 横向找是否有相同的
-            if (board[row][i] &#x3D;&#x3D; c) return false;
-
-        for (int i &#x3D; 0; i &lt; board.size(); i++)      &#x2F;&#x2F; 纵向找是否有相同的
-            if (board[i][col] &#x3D;&#x3D; c) return false;
-        
-        int startCol &#x3D; (col &#x2F; 3) * 3;               &#x2F;&#x2F; 计算给定的位置的3x3方块的左上方起始点
-        int startRow &#x3D; (row &#x2F; 3) * 3;
-        for (int i &#x3D; startRow; i &lt; startRow + 3; i++) &#x2F;&#x2F; 判断在3x3方格内是否有相同的数
-            for (int j &#x3D; startCol; j &lt; startCol + 3; j++)
-                if (board[i][j] &#x3D;&#x3D; c) return false;
-        return true;
-    &#125;
-public:
-    void solveSudoku(vector&lt;vector&lt;char&gt;&gt;&amp; board) &#123;
-        backtracing(board);
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">backtracing</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">char</span>&gt;&gt; &amp;board)</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; board.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; board[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>(); j++) &#123; <br>                <span class="hljs-keyword">if</span> (board[i][j] == <span class="hljs-string">&#x27;.&#x27;</span>) &#123;   <span class="hljs-comment">// 找一个空位置</span><br>                    <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c = <span class="hljs-string">&#x27;1&#x27;</span>; c &lt;= <span class="hljs-string">&#x27;9&#x27;</span>; c++) &#123; <span class="hljs-comment">// 对这个空位置分别试图填进去不同的数字</span><br>                        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isPlaceAvailable</span>(i, j, c, board)) &#123; <span class="hljs-comment">// 如果一个数字填到这里合适的话, 就填入并进行递归</span><br>                            board[i][j] = c;<br>                            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">backtracing</span>(board)) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;    <span class="hljs-comment">// 找到了一种解法的话就返回true, 停止搜索</span><br>                            board[i][j] = <span class="hljs-string">&#x27;.&#x27;</span>;<br>                        &#125;<br>                    &#125;<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;   <span class="hljs-comment">// 当前位置没找到合适的数, 返回false</span><br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;    <span class="hljs-comment">// 所有位置都填完了, 返回true</span><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isPlaceAvailable</span><span class="hljs-params">(<span class="hljs-type">int</span> row, <span class="hljs-type">int</span> col, <span class="hljs-type">char</span> c, vector&lt;vector&lt;<span class="hljs-type">char</span>&gt;&gt; &amp;board)</span> </span>&#123;  <span class="hljs-comment">// 判断在一个位置上填一个数是否合适</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; board[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>(); i++)   <span class="hljs-comment">// 横向找是否有相同的</span><br>            <span class="hljs-keyword">if</span> (board[row][i] == c) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; board.<span class="hljs-built_in">size</span>(); i++)      <span class="hljs-comment">// 纵向找是否有相同的</span><br>            <span class="hljs-keyword">if</span> (board[i][col] == c) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <br>        <span class="hljs-type">int</span> startCol = (col / <span class="hljs-number">3</span>) * <span class="hljs-number">3</span>;               <span class="hljs-comment">// 计算给定的位置的3x3方块的左上方起始点</span><br>        <span class="hljs-type">int</span> startRow = (row / <span class="hljs-number">3</span>) * <span class="hljs-number">3</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = startRow; i &lt; startRow + <span class="hljs-number">3</span>; i++) <span class="hljs-comment">// 判断在3x3方格内是否有相同的数</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = startCol; j &lt; startCol + <span class="hljs-number">3</span>; j++)<br>                <span class="hljs-keyword">if</span> (board[i][j] == c) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solveSudoku</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">char</span>&gt;&gt;&amp; board)</span> </span>&#123;<br>        <span class="hljs-built_in">backtracing</span>(board);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="回溯法总结">回溯法总结</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/%E5%9B%9E%E6%BA%AF%E6%80%BB%E7%BB%93.html">代码随想录链接</a></p>

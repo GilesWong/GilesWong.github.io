@@ -46,58 +46,9 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0110.%E5%B9%B3%E
 <p>递归判断左右子树的高度是否满足要求.</p>
 <h3 id="题解">题解</h3>
 <p>递归法：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution &#123;
-private:
-    int getHeight(TreeNode* node) &#123;
-        if (!node) return 0;
-        int leftHeight &#x3D; getHeight(node -&gt; left);   &#x2F;&#x2F; 递归判断左子树的高度
-        if (leftHeight &#x3D;&#x3D; -1) return -1;    &#x2F;&#x2F; 若左子树不平衡，则直接返回-1
-        int rightHeight &#x3D; getHeight(node -&gt; right); &#x2F;&#x2F; 递归判断右子树的高度
-        if (rightHeight &#x3D;&#x3D; -1) return -1;   &#x2F;&#x2F; 若右子树不平衡，则直接返回-1
-        return abs(leftHeight - rightHeight) &gt; 1 ? -1 : 1 + max(leftHeight, rightHeight);   &#x2F;&#x2F; 若左右子树平衡，根据左右子树高度差判断
-    &#125;
-public:
-    bool isBalanced(TreeNode* root) &#123;
-        return getHeight(root) &#x3D;&#x3D; -1 ? false : true;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getHeight</span><span class="hljs-params">(TreeNode* node)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!node) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> leftHeight = <span class="hljs-built_in">getHeight</span>(node -&gt; left);   <span class="hljs-comment">// 递归判断左子树的高度</span><br>        <span class="hljs-keyword">if</span> (leftHeight == <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;    <span class="hljs-comment">// 若左子树不平衡，则直接返回-1</span><br>        <span class="hljs-type">int</span> rightHeight = <span class="hljs-built_in">getHeight</span>(node -&gt; right); <span class="hljs-comment">// 递归判断右子树的高度</span><br>        <span class="hljs-keyword">if</span> (rightHeight == <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;   <span class="hljs-comment">// 若右子树不平衡，则直接返回-1</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(leftHeight - rightHeight) &gt; <span class="hljs-number">1</span> ? <span class="hljs-number">-1</span> : <span class="hljs-number">1</span> + <span class="hljs-built_in">max</span>(leftHeight, rightHeight);   <span class="hljs-comment">// 若左右子树平衡，根据左右子树高度差判断</span><br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isBalanced</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">getHeight</span>(root) == <span class="hljs-number">-1</span> ? <span class="hljs-literal">false</span> : <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>迭代法：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private:
-    int getDepth(TreeNode* cur) &#123;   &#x2F;&#x2F; 层序遍历，获得输入节点的高度
-        if (!cur) return 0;
-        int depth &#x3D; 0;
-        queue&lt;TreeNode *&gt; que;
-        que.push(cur);
-        while (!que.empty()) &#123;
-            int qsize &#x3D; que.size();
-            depth++;
-            for (int i &#x3D; 0; i &lt; qsize; i++) &#123;
-                TreeNode *node &#x3D; que.front();
-                que.pop();
-                if (node -&gt; left) que.push(node -&gt; left);
-                if (node -&gt; right) que.push(node -&gt; right);
-            &#125;
-        &#125;
-        return depth;
-    &#125;
-public:
-    bool isBalanced(TreeNode* root) &#123;
-        if (!root) return true;
-        stack&lt;TreeNode *&gt; st;
-        st.push(root);
-        while (!st.empty()) &#123;   &#x2F;&#x2F; 先序遍历
-            TreeNode *node &#x3D; st.top();
-            st.pop();
-            if (abs(getDepth(node -&gt; left) - getDepth(node -&gt; right)) &gt; 1) &#123;
-                return false;
-            &#125;   &#x2F;&#x2F; 判断左右子树高度差是否大于一
-            if (node -&gt; right) st.push(node -&gt; right);
-            if (node -&gt; left) st.push(node -&gt; left);
-        &#125;
-        return true;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getDepth</span><span class="hljs-params">(TreeNode* cur)</span> </span>&#123;   <span class="hljs-comment">// 层序遍历，获得输入节点的高度</span><br>        <span class="hljs-keyword">if</span> (!cur) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> depth = <span class="hljs-number">0</span>;<br>        queue&lt;TreeNode *&gt; que;<br>        que.<span class="hljs-built_in">push</span>(cur);<br>        <span class="hljs-keyword">while</span> (!que.<span class="hljs-built_in">empty</span>()) &#123;<br>            <span class="hljs-type">int</span> qsize = que.<span class="hljs-built_in">size</span>();<br>            depth++;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; qsize; i++) &#123;<br>                TreeNode *node = que.<span class="hljs-built_in">front</span>();<br>                que.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-keyword">if</span> (node -&gt; left) que.<span class="hljs-built_in">push</span>(node -&gt; left);<br>                <span class="hljs-keyword">if</span> (node -&gt; right) que.<span class="hljs-built_in">push</span>(node -&gt; right);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> depth;<br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isBalanced</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        stack&lt;TreeNode *&gt; st;<br>        st.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>()) &#123;   <span class="hljs-comment">// 先序遍历</span><br>            TreeNode *node = st.<span class="hljs-built_in">top</span>();<br>            st.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">abs</span>(<span class="hljs-built_in">getDepth</span>(node -&gt; left) - <span class="hljs-built_in">getDepth</span>(node -&gt; right)) &gt; <span class="hljs-number">1</span>) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;   <span class="hljs-comment">// 判断左右子树高度差是否大于一</span><br>            <span class="hljs-keyword">if</span> (node -&gt; right) st.<span class="hljs-built_in">push</span>(node -&gt; right);<br>            <span class="hljs-keyword">if</span> (node -&gt; left) st.<span class="hljs-built_in">push</span>(node -&gt; left);<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>这个地方的迭代法重复计算了好些层的数值，效率没有上面递归法高。</p>
 <h2 id="二叉树的所有路径">257.二叉树的所有路径</h2>
 <p><a
@@ -109,67 +60,10 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0257.%E4%BA%8C%E
 <p>前序遍历，访问一个节点的操作是判断其是否为叶子节点，若为叶子节点，则从根节点到这个节点的路径记录下来。</p>
 <h3 id="题解-1">题解</h3>
 <p>递归法：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-private:
-    void traversal(TreeNode *cur, vector&lt;int&gt; &amp;path, vector&lt;string&gt; &amp;result) &#123;
-        path.push_back(cur -&gt; val); &#x2F;&#x2F; 访问到这个节点时，再将该节点加入路径
-        if (!(cur -&gt; left) &amp;&amp; !(cur -&gt; right)) &#123;    &#x2F;&#x2F; 如果是叶子节点，就记录路径
-            string sPath;
-            for (int i &#x3D; 0; i &lt; path.size() - 1; i++) &#123;
-                sPath +&#x3D; to_string(path[i]);
-                sPath +&#x3D; &quot;-&gt;&quot;;
-            &#125;
-            sPath +&#x3D; to_string(cur -&gt; val);
-            result.push_back(sPath);
-        &#125;
-        if (cur -&gt; left) &#123;  &#x2F;&#x2F; 递归左孩子
-            traversal(cur -&gt; left, path, result);
-            path.pop_back();    &#x2F;&#x2F; 递归左子树完毕后，将左孩子从路径中去除
-        &#125;
-        if (cur -&gt; right) &#123; &#x2F;&#x2F; 递归右孩子
-            traversal(cur -&gt; right, path, result);
-            path.pop_back();    &#x2F;&#x2F; 递归右子树完毕后，将右孩子从路径中去除
-        &#125;
-    &#125;
-public:
-    vector&lt;string&gt; binaryTreePaths(TreeNode* root) &#123;
-        vector&lt;string&gt; result;
-        vector&lt;int&gt; path;
-        if (!root) return result;
-        traversal(root, path, result);
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">traversal</span><span class="hljs-params">(TreeNode *cur, vector&lt;<span class="hljs-type">int</span>&gt; &amp;path, vector&lt;string&gt; &amp;result)</span> </span>&#123;<br>        path.<span class="hljs-built_in">push_back</span>(cur -&gt; val); <span class="hljs-comment">// 访问到这个节点时，再将该节点加入路径</span><br>        <span class="hljs-keyword">if</span> (!(cur -&gt; left) &amp;&amp; !(cur -&gt; right)) &#123;    <span class="hljs-comment">// 如果是叶子节点，就记录路径</span><br>            string sPath;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; path.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i++) &#123;<br>                sPath += <span class="hljs-built_in">to_string</span>(path[i]);<br>                sPath += <span class="hljs-string">&quot;-&gt;&quot;</span>;<br>            &#125;<br>            sPath += <span class="hljs-built_in">to_string</span>(cur -&gt; val);<br>            result.<span class="hljs-built_in">push_back</span>(sPath);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (cur -&gt; left) &#123;  <span class="hljs-comment">// 递归左孩子</span><br>            <span class="hljs-built_in">traversal</span>(cur -&gt; left, path, result);<br>            path.<span class="hljs-built_in">pop_back</span>();    <span class="hljs-comment">// 递归左子树完毕后，将左孩子从路径中去除</span><br>        &#125;<br>        <span class="hljs-keyword">if</span> (cur -&gt; right) &#123; <span class="hljs-comment">// 递归右孩子</span><br>            <span class="hljs-built_in">traversal</span>(cur -&gt; right, path, result);<br>            path.<span class="hljs-built_in">pop_back</span>();    <span class="hljs-comment">// 递归右子树完毕后，将右孩子从路径中去除</span><br>        &#125;<br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;string&gt; <span class="hljs-title">binaryTreePaths</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        vector&lt;string&gt; result;<br>        vector&lt;<span class="hljs-type">int</span>&gt; path;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> result;<br>        <span class="hljs-built_in">traversal</span>(root, path, result);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>迭代法：</p>
 <p>前序遍历，并使用栈来记录当前遍历从根节点出发的路径。</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    vector&lt;string&gt; binaryTreePaths(TreeNode* root) &#123;
-        vector&lt;string&gt; result;
-        stack&lt;string&gt; pathSt;
-        stack&lt;TreeNode*&gt; st;
-        if (!root) return result;
-        st.push(root);
-        pathSt.push(to_string(root -&gt; val));
-        while (!st.empty()) &#123;   &#x2F;&#x2F; 使用栈来遍历节点
-            TreeNode *node &#x3D; st.top(); st.pop();
-            string path &#x3D; pathSt.top(); pathSt.pop();
-            if (!(node -&gt; left) &amp;&amp; !(node -&gt; right)) &#123;
-                result.push_back(path);
-            &#125;   &#x2F;&#x2F; 如果当前节点是椰子节点, 就记录下来该节点的路径
-            if (node -&gt; right) &#123;
-                st.push(node -&gt; right);
-                pathSt.push(path + &quot;-&gt;&quot; + to_string(node -&gt; right -&gt; val));
-            &#125;   &#x2F;&#x2F; 栈内推入节点和节点的路径
-            if (node -&gt; left) &#123;
-                st.push(node -&gt; left);
-                pathSt.push(path + &quot;-&gt;&quot; + to_string(node -&gt; left -&gt; val));
-            &#125;
-
-        &#125;
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;string&gt; <span class="hljs-title">binaryTreePaths</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        vector&lt;string&gt; result;<br>        stack&lt;string&gt; pathSt;<br>        stack&lt;TreeNode*&gt; st;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> result;<br>        st.<span class="hljs-built_in">push</span>(root);<br>        pathSt.<span class="hljs-built_in">push</span>(<span class="hljs-built_in">to_string</span>(root -&gt; val));<br>        <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>()) &#123;   <span class="hljs-comment">// 使用栈来遍历节点</span><br>            TreeNode *node = st.<span class="hljs-built_in">top</span>(); st.<span class="hljs-built_in">pop</span>();<br>            string path = pathSt.<span class="hljs-built_in">top</span>(); pathSt.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-keyword">if</span> (!(node -&gt; left) &amp;&amp; !(node -&gt; right)) &#123;<br>                result.<span class="hljs-built_in">push_back</span>(path);<br>            &#125;   <span class="hljs-comment">// 如果当前节点是椰子节点, 就记录下来该节点的路径</span><br>            <span class="hljs-keyword">if</span> (node -&gt; right) &#123;<br>                st.<span class="hljs-built_in">push</span>(node -&gt; right);<br>                pathSt.<span class="hljs-built_in">push</span>(path + <span class="hljs-string">&quot;-&gt;&quot;</span> + <span class="hljs-built_in">to_string</span>(node -&gt; right -&gt; val));<br>            &#125;   <span class="hljs-comment">// 栈内推入节点和节点的路径</span><br>            <span class="hljs-keyword">if</span> (node -&gt; left) &#123;<br>                st.<span class="hljs-built_in">push</span>(node -&gt; left);<br>                pathSt.<span class="hljs-built_in">push</span>(path + <span class="hljs-string">&quot;-&gt;&quot;</span> + <span class="hljs-built_in">to_string</span>(node -&gt; left -&gt; val));<br>            &#125;<br><br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="左叶子之和">404.左叶子之和</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0404.%E5%B7%A6%E5%8F%B6%E5%AD%90%E4%B9%8B%E5%92%8C.html">代码随想录链接</a></p>
@@ -181,47 +75,9 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0404.%E5%B7%A6%E
 就将左孩子的值加和.</p>
 <h3 id="题解-2">题解</h3>
 <p>递归法:</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution &#123;
-public:
-    int sumOfLeftLeaves(TreeNode* root) &#123;
-        if (!root) return 0;
-        if (!(root -&gt; left) &amp;&amp; !(root -&gt; right)) return 0;
-        int leftVal &#x3D; sumOfLeftLeaves(root -&gt; left);    &#x2F;&#x2F; 求左子树中的左叶子结点值之和
-        if (root -&gt; left &amp;&amp; !(root -&gt; left -&gt; left) &amp;&amp; !(root -&gt; left -&gt; right)) &#123;  &#x2F;&#x2F; 如果左孩子是个叶子结点, 将其值加和
-            leftVal +&#x3D; root -&gt; left -&gt; val;
-        &#125;
-        int rightVal &#x3D; sumOfLeftLeaves(root -&gt; right);  &#x2F;&#x2F; 求右子树中左叶子结点值之和
-
-        return leftVal + rightVal;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">sumOfLeftLeaves</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (!(root -&gt; left) &amp;&amp; !(root -&gt; right)) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> leftVal = <span class="hljs-built_in">sumOfLeftLeaves</span>(root -&gt; left);    <span class="hljs-comment">// 求左子树中的左叶子结点值之和</span><br>        <span class="hljs-keyword">if</span> (root -&gt; left &amp;&amp; !(root -&gt; left -&gt; left) &amp;&amp; !(root -&gt; left -&gt; right)) &#123;  <span class="hljs-comment">// 如果左孩子是个叶子结点, 将其值加和</span><br>            leftVal += root -&gt; left -&gt; val;<br>        &#125;<br>        <span class="hljs-type">int</span> rightVal = <span class="hljs-built_in">sumOfLeftLeaves</span>(root -&gt; right);  <span class="hljs-comment">// 求右子树中左叶子结点值之和</span><br><br>        <span class="hljs-keyword">return</span> leftVal + rightVal;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>迭代法:</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Solution &#123;
-public:
-    int sumOfLeftLeaves(TreeNode* root) &#123;
-        int result &#x3D; 0;
-        if (!root) return result;
-        stack&lt;TreeNode *&gt; st;
-        st.push(root);
-        while (!st.empty()) &#123;   &#x2F;&#x2F; 统一写法的中序遍历
-            TreeNode *node &#x3D; st.top();
-            if (node) &#123;
-                st.pop();
-                st.push(node);
-                st.push(NULL);
-
-                if (node -&gt; right) st.push(node -&gt; right);
-                if (node -&gt; left) st.push(node -&gt; left);
-            &#125; else &#123;    &#x2F;&#x2F; &quot;访问&quot;一个节点, 判断左孩子是不是叶子结点
-                st.pop();
-                node &#x3D; st.top();
-                st.pop();
-                if (node -&gt; left &amp;&amp; !(node -&gt; left -&gt; left) &amp;&amp; !(node -&gt; left -&gt; right)) result +&#x3D; node -&gt; left -&gt; val;
-            &#125;
-        &#125;
-        return result;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">sumOfLeftLeaves</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-type">int</span> result = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (!root) <span class="hljs-keyword">return</span> result;<br>        stack&lt;TreeNode *&gt; st;<br>        st.<span class="hljs-built_in">push</span>(root);<br>        <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>()) &#123;   <span class="hljs-comment">// 统一写法的中序遍历</span><br>            TreeNode *node = st.<span class="hljs-built_in">top</span>();<br>            <span class="hljs-keyword">if</span> (node) &#123;<br>                st.<span class="hljs-built_in">pop</span>();<br>                st.<span class="hljs-built_in">push</span>(node);<br>                st.<span class="hljs-built_in">push</span>(<span class="hljs-literal">NULL</span>);<br><br>                <span class="hljs-keyword">if</span> (node -&gt; right) st.<span class="hljs-built_in">push</span>(node -&gt; right);<br>                <span class="hljs-keyword">if</span> (node -&gt; left) st.<span class="hljs-built_in">push</span>(node -&gt; left);<br>            &#125; <span class="hljs-keyword">else</span> &#123;    <span class="hljs-comment">// &quot;访问&quot;一个节点, 判断左孩子是不是叶子结点</span><br>                st.<span class="hljs-built_in">pop</span>();<br>                node = st.<span class="hljs-built_in">top</span>();<br>                st.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-keyword">if</span> (node -&gt; left &amp;&amp; !(node -&gt; left -&gt; left) &amp;&amp; !(node -&gt; left -&gt; right)) result += node -&gt; left -&gt; val;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 </div><div class="article-licensing box"><div class="licensing-title"><p>代码随想录算法训练营第17天 | 110.平衡二叉树, 257. 二叉树的所有路径, 404.左叶子之和</p><p><a href="http://wwg.xyz/algorithm-train-day17/">http://wwg.xyz/algorithm-train-day17/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-03-03</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-03-13</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">代码随想录</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/leetcode-max-gift-sum/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">剑指 Offer 47. 礼物的最大价值</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm-train-day16/"><span class="level-item">代码随想录算法训练营第16天 | 104.二叉树的最大深度, 111.二叉树的最小深度, 222.完全二叉树的节点个数</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
             id: "b1e8ac5d20c455276fe823a69f75a223",
             repo: "GilesWong.github.io",

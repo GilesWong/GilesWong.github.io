@@ -70,18 +70,9 @@ class="math inline">\(O(n)\)</span>的时间。</p>
 <figcaption aria-hidden="true">链表存储示意图</figcaption>
 </figure>
 <p>根据链表的定义，一个常见的单链表的节点可以用C++表示为：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">struct Node* &#123;
-    int data;   &#x2F;&#x2F; 该节点所存储的数据
-    Node* next; &#x2F;&#x2F; 指向下一个节点的指针
-    Node(int x) : data(x), next(nullptr) &#123;&#125;  &#x2F;&#x2F; 节点的构造函数，可选
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Node</span>* &#123;<br>    <span class="hljs-type">int</span> data;   <span class="hljs-comment">// 该节点所存储的数据</span><br>    Node* next; <span class="hljs-comment">// 指向下一个节点的指针</span><br>    <span class="hljs-built_in">Node</span>(<span class="hljs-type">int</span> x) : <span class="hljs-built_in">data</span>(x), <span class="hljs-built_in">next</span>(<span class="hljs-literal">nullptr</span>) &#123;&#125;  <span class="hljs-comment">// 节点的构造函数，可选</span><br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>一个常见的双链表节点可以用C++表示为：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">struct Node* &#123;
-    int data;   &#x2F;&#x2F; 该节点所存储的数据
-    Node* prev; &#x2F;&#x2F; 指向前一个节点的指针
-    Node* next; &#x2F;&#x2F; 指向下一个节点的指针
-    Node(int x) : data(x), prev(nullptr), next(nullptr) &#123;&#125;  &#x2F;&#x2F; 节点的构造函数，可选
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Node</span>* &#123;<br>    <span class="hljs-type">int</span> data;   <span class="hljs-comment">// 该节点所存储的数据</span><br>    Node* prev; <span class="hljs-comment">// 指向前一个节点的指针</span><br>    Node* next; <span class="hljs-comment">// 指向下一个节点的指针</span><br>    <span class="hljs-built_in">Node</span>(<span class="hljs-type">int</span> x) : <span class="hljs-built_in">data</span>(x), <span class="hljs-built_in">prev</span>(<span class="hljs-literal">nullptr</span>), <span class="hljs-built_in">next</span>(<span class="hljs-literal">nullptr</span>) &#123;&#125;  <span class="hljs-comment">// 节点的构造函数，可选</span><br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="移除链表元素">203.移除链表元素</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0.html">代码随想录链接</a></p>
@@ -94,73 +85,13 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0203.%E7%A7%BB%E
 <h3 id="自己的想法">自己的想法</h3>
 <p>自己首先想到的还是使用链表原有的头和尾来完成，对头进行单独的判断处理，如果头携带值就等于给定值，则不断地把头设置为下一个节点，当头所携带的值不是给定值之后，再对链表后面进行处理，自己写的版本即为解法一。</p>
 <h3 id="解法一">解法一</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">&#x2F;**
- * Definition for singly-linked list.
- * struct ListNode &#123;
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) &#123;&#125;
- *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;
- *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-public:
-    ListNode* removeElements(ListNode* head, int val) &#123;
-        ListNode* cur &#x3D; NULL; &#x2F;&#x2F; 为了保存当前使用的节点而设立的一个指针
-        while (head !&#x3D; NULL &amp;&amp; head -&gt; val &#x3D;&#x3D; val) &#123; &#x2F;&#x2F; 如果头指针指向的节点携带的值等于给定值
-            cur &#x3D; head;  &#x2F;&#x2F; 保存头结点的地址
-            head &#x3D; head -&gt; next;  &#x2F;&#x2F; 将头指向下一个节点，使下一个节点成为头结点，这一步之后原来的头结点已经被剥离链表
-            delete cur;  &#x2F;&#x2F; 释放掉原来头结点的空间
-        &#125;
-        cur &#x3D; head; &#x2F;&#x2F; 从头结点开始遍历，此时头结点的值不等于给定值，所以我们下面只需要看cur -&gt; next的值是否等于给定值
-        while (cur !&#x3D; NULL) &#123; &#x2F;&#x2F; 当遍历节点不为空时
-            if (cur -&gt; next !&#x3D; NULL &amp;&amp; cur -&gt; next -&gt; val &#x3D;&#x3D; val) &#123; &#x2F;&#x2F; 如果当前节点存在下一个节点且下一个节点的数据等于给定值
-                ListNode* toDel &#x3D; cur -&gt; next;  &#x2F;&#x2F; 标记需要被删除的节点
-                cur -&gt; next &#x3D; toDel -&gt; next;    &#x2F;&#x2F; 更新当前节点的next指针，将其指向被删除节点的下一个节点，此步之后被删除节点已被剥离链表
-                delete toDel;                   &#x2F;&#x2F; 释放被删除节点的空间
-            &#125; else &#123;                            &#x2F;&#x2F; 如果当前节点的下一个节点不存在或者其值不等于给定值
-                cur &#x3D; cur -&gt; next;              &#x2F;&#x2F; 则移动节点
-            &#125;
-        &#125;
-        return head;                            &#x2F;&#x2F; 返回链表表首指针
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * struct ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode *next;</span><br><span class="hljs-comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">removeElements</span><span class="hljs-params">(ListNode* head, <span class="hljs-type">int</span> val)</span> </span>&#123;<br>        ListNode* cur = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// 为了保存当前使用的节点而设立的一个指针</span><br>        <span class="hljs-keyword">while</span> (head != <span class="hljs-literal">NULL</span> &amp;&amp; head -&gt; val == val) &#123; <span class="hljs-comment">// 如果头指针指向的节点携带的值等于给定值</span><br>            cur = head;  <span class="hljs-comment">// 保存头结点的地址</span><br>            head = head -&gt; next;  <span class="hljs-comment">// 将头指向下一个节点，使下一个节点成为头结点，这一步之后原来的头结点已经被剥离链表</span><br>            <span class="hljs-keyword">delete</span> cur;  <span class="hljs-comment">// 释放掉原来头结点的空间</span><br>        &#125;<br>        cur = head; <span class="hljs-comment">// 从头结点开始遍历，此时头结点的值不等于给定值，所以我们下面只需要看cur -&gt; next的值是否等于给定值</span><br>        <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">NULL</span>) &#123; <span class="hljs-comment">// 当遍历节点不为空时</span><br>            <span class="hljs-keyword">if</span> (cur -&gt; next != <span class="hljs-literal">NULL</span> &amp;&amp; cur -&gt; next -&gt; val == val) &#123; <span class="hljs-comment">// 如果当前节点存在下一个节点且下一个节点的数据等于给定值</span><br>                ListNode* toDel = cur -&gt; next;  <span class="hljs-comment">// 标记需要被删除的节点</span><br>                cur -&gt; next = toDel -&gt; next;    <span class="hljs-comment">// 更新当前节点的next指针，将其指向被删除节点的下一个节点，此步之后被删除节点已被剥离链表</span><br>                <span class="hljs-keyword">delete</span> toDel;                   <span class="hljs-comment">// 释放被删除节点的空间</span><br>            &#125; <span class="hljs-keyword">else</span> &#123;                            <span class="hljs-comment">// 如果当前节点的下一个节点不存在或者其值不等于给定值</span><br>                cur = cur -&gt; next;              <span class="hljs-comment">// 则移动节点</span><br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> head;                            <span class="hljs-comment">// 返回链表表首指针</span><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>由于遍历了整个链表，故时间复杂度为<span
 class="math inline">\(O(n)\)</span>，使用了常数个额外变量，空间复杂度为<span
 class="math inline">\(O(1)\)</span>。</p>
 <h3 id="解法二">解法二</h3>
 <p>下面这种方法的思想和上面是一样的，只不过使用了一个假表首来使得代码实现起来比较简单。<del>之前学过但是自己想的时候就是想不起来这种做法</del></p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">&#x2F;**
- * Definition for singly-linked list.
- * struct ListNode &#123;
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) &#123;&#125;
- *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;
- *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-public:
-    ListNode* removeElements(ListNode* head, int val) &#123;
-        ListNode* dummyHead &#x3D; new ListNode(0);
-        dummyHead -&gt; next &#x3D; head;
-        ListNode* cur &#x3D; dummyHead;
-        while (cur -&gt; next !&#x3D; NULL) &#123;
-            if (cur -&gt; next -&gt; val &#x3D;&#x3D; val) &#123;
-                ListNode* toDel &#x3D; cur -&gt; next;
-                cur -&gt; next &#x3D; toDel -&gt; next;
-                delete toDel;
-            &#125; else &#123;
-                cur &#x3D; cur -&gt; next;
-            &#125;
-        &#125;
-        head &#x3D; dummyHead -&gt; next;
-        delete dummyHead;
-        return head;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * struct ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode *next;</span><br><span class="hljs-comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">removeElements</span><span class="hljs-params">(ListNode* head, <span class="hljs-type">int</span> val)</span> </span>&#123;<br>        ListNode* dummyHead = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>);<br>        dummyHead -&gt; next = head;<br>        ListNode* cur = dummyHead;<br>        <span class="hljs-keyword">while</span> (cur -&gt; next != <span class="hljs-literal">NULL</span>) &#123;<br>            <span class="hljs-keyword">if</span> (cur -&gt; next -&gt; val == val) &#123;<br>                ListNode* toDel = cur -&gt; next;<br>                cur -&gt; next = toDel -&gt; next;<br>                <span class="hljs-keyword">delete</span> toDel;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                cur = cur -&gt; next;<br>            &#125;<br>        &#125;<br>        head = dummyHead -&gt; next;<br>        <span class="hljs-keyword">delete</span> dummyHead;<br>        <span class="hljs-keyword">return</span> head;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>由于遍历了整个链表，故时间复杂度为<span
 class="math inline">\(O(n)\)</span>，使用了常数个额外变量，空间复杂度为<span
 class="math inline">\(O(1)\)</span>。</p>
@@ -176,66 +107,7 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0707.%E8%AE%BE%E
 <h3 id="自己的思考">自己的思考</h3>
 <p>尽量地多使用伪表首来实现功能，让代码的逻辑看起来更清晰一些。</p>
 <h3 id="解法">解法</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class MyLinkedList &#123;
-public:
-    struct Node &#123;
-        int val;
-        Node* next;
-        Node(int val): val(val), next(nullptr)&#123;&#125;
-    &#125;;
-
-    MyLinkedList() &#123;
-        _dummyHead &#x3D; new Node(0);                       &#x2F;&#x2F; 内部实现一个假表首
-        _size &#x3D; 0;                                      &#x2F;&#x2F; 内部的变量，用于存储当前链表的大小
-    &#125;
-    
-    int get(int index) &#123;
-        if (index &gt;&#x3D; _size || index &lt; 0) return -1;     &#x2F;&#x2F; 在index不正确时，按照题目要求返回-1
-        Node* cur &#x3D; _dummyHead -&gt; next;                 &#x2F;&#x2F; 声明一个用于遍历链表的节点
-        while (index--) cur &#x3D; cur-&gt;next;                &#x2F;&#x2F; 根据index定位到节点
-        return cur -&gt; val;                              &#x2F;&#x2F; 返回节点值
-    &#125;
-    
-    void addAtHead(int val) &#123;
-        Node* toAdd &#x3D; new Node(val);                    &#x2F;&#x2F; 实例化一个新的节点来存储值
-        toAdd -&gt; next &#x3D; _dummyHead -&gt; next;             &#x2F;&#x2F; 将新的节点的next指针指向当前的（真）头指针，让头节点成为其下一个节点
-        _dummyHead -&gt; next &#x3D; toAdd;                     &#x2F;&#x2F; 将假表首的next指针指向新的节点，代表新节点成为了（真）头指针
-        _size++;                                        &#x2F;&#x2F; 别忘了更新链表的大小
-    &#125;
-    
-    void addAtTail(int val) &#123;
-        Node* cur &#x3D; _dummyHead;                         &#x2F;&#x2F; 依次遍历到链表的末尾，实例化一个新的节点，并将原末尾节点的next指针指向新的节点
-        while (cur -&gt; next !&#x3D; NULL) cur &#x3D; cur -&gt; next;
-        Node* toAdd &#x3D; new Node(val);
-        cur -&gt; next &#x3D; toAdd;
-        _size++;
-    &#125;
-    
-    void addAtIndex(int index, int val) &#123;               &#x2F;&#x2F; 类似于get函数的做法，先定位到index指向的节点，然后根据题意将节点插入在该节点之前（修改前节点的next指针和新节点的next指针）
-        if (index &gt; _size) return;
-        if (index &lt; 0) index &#x3D; 0;
-        Node* toAdd &#x3D; new Node(val);
-        Node* cur &#x3D; _dummyHead;
-        while (index--) cur &#x3D; cur -&gt; next;
-        toAdd -&gt; next &#x3D; cur -&gt; next;
-        cur -&gt; next &#x3D; toAdd;
-        _size++;
-    &#125;
-    
-    void deleteAtIndex(int index) &#123;                     &#x2F;&#x2F; 根据index定位到节点，通过将前一个节点的next指针修改为要删除节点的下一个节点的地址来完成删除
-        if (index &gt;&#x3D; _size || index &lt; 0 ) return;
-        Node* cur &#x3D; _dummyHead;
-        while (index--) cur &#x3D; cur -&gt; next;
-        Node* todel &#x3D; cur -&gt; next;
-        cur -&gt; next &#x3D; todel -&gt; next;
-        delete todel;                                   &#x2F;&#x2F; 释放节点空间
-        _size--;
-    &#125;
-
-private:
-    int _size;
-    Node* _dummyHead;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyLinkedList</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Node</span> &#123;<br>        <span class="hljs-type">int</span> val;<br>        Node* next;<br>        <span class="hljs-built_in">Node</span>(<span class="hljs-type">int</span> val): <span class="hljs-built_in">val</span>(val), <span class="hljs-built_in">next</span>(<span class="hljs-literal">nullptr</span>)&#123;&#125;<br>    &#125;;<br><br>    <span class="hljs-built_in">MyLinkedList</span>() &#123;<br>        _dummyHead = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Node</span>(<span class="hljs-number">0</span>);                       <span class="hljs-comment">// 内部实现一个假表首</span><br>        _size = <span class="hljs-number">0</span>;                                      <span class="hljs-comment">// 内部的变量，用于存储当前链表的大小</span><br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (index &gt;= _size || index &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;     <span class="hljs-comment">// 在index不正确时，按照题目要求返回-1</span><br>        Node* cur = _dummyHead -&gt; next;                 <span class="hljs-comment">// 声明一个用于遍历链表的节点</span><br>        <span class="hljs-keyword">while</span> (index--) cur = cur-&gt;next;                <span class="hljs-comment">// 根据index定位到节点</span><br>        <span class="hljs-keyword">return</span> cur -&gt; val;                              <span class="hljs-comment">// 返回节点值</span><br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addAtHead</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> </span>&#123;<br>        Node* toAdd = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Node</span>(val);                    <span class="hljs-comment">// 实例化一个新的节点来存储值</span><br>        toAdd -&gt; next = _dummyHead -&gt; next;             <span class="hljs-comment">// 将新的节点的next指针指向当前的（真）头指针，让头节点成为其下一个节点</span><br>        _dummyHead -&gt; next = toAdd;                     <span class="hljs-comment">// 将假表首的next指针指向新的节点，代表新节点成为了（真）头指针</span><br>        _size++;                                        <span class="hljs-comment">// 别忘了更新链表的大小</span><br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addAtTail</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> </span>&#123;<br>        Node* cur = _dummyHead;                         <span class="hljs-comment">// 依次遍历到链表的末尾，实例化一个新的节点，并将原末尾节点的next指针指向新的节点</span><br>        <span class="hljs-keyword">while</span> (cur -&gt; next != <span class="hljs-literal">NULL</span>) cur = cur -&gt; next;<br>        Node* toAdd = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Node</span>(val);<br>        cur -&gt; next = toAdd;<br>        _size++;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addAtIndex</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> val)</span> </span>&#123;               <span class="hljs-comment">// 类似于get函数的做法，先定位到index指向的节点，然后根据题意将节点插入在该节点之前（修改前节点的next指针和新节点的next指针）</span><br>        <span class="hljs-keyword">if</span> (index &gt; _size) <span class="hljs-keyword">return</span>;<br>        <span class="hljs-keyword">if</span> (index &lt; <span class="hljs-number">0</span>) index = <span class="hljs-number">0</span>;<br>        Node* toAdd = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Node</span>(val);<br>        Node* cur = _dummyHead;<br>        <span class="hljs-keyword">while</span> (index--) cur = cur -&gt; next;<br>        toAdd -&gt; next = cur -&gt; next;<br>        cur -&gt; next = toAdd;<br>        _size++;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">deleteAtIndex</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> </span>&#123;                     <span class="hljs-comment">// 根据index定位到节点，通过将前一个节点的next指针修改为要删除节点的下一个节点的地址来完成删除</span><br>        <span class="hljs-keyword">if</span> (index &gt;= _size || index &lt; <span class="hljs-number">0</span> ) <span class="hljs-keyword">return</span>;<br>        Node* cur = _dummyHead;<br>        <span class="hljs-keyword">while</span> (index--) cur = cur -&gt; next;<br>        Node* todel = cur -&gt; next;<br>        cur -&gt; next = todel -&gt; next;<br>        <span class="hljs-keyword">delete</span> todel;                                   <span class="hljs-comment">// 释放节点空间</span><br>        _size--;<br>    &#125;<br><br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-type">int</span> _size;<br>    Node* _dummyHead;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="反转链表">206.反转链表</h2>
 <p><a
 target="_blank" rel="noopener" href="https://programmercarl.com/0206.%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.html">代码随想录链接</a></p>
@@ -248,32 +120,7 @@ target="_blank" rel="noopener" href="https://programmercarl.com/0206.%E7%BF%BB%E
 <h3 id="自己的思考-1">自己的思考</h3>
 <p>首先想到的是生成一个新的链表，依次分别将原链表中的数据不断在新链表的头部进行添加。但考虑到这样会造成额外的空间开销，就考虑使用链表的现有节点进行逆转。</p>
 <h3 id="解法-1">解法</h3>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">&#x2F;**
- * Definition for singly-linked list.
- * struct ListNode &#123;
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) &#123;&#125;
- *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;
- *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;
- * &#125;;
- *&#x2F;
-class Solution &#123;
-public:
-    ListNode* reverseList(ListNode* head) &#123;
-        if (head &#x3D;&#x3D; NULL) return NULL;              &#x2F;&#x2F; 处理空表的特殊情况
-        if (head -&gt; next &#x3D;&#x3D; NULL) return head;      &#x2F;&#x2F; 处理只有一个节点的特殊情况
-        ListNode* dummyHead &#x3D; new ListNode(0);      &#x2F;&#x2F; 使用假表首
-        ListNode* cur &#x3D; head;                       &#x2F;&#x2F; 使用一个当前节点的指针
-        while (cur !&#x3D; NULL) &#123;                       &#x2F;&#x2F; 循环条件
-            ListNode* tmp &#x3D; cur;                    &#x2F;&#x2F; 使用一个临时指针来标记当前节点A
-            cur &#x3D; cur -&gt; next;                      &#x2F;&#x2F; 将当前节点向后移动，标记原链表中A的下一个节点
-            tmp -&gt; next &#x3D; dummyHead -&gt; next;        &#x2F;&#x2F; 将A的next指针指向假表首的下一个节点
-            dummyHead -&gt; next &#x3D; tmp;                &#x2F;&#x2F; 使A成为新的表首
-        &#125;
-        return dummyHead -&gt; next;                   &#x2F;&#x2F; 真表首是假表首的next指针所指向的节点
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * struct ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode *next;</span><br><span class="hljs-comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode* head)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;              <span class="hljs-comment">// 处理空表的特殊情况</span><br>        <span class="hljs-keyword">if</span> (head -&gt; next == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> head;      <span class="hljs-comment">// 处理只有一个节点的特殊情况</span><br>        ListNode* dummyHead = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>);      <span class="hljs-comment">// 使用假表首</span><br>        ListNode* cur = head;                       <span class="hljs-comment">// 使用一个当前节点的指针</span><br>        <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">NULL</span>) &#123;                       <span class="hljs-comment">// 循环条件</span><br>            ListNode* tmp = cur;                    <span class="hljs-comment">// 使用一个临时指针来标记当前节点A</span><br>            cur = cur -&gt; next;                      <span class="hljs-comment">// 将当前节点向后移动，标记原链表中A的下一个节点</span><br>            tmp -&gt; next = dummyHead -&gt; next;        <span class="hljs-comment">// 将A的next指针指向假表首的下一个节点</span><br>            dummyHead -&gt; next = tmp;                <span class="hljs-comment">// 使A成为新的表首</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> dummyHead -&gt; next;                   <span class="hljs-comment">// 真表首是假表首的next指针所指向的节点</span><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>遍历了链表，时间复杂度为<span
 class="math inline">\(O(n)\)</span>；由于没有产生新的链表，空间复杂度为<span
 class="math inline">\(O(1)\)</span>。</p>
