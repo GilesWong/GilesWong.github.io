@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>代码随想录算法训练营第59天 | 503.下一个更大元素II, 42.接雨水 - Giles&#039; Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Giles"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Giles"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="503.下一个更大元素II, 42.接雨水"><meta property="og:type" content="blog"><meta property="og:title" content="代码随想录算法训练营第59天 | 503.下一个更大元素II, 42.接雨水"><meta property="og:url" content="http://wwg.xyz/algorithm-train-day59/"><meta property="og:site_name" content="Giles&#039; Blog"><meta property="og:description" content="503.下一个更大元素II, 42.接雨水"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://wwg.xyz/algorithm-train-day59/2023-04-14T152530.png"><meta property="og:image" content="http://wwg.xyz/algorithm-train-day59/2023-04-14T152530.png"><meta property="og:image" content="http://wwg.xyz/algorithm-train-day59/2023-04-14T154157.png"><meta property="article:published_time" content="2023-04-14T07:07:46.000Z"><meta property="article:modified_time" content="2023-04-14T07:49:52.760Z"><meta property="article:author" content="Giles"><meta property="article:tag" content="学习"><meta property="article:tag" content="算法"><meta property="article:tag" content="代码随想录"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://wwg.xyz/algorithm-train-day59/2023-04-14T152530.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://wwg.xyz/algorithm-train-day59/"},"headline":"代码随想录算法训练营第59天 | 503.下一个更大元素II, 42.接雨水","image":["http://wwg.xyz/algorithm-train-day59/2023-04-14T152530.png","http://wwg.xyz/algorithm-train-day59/2023-04-14T152530.png","http://wwg.xyz/algorithm-train-day59/2023-04-14T154157.png"],"datePublished":"2023-04-14T07:07:46.000Z","dateModified":"2023-04-14T07:49:52.760Z","author":{"@type":"Person","name":"Giles"},"publisher":{"@type":"Organization","name":"Giles' Blog","logo":{"@type":"ImageObject","url":{"text":"Giles' Blog"}}},"description":"503.下一个更大元素II, 42.接雨水"}</script><link rel="canonical" href="http://wwg.xyz/algorithm-train-day59/"><link rel="alternate" href="/atom.xml" title="Giles&#039; Blog" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css"><link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ED55ZDHVH" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-5ED55ZDHVH');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script>
+<script async defer data-website-id="ca05f69d-e239-4450-bf17-725a84896da7" src="https://stats.wwg.xyz/statIndex.js"></script>
+    <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Giles&#039; Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">Resume</a><a class="navbar-item" target="_blank" rel="noopener" href="https://status.wwg.xyz">Server Status</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-04-14T07:07:46.000Z" title="2023/4/14 15:07:46">2023-04-14</time>发表</span><span class="level-item"><time dateTime="2023-04-14T07:49:52.760Z" title="2023/4/14 15:49:52">2023-04-14</time>更新</span><span class="level-item">7 分钟读完 (大约1048个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">代码随想录算法训练营第59天 | 503.下一个更大元素II, 42.接雨水</h1><div class="content"><h2 id="下一个更大元素ii">503.下一个更大元素II</h2>
+<p><a
+target="_blank" rel="noopener" href="https://programmercarl.com/0503.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0II.html">代码随想录链接</a></p>
+<h3 id="题目">题目</h3>
+<p><a
+target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-ii/">LeetCode-503.下一个更大元素II</a></p>
+<p>给定一个循环数组,
+在循环的情况下寻找每一个元素右侧的第一个比其大的元素.</p>
+<h3 id="题目分析">题目分析</h3>
+<p>可以看作是单调栈连续对一个数组执行了两次, 且之间执行是连续的.</p>
+<p>可以在for循环的控制条件里, 将i结束的条件设置为小于两倍的数组长度,
+并在for循环内使用<span class="math inline">\(i\  \%
+\  nums.size()\)</span> 来进行迭代.</p>
+<h3 id="题解">题解</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">nextGreaterElements</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">result</span><span class="hljs-params">(nums.size(), <span class="hljs-number">-1</span>)</span></span>;<br>        <span class="hljs-keyword">if</span> (nums.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> result;<br>        stack&lt;<span class="hljs-type">int</span>&gt; st;<br>        st.<span class="hljs-built_in">push</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; nums.<span class="hljs-built_in">size</span>() * <span class="hljs-number">2</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (nums[i % nums.<span class="hljs-built_in">size</span>()] &lt;= nums[st.<span class="hljs-built_in">top</span>() % nums.<span class="hljs-built_in">size</span>()])<br>                st.<span class="hljs-built_in">push</span>(i);<br>            <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>() &amp;&amp; nums[st.<span class="hljs-built_in">top</span>() % nums.<span class="hljs-built_in">size</span>()] &lt; nums[i % nums.<span class="hljs-built_in">size</span>()]) &#123;<br>                    result[st.<span class="hljs-built_in">top</span>() % nums.<span class="hljs-built_in">size</span>()] = nums[i % nums.<span class="hljs-built_in">size</span>()];<br>                    st.<span class="hljs-built_in">pop</span>();<br>                &#125;<br>                st.<span class="hljs-built_in">push</span>(i);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h2 id="接雨水">42.接雨水</h2>
+<p><a
+target="_blank" rel="noopener" href="https://programmercarl.com/0042.%E6%8E%A5%E9%9B%A8%E6%B0%B4.html">代码随想录链接</a></p>
+<h3 id="题目-1">题目</h3>
+<p><a
+target="_blank" rel="noopener" href="https://leetcode.cn/problems/trapping-rain-water/">LeetCode-42.接雨水</a></p>
+<p>给定一系列在横轴上摆放的柱子的高度,
+求这些柱子和横轴之间所形成的容器最多能接多少雨水.</p>
+<figure>
+<img src="2023-04-14T152530.png" alt="LeetCode-42.接雨水" />
+<figcaption aria-hidden="true">LeetCode-42.接雨水</figcaption>
+</figure>
+<p>如图, 黑色是柱子, 蓝色是雨水,
+题目要求的就是蓝色块的面积(二维下可不是面积🐴)</p>
+<h3 id="题目分析-1">题目分析</h3>
+<h4 id="双指针法">双指针法</h4>
+<p>针对每一个柱子上的面积进行单独考虑, 一个柱子上的蓝色块的面积,
+由左右方向各自最高的共两根柱子中, 较矮的那根柱子和自身的高度差决定.</p>
+<figure>
+<img src="2023-04-14T152530.png" alt="LeetCode-42.接雨水" />
+<figcaption aria-hidden="true">LeetCode-42.接雨水</figcaption>
+</figure>
+<p>例如, 柱子高度height[0,1,0,2,1,0,1,3,2,1,2,1]
+对应的图片是上面这张图片, 当i = 2时, height[2] = 0,
+其上方的积水为1个单位, 由左边高度为1的柱子和自身为0的柱子求得; i = 6时,
+height[6] = 1, 其上方积水为1个单位,
+由左侧最高的柱子的高度2和自身高度1求得.</p>
+<p>我们可以在针对每个柱子进行积水计算时,
+分别找左侧最高的柱子和右侧最高的柱子, 但这样会有很多重复的计算,
+解决办法之一是先将每个柱子的左侧最高高度和右侧最高高度进行一次计算并保存下来,
+这样能降低时间复杂度.</p>
+<h4 id="单调栈">单调栈</h4>
+<p>单调栈方法下, 一行一行地计算积水的量.</p>
+<p>在给定柱子高度的环境下, 积水只会出现在有凹槽的地方,
+有凹槽的地方一定是出现在从前向后遍历时, 由递减变为递增的状态处,
+此时就应该进行横向的积水量计算.</p>
+<figure>
+<img src="2023-04-14T154157.png" alt="LeetCode-42.接雨水(单调栈)" />
+<figcaption aria-hidden="true">LeetCode-42.接雨水(单调栈)</figcaption>
+</figure>
+<p>由前向后使用单调栈进行遍历时, 有三种情况:</p>
+<ul>
+<li><p>栈顶索引对应的元素大于遍历到的元素</p>
+<p>此时将元素入栈符合栈顶到栈底元素递增的情况, 对应在柱子中,
+是凹槽的左侧高度下降部分.</p></li>
+<li><p>栈顶索引对应的元素等于遍历到的元素</p>
+<p>元素可以直接入栈, 并不影响计算, 或者只保存一者,
+最终不影响结果.</p></li>
+<li><p>栈顶索引对应的元素小于遍历到的元素</p>
+<p>此时说明凹槽出现了,
+应该开始计算当前开始变高的柱子和左侧柱子形成的凹槽的单位.</p></li>
+</ul>
+<h3 id="题解-1">题解</h3>
+<p>双指针法:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">trap</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; height)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (height.<span class="hljs-built_in">size</span>() &lt;= <span class="hljs-number">2</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">maxLeft</span><span class="hljs-params">(height.size(), <span class="hljs-number">0</span>)</span></span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">maxRight</span><span class="hljs-params">(height.size(), <span class="hljs-number">0</span>)</span></span>;<br><br>        maxLeft[<span class="hljs-number">0</span>] = height[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; height.<span class="hljs-built_in">size</span>(); i++)<br>            maxLeft[i] = <span class="hljs-built_in">max</span>(maxLeft[i - <span class="hljs-number">1</span>], height[i]);<br>        <br>        maxRight[height.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>] = height.<span class="hljs-built_in">back</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = height.<span class="hljs-built_in">size</span>() - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i--)<br>            maxRight[i] = <span class="hljs-built_in">max</span>(maxRight[i + <span class="hljs-number">1</span>], height[i]);<br><br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; height.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-type">int</span> count = <span class="hljs-built_in">min</span>(maxLeft[i], maxRight[i]) - height[i];<br>            <span class="hljs-keyword">if</span> (count &gt; <span class="hljs-number">0</span>) sum += count;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sum;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>单调栈:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">trap</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; height)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (height.<span class="hljs-built_in">size</span>() &lt;= <span class="hljs-number">2</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        stack&lt;<span class="hljs-type">int</span>&gt; st;<br>        st.<span class="hljs-built_in">push</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; height.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">if</span> (height[i] &lt;= height[st.<span class="hljs-built_in">top</span>()])<br>                st.<span class="hljs-built_in">push</span>(i);<br>            <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>() &amp;&amp; height[i] &gt; height[st.<span class="hljs-built_in">top</span>()]) &#123;<br>                    <span class="hljs-type">int</span> mid = st.<span class="hljs-built_in">top</span>();<br>                    st.<span class="hljs-built_in">pop</span>();<br>                    <span class="hljs-keyword">if</span> (!st.<span class="hljs-built_in">empty</span>()) &#123;<br>                        <span class="hljs-type">int</span> h = <span class="hljs-built_in">min</span>(height[st.<span class="hljs-built_in">top</span>()], height[i]) - height[mid];<br>                        <span class="hljs-type">int</span> w = i - st.<span class="hljs-built_in">top</span>() - <span class="hljs-number">1</span>;<br>                        sum += h * w;<br>                    &#125;<br>                &#125;<br>                st.<span class="hljs-built_in">push</span>(i);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sum;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>代码随想录算法训练营第59天 | 503.下一个更大元素II, 42.接雨水</p><p><a href="http://wwg.xyz/algorithm-train-day59/">http://wwg.xyz/algorithm-train-day59/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-04-14</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-04-14</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">代码随想录</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm-train-day58/"><span class="level-item">代码随想录算法训练营第58天 | 739.每日温度, 496.下一个更大元素 I</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "423901323febf73517c1eb5e58ce8116",
+            repo: "GilesWong.github.io",
+            owner: "GilesWong",
+            clientID: "aa3cec25dbe3c896a524",
+            clientSecret: "ea097e10505594f2ee3cf9d780c54d60b228b923",
+            admin: ["GilesWong"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
+            proxy: "https://gtalk.wwg.xyz/github_access_token",
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#下一个更大元素ii"><span class="level-left"><span class="level-item">1</span><span class="level-item">503.下一个更大元素II</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题目"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">题目</span></span></a></li><li><a class="level is-mobile" href="#题目分析"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">题目分析</span></span></a></li><li><a class="level is-mobile" href="#题解"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">题解</span></span></a></li></ul></li><li><a class="level is-mobile" href="#接雨水"><span class="level-left"><span class="level-item">2</span><span class="level-item">42.接雨水</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题目-1"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">题目</span></span></a></li><li><a class="level is-mobile" href="#题目分析-1"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">题目分析</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#双指针法"><span class="level-left"><span class="level-item">2.2.1</span><span class="level-item">双指针法</span></span></a></li><li><a class="level is-mobile" href="#单调栈"><span class="level-left"><span class="level-item">2.2.2</span><span class="level-item">单调栈</span></span></a></li></ul></li><li><a class="level is-mobile" href="#题解-1"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">题解</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Giles&#039; Blog</a><p class="is-size-7"><span>&copy; 2023 Giles</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
