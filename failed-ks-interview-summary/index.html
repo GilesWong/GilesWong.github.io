@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>快手8.17音视频开发凉面 - Giles&#039; Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Giles"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Giles"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="凉啊~"><meta property="og:type" content="blog"><meta property="og:title" content="快手8.17音视频开发凉面"><meta property="og:url" content="http://wwg.xyz/failed-ks-interview-summary/"><meta property="og:site_name" content="Giles&#039; Blog"><meta property="og:description" content="凉啊~"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://wwg.xyz/failed-ks-interview-summary/2023-09-06T230540.png"><meta property="article:published_time" content="2023-08-20T14:17:33.000Z"><meta property="article:modified_time" content="2023-09-06T16:20:17.908Z"><meta property="article:author" content="Giles"><meta property="article:tag" content="面经"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://wwg.xyz/failed-ks-interview-summary/2023-09-06T230540.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://wwg.xyz/failed-ks-interview-summary/"},"headline":"快手8.17音视频开发凉面","image":["http://wwg.xyz/failed-ks-interview-summary/2023-09-06T230540.png"],"datePublished":"2023-08-20T14:17:33.000Z","dateModified":"2023-09-06T16:20:17.908Z","author":{"@type":"Person","name":"Giles"},"publisher":{"@type":"Organization","name":"Giles' Blog","logo":{"@type":"ImageObject","url":{"text":"Giles' Blog"}}},"description":"凉啊~"}</script><link rel="canonical" href="http://wwg.xyz/failed-ks-interview-summary/"><link rel="alternate" href="/atom.xml" title="Giles&#039; Blog" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css"><link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ED55ZDHVH" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-5ED55ZDHVH');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script>
+<script async src="https://stats.wwg.xyz/script.js" data-website-id="1611d803-40b3-4cec-b7b0-0484ae97e53c"></script>
+    <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Giles&#039; Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">Resume</a><a class="navbar-item" target="_blank" rel="noopener" href="https://status.wwg.xyz">Server Status</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-08-20T14:17:33.000Z" title="2023/8/20 22:17:33">2023-08-20</time>发表</span><span class="level-item"><time dateTime="2023-09-06T16:20:17.908Z" title="2023/9/7 00:20:17">2023-09-07</time>更新</span><span class="level-item">14 分钟读完 (大约2064个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">快手8.17音视频开发凉面</h1><div class="content"><h2 id="凉经">凉经</h2>
+<ol type="1">
+<li>5min自我介绍</li>
+<li>看到有iOS项目，问为什么用Moya，相比于NSURLSession好在哪里？
+<ol type="1">
+<li>Moya封装了Alamofire，提供了一个抽象层，封装了网络层的细节，提供了更干净、更类似于Swift的API，使得封装网络请求编的更容易。</li>
+<li>NSURLSession是iOS自带的网络库，支持多种协议，可自定义程度更高。</li>
+<li>两者封装性的差别：NSURLSession的扩展性会更高一些。</li>
+</ol></li>
+<li>C++ malloc 和 new的区别
+<ol type="1">
+<li>new分配内存失败时，会抛出bad_alloc异常，malloc分配失败时，只会返回NULL；</li>
+<li>new不需要显式地指示所需要的空间，而malloc需要显式指明；</li>
+<li>new会触发所创建对象的构造函数，而malloc不会；</li>
+<li>new是一个运算符，可以重载，而malloc是库函数；</li>
+<li>new所返回的指针类型一定是new的对象类型的指针，而malloc返回的是<code>void *</code>，需要再次转换为所需的类型的指针</li>
+</ol></li>
+<li>i++是原子性的吗？
+<ol type="1">
+<li>不是原子性，虽然C++语句只有一句，但是实际上可以理解为做了三个操作：将i移动到寄存器中，在寄存器中做运算，再将运算后的结果拷贝到原先i的位置。</li>
+<li>如果并发有多个线程进行i++操作，会造成数据的异常；</li>
+<li>可以使用std::atomic来解决。 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><br><br>std::atomic&lt;<span class="hljs-type">int</span>&gt; atomicCounter&#123;<span class="hljs-number">0</span>&#125;;<br><span class="hljs-type">int</span> counter = <span class="hljs-number">0</span>;<br><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">atomicIncrement</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100000</span>; ++i) &#123;<br>        ++atomicCounter;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">increment</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100000</span>; ++i) &#123;<br>        ++counter;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-function">std::thread <span class="hljs-title">atomicT1</span><span class="hljs-params">(atomicIncrement)</span></span>;<br>    <span class="hljs-function">std::thread <span class="hljs-title">atomicT2</span><span class="hljs-params">(atomicIncrement)</span></span>;<br><br>    atomicT1.<span class="hljs-built_in">join</span>();<br>    atomicT2.<span class="hljs-built_in">join</span>();<br><br>    <span class="hljs-function">std::thread <span class="hljs-title">t1</span><span class="hljs-params">(increment)</span></span>;<br>    <span class="hljs-function">std::thread <span class="hljs-title">t2</span><span class="hljs-params">(increment)</span></span>;<br>    <br>    t1.<span class="hljs-built_in">join</span>();<br>    t2.<span class="hljs-built_in">join</span>();<br><br>    std::cout &lt;&lt; <span class="hljs-string">&quot;atomic increment result: &quot;</span> &lt;&lt; atomicCounter &lt;&lt; std::endl;<br><br>    std::cout &lt;&lt; <span class="hljs-string">&quot;Increment result: &quot;</span> &lt;&lt; counter &lt;&lt; std::endl;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+</ol></li>
+</ol>
+<figure>
+<img src="2023-09-06T230540.png" alt="2023-09-06T230540" />
+<figcaption aria-hidden="true">2023-09-06T230540</figcaption>
+</figure>
+<ol start="5" type="1">
+<li>SSL的过程
+<ol type="1">
+<li>客户端发送<code>Client hello</code>, 其中包含客户端所支持的TLS版本,
+加密套件, 以及随机数<code>Client random</code>.</li>
+<li>服务器返回<code>Sever hello</code>, 其中包含服务器的TLS整数,
+服务器所选择的加密套件, 以及服务器随机数<code>Server random</code>.</li>
+<li>客户端对服务器提供的证书进行验证,
+验证通过后发送<code>Client Key Exchange</code>消息,
+一中包含了使用服务器证书公钥加密的一个随机数<code>Premaster Secret</code>.</li>
+<li>服务器使用证书私钥解密得到<code>Premaster Secret</code></li>
+<li>客户端和服务器都使用相同的加密套件, 根据<code>Client Random</code>,
+<code>Server Random</code>和<code>Premaster Secret</code>生成相同的密钥.</li>
+<li>客户端和服务器都相对方发送<code>Change Cipher Spec</code>以及<code>Finished</code>消息,
+表明自身已经计算好用于通信加密的密钥.</li>
+<li>握手完毕, 开始使用加密连接进行通讯.</li>
+</ol></li>
+<li>介绍下死锁
+<ol type="1">
+<li>死锁是指一组相互竞争资源的进程推进顺序不当而导致无法每个进程都无法推进下去的局面</li>
+<li>在这一组进程中, 每个进程都占有并保持了一定的资源,
+而又请求另外一些被其他进程占有的资源</li>
+<li>触发条件: 互斥, 占有和等待, 不可抢占, 环路等待.</li>
+<li>死锁预防: 破坏互斥(虚拟打印机技术),
+破坏占有并等待(预先请求好运行过程中所需要的所有资源), 破坏不可抢占</li>
+<li>死锁避免: 银行家算法</li>
+</ol></li>
+<li>介绍下C++智能指针
+<ol type="1">
+<li>分为shared_ptr, unique_ptr 和 weak_ptr</li>
+<li>shared_ptr在拷贝时使用同一份引用计数,
+重载拷贝构造函数使得引用计数+1,
+重载赋值运算符使得赋值前原来的对象的引用计数-1, 新的对象引用计数+1,
+重载析构函数使得引用计数-1并判断是否需要delete</li>
+<li>同一个shared_ptr被多个线程<code>读</code>是安全的,
+被多个线程<code>写</code>是不安全的(类比于i++的情况);
+指向同一个实例的多个shared_ptr被不同的线程<code>写</code>是安全的.</li>
+<li>unique_ptr唯一拥有其所指的对象,离开作用域时, 对象会被销毁,
+不支持普通的拷贝和赋值(但是一个将要被销毁的unique_ptr,
+可以通过使用release或者reset将指针所有权转移到另一个unique_ptr上)</li>
+<li>weak_ptr的使用不会引起引用计数的变化, 主要是为了辅助shared_ptr工作,
+使用前需要检查是否为空指针.</li>
+</ol></li>
+<li>怎么样来避免菱形继承所带来的问题?
+<ol type="1">
+<li>给定A为基类, B, C分别继承于A, D继承于B, C, 这种情况为菱形继承.
+菱形继承会使得D中保留了两份基类A的数据, 分别存在于类B和类C当中,
+会浪费空间, 且访问基类中的数据还要使用域运算符作区分.</li>
+<li>使用虚继承来解决问题, 虚继承在声明派生类时指定继承方式,
+在菱形继承中, 需要在定义类B, 类C时指明继承A的方式是虚继承.</li>
+<li>虚基类的初始化由最后的派生类来负责初始化</li>
+</ol></li>
+<li>shared_ptr是否是线程安全的？
+<ol type="1">
+<li>见7.</li>
+</ol></li>
+<li>C++类型转换，<code>static_cast</code>和<code>dynamic_cast</code>
+<ol type="1">
+<li><code>statoc_cast</code>没有类型检查, 不能保证类型安全,
+由派生类向基类转化是安全的, 但反方向是不安全的.
+可用于基本数据类型之间的转化, 以及把任何类型的表达式转化为void类型</li>
+<li><code>dynamic_cast</code>是动态转化, 具有类型检查的功能,
+互赞换后必须是类的指针, 引用或者是<code>void*</code>, 基类要有虚函数,
+可以交叉转化;
+其只能用于存在虚函数的有继承关系的类的实例之间进行强制类型转换;
+指针转换失败会返回nullptr, 引用转换失败则会抛出异常.</li>
+<li><code>reinterpret_cast</code>可以将整型转换为指针,
+也可以把指针转化为数组, 可以在指针和引用里随意转换.</li>
+<li><code>const_cast</code>, 将常量指针转化为非常量指针,
+常量引用转化为非常量引用</li>
+</ol></li>
+<li>C++怎么实现多态的？
+<ol type="1">
+<li>重载(Overload)和覆盖(Override)</li>
+<li>重载指允许出现多个重名函数, 且这些函数的参数表不同</li>
+<li>覆盖指子类重新定义父类的函数的做法.</li>
+</ol></li>
+<li>map与unordered_map的区别
+<ol type="1">
+<li>map使用红黑树实现, key是有序的, 查找,
+插入的时间复杂度为O(logn)且较为稳定</li>
+<li>unordered_map使用哈希表实现, key是无序的, 查找,
+插入的时间复杂度通常为O(1), 但是不稳定,
+根据哈希函数在有些情况下可能会达到O(n)的时间复杂度.</li>
+</ol></li>
+<li>TCP拥塞控制的流程
+<ol type="1">
+<li>慢启动</li>
+<li>拥塞避免(指数增长变为线性增长)</li>
+<li>拥塞发生
+<ol type="1">
+<li>超时重传--阈值设为<strong>原速率</strong>一半,
+速率从1开始慢启动</li>
+<li>快速重传--阈值和速率都设置为<strong>原速率</strong>一半.</li>
+</ol></li>
+<li>快速恢复</li>
+</ol></li>
+<li>操作系统虚拟地址到物理地址的转换流程
+<ol type="1">
+<li>CPU在TLB中找到虚拟地址的项, 就从该项中直接获取对应的物理地址</li>
+<li>TLB未命中, 则查找进程的页表, 如果其对应物理页面在内存中,
+则更新TLB并检测访问是否合法, 通过之后给定物理地址</li>
+<li>TLB未命中, 且物理页面不在内存中,
+则使用页面置换算法将该物理页换入内存中, 再次建立映射</li>
+</ol></li>
+<li>在有1000+文件的一个目录里，给定一个字符串，怎么样去找到包含该字符串的那个文件
+<ol type="1">
+<li><code>grep -nr "text" directory/</code></li>
+</ol></li>
+<li>Git提交中，如何避免环的产生
+<ol type="1">
+<li>定期将主干上的更改合并到次要分支</li>
+<li>使用<code>cherry-pick</code>选择性地将更改从一个分支应用到另一个分支而不会创建合并提交.</li>
+</ol></li>
+</ol>
+<p>手撕的<strong>复原IP地址</strong>，但是ACM模式，紧张了。原本之前第一次做这题的时候自己就撕出来了，现在再做反而只把代码框架撕出来，甚至编译报错。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>快手8.17音视频开发凉面</p><p><a href="http://wwg.xyz/failed-ks-interview-summary/">http://wwg.xyz/failed-ks-interview-summary/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-08-20</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-09-07</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E9%9D%A2%E7%BB%8F/">面经</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/how-to-write-a-thesis-note/"><span class="level-item">how-to-write-a-thesis-note</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "388147cabe7846af638ee7969452c0e5",
+            repo: "GilesWong.github.io",
+            owner: "GilesWong",
+            clientID: "aa3cec25dbe3c896a524",
+            clientSecret: "ea097e10505594f2ee3cf9d780c54d60b228b923",
+            admin: ["GilesWong"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
+            proxy: "https://gtalk.wwg.xyz/github_access_token",
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#凉经"><span class="level-left"><span class="level-item">1</span><span class="level-item">凉经</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Giles&#039; Blog</a><p class="is-size-7"><span>&copy; 2023 Giles</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
