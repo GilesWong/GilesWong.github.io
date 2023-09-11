@@ -1,11 +1,9 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>美团9.7后端面试 - Giles&#039; Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Giles"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Giles"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="透心凉"><meta property="og:type" content="blog"><meta property="og:title" content="美团9.7后端面试"><meta property="og:url" content="http://wwg.xyz/meituan-interview-23-9-7/"><meta property="og:site_name" content="Giles&#039; Blog"><meta property="og:description" content="透心凉"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://wwg.xyz/img/og_image.png"><meta property="article:published_time" content="2023-09-07T15:36:47.000Z"><meta property="article:modified_time" content="2023-09-07T15:51:16.748Z"><meta property="article:author" content="Giles"><meta property="article:tag" content="凉面"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://wwg.xyz/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://wwg.xyz/meituan-interview-23-9-7/"},"headline":"美团9.7后端面试","image":["http://wwg.xyz/img/og_image.png"],"datePublished":"2023-09-07T15:36:47.000Z","dateModified":"2023-09-07T15:51:16.748Z","author":{"@type":"Person","name":"Giles"},"publisher":{"@type":"Organization","name":"Giles' Blog","logo":{"@type":"ImageObject","url":{"text":"Giles' Blog"}}},"description":"透心凉"}</script><link rel="canonical" href="http://wwg.xyz/meituan-interview-23-9-7/"><link rel="alternate" href="/atom.xml" title="Giles&#039; Blog" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css"><link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ED55ZDHVH" async></script><script>window.dataLayer = window.dataLayer || [];
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>美团9.7后端面试 - Giles&#039; Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Giles"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Giles"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="搞文件存储的¬"><meta property="og:type" content="blog"><meta property="og:title" content="美团9.7后端面试"><meta property="og:url" content="http://wwg.xyz/meituan-interview-23-9-7/"><meta property="og:site_name" content="Giles&#039; Blog"><meta property="og:description" content="搞文件存储的¬"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://wwg.xyz/img/og_image.png"><meta property="article:published_time" content="2023-09-07T15:36:47.000Z"><meta property="article:modified_time" content="2023-09-11T15:46:59.296Z"><meta property="article:author" content="Giles"><meta property="article:tag" content="面经"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://wwg.xyz/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://wwg.xyz/meituan-interview-23-9-7/"},"headline":"美团9.7后端面试","image":["http://wwg.xyz/img/og_image.png"],"datePublished":"2023-09-07T15:36:47.000Z","dateModified":"2023-09-11T15:46:59.296Z","author":{"@type":"Person","name":"Giles"},"publisher":{"@type":"Organization","name":"Giles' Blog","logo":{"@type":"ImageObject","url":{"text":"Giles' Blog"}}},"description":"搞文件存储的¬"}</script><link rel="canonical" href="http://wwg.xyz/meituan-interview-23-9-7/"><link rel="alternate" href="/atom.xml" title="Giles&#039; Blog" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css"><link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ED55ZDHVH" async></script><script>window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
     
-        gtag('config', 'G-5ED55ZDHVH');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start -->
-<script async src="https://stats.wwg.xyz/script.js" data-website-id="1611d803-40b3-4cec-b7b0-0484ae97e53c"></script>
-    <script>
+        gtag('config', 'G-5ED55ZDHVH');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
   (function () {
       function switchTab() {
           if (!location.hash) {
@@ -35,32 +33,178 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Giles&#039; Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">Resume</a><a class="navbar-item" target="_blank" rel="noopener" href="https://status.wwg.xyz">Server Status</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-07T15:36:47.000Z" title="2023/9/7 23:36:47">2023-09-07</time>发表</span><span class="level-item"><time dateTime="2023-09-07T15:51:16.748Z" title="2023/9/7 23:51:16">2023-09-07</time>更新</span><span class="level-item">2 分钟读完 (大约247个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">美团9.7后端面试</h1><div class="content"><h2 id="岗位">岗位</h2>
+  </script>
+<script async src="https://stats.wwg.xyz/script.js" data-website-id="1611d803-40b3-4cec-b7b0-0484ae97e53c"></script>
+    <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Giles&#039; Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">Resume</a><a class="navbar-item" target="_blank" rel="noopener" href="https://status.wwg.xyz">Server Status</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-07T15:36:47.000Z" title="2023/9/7 23:36:47">2023-09-07</time>发表</span><span class="level-item"><time dateTime="2023-09-11T15:46:59.296Z" title="2023/9/11 23:46:59">2023-09-11</time>更新</span><span class="level-item">15 分钟读完 (大约2306个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">美团9.7后端面试</h1><div class="content"><h2 id="岗位">岗位</h2>
 <p>应该是成都的搞文件存储</p>
 <h2 id="流程">流程</h2>
 <ol type="1">
 <li>自我介绍</li>
-<li>C++怎么实现虚函数的</li>
-<li>析构函数可以是虚函数吗?构造函数呢?</li>
-<li>C++面向对象的三大特性</li>
+<li>C++怎么实现虚函数的
+<ol type="1">
+<li>为了实现虚函数,
+C++使用了虚函数表来动态查找实际所需要执行的函数.</li>
+<li>每个拥有虚函数的类(包括其派生类), 都有一个虚函数表,
+这个虚函数表是编译器在编译时就已经建立好的</li>
+<li>虚函数表中包含了类的实例所能调用的每个虚函数的指针,
+指针指向了该类可以访问的最高级的对应函数.</li>
+<li>编译器还向基类中隐式地添加了虚函数表指针, 当在对象上调用虚函数时,
+通过虚函数表指针从虚函数表中查找正确调用的函数.</li>
+</ol></li>
+<li>析构函数可以是虚函数吗?构造函数呢?
+<ol type="1">
+<li>析构函数可以是虚函数, 当一个基类指针指向派生类,
+并通过该指针删除对象时, 如果析构函数是虚函数,
+就可以确保先调用的是派生类的析构函数, 保证派生类的资源被正确释放,
+然后再调用基类的析构函数.</li>
+<li>构造函数不能是析构函数, 当一个类的构造函数被执行时,
+其虚函数表指针还为被正确初始化, 因此不能正确进行虚函数的执行,
+所以构造函数不能是虚函数.</li>
+</ol></li>
+<li>C++面向对象的三大特性
+<ol type="1">
+<li>封装
+<ol type="1">
+<li>数据和代码捆绑在一起, 避免外界干扰和不确定性访问</li>
+<li>把客观事物封装成抽象的类,
+类还可以将自己的数据和方法只让可信的类或者对象操作,
+对不可信的进行信息隐藏.</li>
+</ol></li>
+<li>继承
+<ol type="1">
+<li>让某种类型的对象获得另外一个类型对象的属性和方法</li>
+<li>实现继承(使用基类的方法和属性)</li>
+<li>接口继承(仅使用基类属性和方法的名称, 但子类必须自己进行实现)</li>
+<li>可视继承(子窗体)使用基窗体(类)的外观和实现代码的能力.</li>
+</ol></li>
+<li>多态
+<ol type="1">
+<li>同一事物表现出不同的能力(向不同的对象发送同一消息,
+不同的对象在接受时会产生不同的行为)</li>
+<li>重载实现编译时多态, 虚函数实现运行时多态</li>
+<li>覆盖: 子类重新定义父类虚函数的做法</li>
+<li>重载: 存在多个重名函数, 但这些函数的参数表不同</li>
+</ol></li>
+</ol></li>
 <li>我重载了一个函数, 使用基类指针调用派生类的这个函数,
-实际上调用的哪个?</li>
-<li>介绍下智能指针</li>
-<li>weak_ptr不增加引用计数, 是为了解决什么问题?</li>
-<li>malloc和new的区别</li>
-<li>C++内存分布</li>
-<li>进程和线程的区别</li>
-<li>进程和线程进行调度的时候, 谁开销大, 为什么?</li>
-<li>Linux使用什么系统调用来创建新的进程?</li>
-<li>创建了新的进程之后, 子进程是否会共享父进程的资源?</li>
-<li>还用过哪些系统调用?</li>
+实际上调用的哪个?
+<ol type="1">
+<li>取决于该函数是否被声明为虚函数</li>
+<li>如果函数不是虚函数, 则会调用基类的版本(静态绑定)</li>
+<li>如果函数是虚函数, 则回去调用派生类的版本(动态绑定)</li>
+</ol></li>
+<li>介绍下智能指针
+<ol type="1">
+<li>shared_ptr: shared_ptr可以与其他共享一个实例的访问权,
+且多个指向同一个实例的shared_ptr共享一个引用计数,
+在生成新的shared_ptr时, 指向的实例的引用计数要+1,
+销毁shared_ptr要将引用计数-1, 并判断是否需要销毁指向的实例.</li>
+<li>unique_ptr: 独占对于一个实例的访问权, 在销毁时也会销毁所指向的实例,
+(但是可以通过使用release的方法转移一个即将被销毁的指针的实例)</li>
+<li>weak_ptr: 不控制器所指向对象生命周期的指针,
+为了解决shared_ptr可能导致的循环引用问题而设计,
+需要和shared_ptr一起使用.</li>
+<li>使用智能指针可以帮助避免内存泄漏和空悬引用,
+仍然需要谨慎对待内存管理问题</li>
+</ol></li>
+<li>weak_ptr不增加引用计数, 是为了解决什么问题?
+<ol type="1">
+<li>循环引用问题, 两个实例都包含一个指向对方的指针,
+导致两者的引用计数最小是1, 形成内存泄漏.</li>
+</ol></li>
+<li>malloc和new的区别
+<ol type="1">
+<li>malloc只分配内存空间, new同时执行构造函数</li>
+<li>malloc需要显式声明空间, new不需要</li>
+<li>malloc是标准库函数, new是运算符, 还可以重载</li>
+<li>malloc分配失败返回NULL, new分配失败抛出bad_alloc异常</li>
+<li>malloc返回的指针必须强制转换为目标实例的指针,
+new直接返回的是目标实例的指针.</li>
+</ol></li>
+<li>C++内存分布
+<ol type="1">
+<li>从低地址到高地址</li>
+<li>代码区--存放机器码</li>
+<li>数据区--存放已初始化的全局和静态变量, 常量数据</li>
+<li>BSS(Block Started By Symbol)--存放未初始化的全局和静态变态</li>
+<li>堆--动态分配内存的区域, 低地址向高地址增长, 容量大于栈</li>
+<li>栈--从高地址向低地址增长, 存放局部变量, 参数函数, 返回变量.</li>
+</ol></li>
+<li>进程和线程的区别
+<ol type="1">
+<li>进程是操作系统资源分配的基本单位,
+线程是处理器任务调度和执行的基本单位</li>
+<li>线程共享本进程的地址空间和资源,
+而内存之间有各自独立的地址空间和资源</li>
+<li>多进程比多线程要更健壮, 多线程中一个进程崩溃会导致整个进程崩溃,
+而一个进程崩溃并不会直接导致其他进程崩溃.</li>
+<li>每个进程有一个程序运行的入口, 顺序执行序列, 但是线程不能独立执行,
+必须依赖进程管理</li>
+<li>两者都可以并发执行</li>
+<li>进程切换时, 消耗的资源大, 效率低</li>
+</ol></li>
+<li>进程和线程进行调度的时候, 谁开销大, 为什么?
+<ol type="1">
+<li>进程切换的开销大</li>
+<li>因为每个进程都有独立的代码和数据空间, 在进程切换时,
+操作系统需要保存和恢复更多的信息, 例如切换硬件上下文, 刷新TLB,
+切换内核态堆栈</li>
+<li>因为同一进程中的线程共享代码和数据空间,
+所以线程的切换主要涉及用户态与内核态的转化. 发生调度时,
+先触发中断进入内核态, 切换完成后再回到用户态.</li>
+</ol></li>
+<li>Linux使用什么系统调用来创建新的进程?
+<ol type="1">
+<li>fork: 创建一个新的进程, 是原有进程的一个子进程,
+也是原有进程的一个副本, 在父进程中, fork返回子进程的PID,
+子进程复制了父进程的task_struct, 系统堆栈空间和页面表.</li>
+<li>vfork: 创建一个新的进程, 但是新的进程与父进程共享内存,
+堆栈和数据资源都是共享的, 避免了大量的内存复制. 必须执行完毕后,
+父进程才会被继续调度</li>
+<li>clone: 可以选择性地将资源赋值给子进程,
+而没有复制的资源则会使用指针来共享给子进程.</li>
+</ol></li>
+<li>创建了新的进程之后, 子进程是否会共享父进程的资源?
+<ol type="1">
+<li>vfork会共享内存, clone可以指定共享的资源, 也可以全部共享或不共享.
+但同一组父子进程会,共享一些文件描述符, 进程组ID</li>
+</ol></li>
+<li>什么是僵尸进程?
+<ol type="1">
+<li>一个进程fork了一个子进程, 如果子进程退出,
+而父进程没有调用wait或者waitpid来获取子进程的状态信息,
+那么子进程的进程描述符仍然保存在系统当中, 成为僵尸进程.</li>
+<li>僵尸进程会一直占用进程号, 系统的进程号是有限的,
+如果产生了大量的僵尸进程,
+可能会导致没有可用的进程号来继续系统的运行.</li>
+</ol></li>
+<li>还用过哪些系统调用?
+<ol type="1">
+<li>进程控制: fork, clone, execve(运行可执行文件), exit(终止),
+getpid(获取进程标识号), getppid(获取父进程标识号)</li>
+<li>文件系统控制: open, read, write, close等</li>
+<li>系统控制: ioctl, reboot</li>
+<li>内存管理: brk(改变数据段空间的分配), mmap(映射虚拟内存页),
+munmap(去除内存页映射)</li>
+<li>网络管理: gethostname(获取主机名称), sethostname(设置主机名称)</li>
+<li>Socket控制: bind(绑定端口), connect(连接远程主机)</li>
+</ol></li>
 <li>有用过MySQL? KV存储?</li>
-<li>Linux下软链接和硬链接是什么? 有什么区别?</li>
+<li>Linux下软链接和硬链接是什么? 有什么区别?
+<ol type="1">
+<li>硬链接是通过索引节点进行连接, Linux的文件系统中,
+每个文件都会有个编号, 称为索引节点号, 索引节点用于标识这个文件.
+硬链接就是通过这个索引节点进行连接,
+只有在同一文件系统中的文件之间才能创建硬链接.
+可以理解为硬链接就是让一个文件拥有多个有效路径名,
+只要有一个以上有效的链接, 文件的数据块就不会被释放.</li>
+<li>软链接类似于Windows的快捷方式, 其本身是个文本文件,
+包含了另一文件的位置信息. 可以跨文件系统使用.</li>
+</ol></li>
 </ol>
 <p>手撕的二叉树层序遍历, 6分钟撕完.</p>
 <p>结束一小时后回人才库.</p>
-<p>凉啊~</p>
-</div><div class="article-licensing box"><div class="licensing-title"><p>美团9.7后端面试</p><p><a href="http://wwg.xyz/meituan-interview-23-9-7/">http://wwg.xyz/meituan-interview-23-9-7/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-09-07</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-09-07</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%87%89%E9%9D%A2/">凉面</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/failed-ks-interview-summary/"><span class="level-item">快手8.17音视频开发凉面</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+</div><div class="article-licensing box"><div class="licensing-title"><p>美团9.7后端面试</p><p><a href="http://wwg.xyz/meituan-interview-23-9-7/">http://wwg.xyz/meituan-interview-23-9-7/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-09-07</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-09-11</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E9%9D%A2%E7%BB%8F/">面经</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/failed-ks-interview-summary/"><span class="level-item">快手8.17音视频开发凉面</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
             id: "3a3327a3815e4b805e6a0aba1056f8c9",
             repo: "GilesWong.github.io",
             owner: "GilesWong",
