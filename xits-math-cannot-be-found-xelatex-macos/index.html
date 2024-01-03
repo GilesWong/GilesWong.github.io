@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>解决XeLatex在MacOS下无法找到XITS Math 字体 - Giles&#039; Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Giles"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Giles"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="XeLatex的锅~"><meta property="og:type" content="blog"><meta property="og:title" content="解决XeLatex在MacOS下无法找到XITS Math 字体"><meta property="og:url" content="http://wwg.xyz/xits-math-cannot-be-found-xelatex-macos/"><meta property="og:site_name" content="Giles&#039; Blog"><meta property="og:description" content="XeLatex的锅~"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://wwg.xyz/img/og_image.png"><meta property="article:published_time" content="2024-01-03T02:55:40.000Z"><meta property="article:modified_time" content="2024-01-03T03:28:21.761Z"><meta property="article:author" content="Giles"><meta property="article:tag" content="BugFix"><meta property="article:tag" content="MacOS"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://wwg.xyz/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://wwg.xyz/xits-math-cannot-be-found-xelatex-macos/"},"headline":"解决XeLatex在MacOS下无法找到XITS Math 字体","image":["http://wwg.xyz/img/og_image.png"],"datePublished":"2024-01-03T02:55:40.000Z","dateModified":"2024-01-03T03:28:21.761Z","author":{"@type":"Person","name":"Giles"},"publisher":{"@type":"Organization","name":"Giles' Blog","logo":{"@type":"ImageObject","url":{"text":"Giles' Blog"}}},"description":"XeLatex的锅~"}</script><link rel="canonical" href="http://wwg.xyz/xits-math-cannot-be-found-xelatex-macos/"><link rel="alternate" href="/atom.xml" title="Giles&#039; Blog" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css"><link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ED55ZDHVH" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-5ED55ZDHVH');</script><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script>
+<script async src="https://stats.wwg.xyz/script.js" data-website-id="1611d803-40b3-4cec-b7b0-0484ae97e53c"></script>
+    <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Giles&#039; Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">Resume</a><a class="navbar-item" target="_blank" rel="noopener" href="https://status.wwg.xyz">Server Status</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/GilesWong"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-01-03T02:55:40.000Z" title="2024/1/3 10:55:40">2024-01-03</time>发表</span><span class="level-item"><time dateTime="2024-01-03T03:28:21.761Z" title="2024/1/3 11:28:21">2024-01-03</time>更新</span><span class="level-item">4 分钟读完 (大约548个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">解决XeLatex在MacOS下无法找到XITS Math 字体</h1><div class="content"><h2 id="运行环境">运行环境</h2>
+<ul>
+<li>MacOS版本: <code>Sonoma 14.2.1</code></li>
+<li>XeLatex版本字符串
+<ul>
+<li><code>This is XeTeX, Version 3.141592653-2.6-0.999995</code></li>
+</ul></li>
+<li>VSCode版本: <code>1.85.1</code></li>
+<li>Latex Workshop插件版本: <code>9.17.0</code></li>
+<li>使用模板: <a
+target="_blank" rel="noopener" href="https://github.com/obster-y/XJTU-thesis">obster-y/XJTU-thesis</a></li>
+</ul>
+<h2 id="bug表现">Bug表现</h2>
+<p>编译时, Xelatex报错, 并在如下代码的最后一行处提示错误,
+错误内容为<code>The font "XITS Math" cannot be found.</code></p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\setCJKmainfont</span>[AutoFakeBold=true]&#123;Songti SC&#125;<br><span class="hljs-keyword">\newfontfamily</span>&#123;<span class="hljs-keyword">\heiti@letter</span>&#125;&#123;STHeiti&#125;<br><span class="hljs-keyword">\newfontfamily</span>&#123;<span class="hljs-keyword">\songti@letter</span>&#125;&#123;Songti SC&#125;<br><span class="hljs-keyword">\newfontfamily</span>&#123;<span class="hljs-keyword">\kaiti</span>&#125;&#123;STKaiti&#125;<br><span class="hljs-keyword">\setmainfont</span>&#123;Times New Roman&#125;<br><span class="hljs-keyword">\setmathfont</span>&#123;XITS Math&#125;<br><span class="hljs-keyword">\setmathfont</span>[range=&#123;<span class="hljs-keyword">\mathcal</span>,<span class="hljs-keyword">\mathbfcal</span>&#125;,StylisticSet=1]&#123;XITS Math&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="解决方案">解决方案</h2>
+<p>查了一些资料,
+似乎是<code>XeLatex</code>在MacOS下不能通过XITS的字体名识别字体导致的,
+但是对于系统的字体册中的字体则没有这个问题,
+所以解决方案是把字体装到系统的字体册中.</p>
+<ul>
+<li>确定MacTex的安装位置</li>
+</ul>
+<p>在我的Mac上, 我使用Homebrew来安装mactex,
+其安装目录默认在<code>/usr/local/texlive/2023/</code>,
+其中<code>2023</code>会根据安装的不同版本而可能有所变化.</p>
+<ul>
+<li>向<code>字体册.app</code>中添加字体
+<ul>
+<li>在<code>字体册.app</code>中,
+在菜单栏导航依次到<code>文件 -  新建资源库</code>来新建一个资源库,
+可以通过双击<code>未命名的资源库</code>来进行重命名.</li>
+<li>选中刚才新建的资源库,
+在菜单栏选取<code>文件 - 将字体添加到xxxx</code>, 在弹出的窗口中,
+可以按下<code>CMD + G</code>快捷键,
+然后输入<code>/usr/local/texlive/2023/texmf-dist/fonts/</code>并按下回车,
+这串字符串由你的MacTex具体的安装位置决定</li>
+<li>然后选中<code>opentype</code>文件夹, 并点击<code>打开</code></li>
+<li>可能会有窗口提示<code>不是所有的文件都是字体</code>之类的内容,
+忽略掉就好.</li>
+</ul></li>
+<li>安装完毕字体后, 重新启动VSCode编译, 问题即可解决.</li>
+</ul>
+<h2 id="可能我不太会用的解决方案">可能我不太会用的解决方案</h2>
+<p>在<a
+target="_blank" rel="noopener" href="https://github.com/stone-zeng/fduthesis/issues/45">stone-zeng/fduthesis</a>中,
+有人提到可以使用<code>ln</code>来解决这个问题,
+而且字体可以使用<code>tlmgr</code>更新.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ln</span> -s /usr/local/texlive/2018/texmf-dist/fonts/opentype ~/Library/Fonts/<br></code></pre></td></tr></table></figure>
+<p>但我这么做之后, 会导致Chrome在某些中文网页上的中文字体乱码,
+遂复原作罢.</p>
+<h2 id="碎碎念">碎碎念</h2>
+<p>Latex配置再复杂也比Word图乱飘字体五花八门强😅.</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>解决XeLatex在MacOS下无法找到XITS Math 字体</p><p><a href="http://wwg.xyz/xits-math-cannot-be-found-xelatex-macos/">http://wwg.xyz/xits-math-cannot-be-found-xelatex-macos/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Giles</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-01-03</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-01-03</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/BugFix/">BugFix</a><a class="link-muted mr-2" rel="tag" href="/tags/MacOS/">MacOS</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=62da4ce1a6cfe400199aeed5&amp;product=inline-share-buttons" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/alipay.jpg" alt="支付宝"></span></a><a class="button donate" href="https://www.buymeacoffee.com/gilesw" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/meituan-interview-23-9-7/"><span class="level-item">美团9.7后端面试</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><script src="https://utteranc.es/client.js" repo="GilesWong/GilesWong.github.io" issue-term="title" theme="github-light" crossorigin="anonymous" async></script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#运行环境"><span class="level-left"><span class="level-item">1</span><span class="level-item">运行环境</span></span></a></li><li><a class="level is-mobile" href="#bug表现"><span class="level-left"><span class="level-item">2</span><span class="level-item">Bug表现</span></span></a></li><li><a class="level is-mobile" href="#解决方案"><span class="level-left"><span class="level-item">3</span><span class="level-item">解决方案</span></span></a></li><li><a class="level is-mobile" href="#可能我不太会用的解决方案"><span class="level-left"><span class="level-item">4</span><span class="level-item">可能我不太会用的解决方案</span></span></a></li><li><a class="level is-mobile" href="#碎碎念"><span class="level-left"><span class="level-item">5</span><span class="level-item">碎碎念</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Giles&#039; Blog</a><p class="is-size-7"><span>&copy; 2024 Giles</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdnjs.loli.net/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
